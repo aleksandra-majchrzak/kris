@@ -2,6 +2,7 @@ package com.example.krismobile.main;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
@@ -20,8 +21,14 @@ public class MenuFragment extends Fragment {
 	private ListView menuListView;
 	private MenuAdapter menuAdapter;
 
-	public MenuFragment(Context context) {
-		this.context = context;
+	public MenuFragment() {
+	}
+
+	@Override
+	public void onAttach(Activity activity) {
+
+	    super.onAttach(activity);
+	    this.context=activity;
 	}
 
 	@Override

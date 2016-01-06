@@ -29,7 +29,7 @@ public class MainSectionsPagerAdapter extends FragmentPagerAdapter {
 	public Fragment getItem(int position) {
 
 		if(position == POSITION_MENU)
-			return new MenuFragment(context);
+			return new MenuFragment();
 		else //if (position == POSITION_SETTINGS)
 			return new SettingsFragment();
 	}
