@@ -43,5 +43,10 @@
     <string name="summary_parent_preference">summary_parent_preference</string>
     <string name="title_child_preference">title_child_preference</string>
     <string name="summary_child_preference">summary_child_preference</string>
+    <string name="contractors">Kontrahenci</string>
+    <string name="documents">Dokumenty</string>
+    <string name="payments">Płatności</string>
+    <string name="items">Towary</string>
+    <string name="warehouses">Magazyny</string>
 
 </resources>

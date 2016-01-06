@@ -1,4 +1,4 @@
-package com.example.krismobile.main;
+package com.example.krismobile.main.adapters;
 
 import java.util.Locale;
 
@@ -8,6 +8,8 @@ import android.content.Context;
 import android.support.v13.app.FragmentPagerAdapter;
 
 import com.example.krismobile.R;
+import com.example.krismobile.main.MenuFragment;
+import com.example.krismobile.main.SettingsFragment;
 
 
 public class MainSectionsPagerAdapter extends FragmentPagerAdapter {
@@ -27,7 +29,7 @@ public class MainSectionsPagerAdapter extends FragmentPagerAdapter {
 	public Fragment getItem(int position) {
 
 		if(position == POSITION_MENU)
-			return new MenuFragment();
+			return new MenuFragment(context);
 		else //if (position == POSITION_SETTINGS)
 			return new SettingsFragment();
 	}

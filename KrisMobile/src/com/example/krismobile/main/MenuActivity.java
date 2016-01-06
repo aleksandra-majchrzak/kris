@@ -1,6 +1,7 @@
 package com.example.krismobile.main;
 
 import com.example.krismobile.R;
+import com.example.krismobile.main.adapters.MainSectionsPagerAdapter;
 
 import android.app.Activity;
 import android.content.Context;
