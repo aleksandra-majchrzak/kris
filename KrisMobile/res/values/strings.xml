@@ -7,5 +7,41 @@
     <string name="log_in">Zaloguj</string>
     <string name="login">login</string>
     <string name="password">hasło</string>
+    <string name="title_activity_menu">MenuActivity</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+    <string name="inline_preferences">Ustawienia aplikacji</string>
+    <string name="title_checkbox_preference">Checkbox</string>
+    <string name="summary_checkbox_preference">Opis checkboxa</string>
+    <string name="dialog_based_preferences">Preferencje z dialogami</string>
+    <string name="title_edittext_preference">Pref z edit textem</string>
+    <string name="summary_edittext_preference">Opis pref z edit textem</string>
+    <string name="dialog_title_edittext_preference">Tytuł dialogu z edit textem</string>
+    <string name="title_list_preference">Pref z listą</string>
+    <string name="summary_list_preference">Opis pref z listą</string>
+    <string-array name="entries_list_preference">
+        <item>text_string</item>
+        <item>text_string2</item>
+        <item>text_string3</item>
+    </string-array>
+    <string-array name="entryvalues_list_preference">
+        <item>text_string</item>
+        <item>text_string2</item>
+        <item>text_string3</item>
+    </string-array>
+    <string name="dialog_title_list_preference">Tytuł dialogu z listą</string>
+    <string name="launch_preferences">launch_preferences</string>
+    <string name="title_screen_preference">title_screen_preference</string>
+    <string name="summary_screen_preference">summary_screen_preference</string>
+    <string name="title_next_screen_toggle_preference">title_next_screen_toggle_preference</string>
+    <string name="summary_next_screen_toggle_preference">summary_next_screen_toggle_preference</string>
+    <string name="title_intent_preference">title_intent_preference</string>
+    <string name="summary_intent_preference">summary_intent_preference</string>
+    <string name="preference_attributes">preference_attributes</string>
+    <string name="title_parent_preference">title_parent_preference</string>
+    <string name="summary_parent_preference">summary_parent_preference</string>
+    <string name="title_child_preference">title_child_preference</string>
+    <string name="summary_child_preference">summary_child_preference</string>
 
 </resources>
