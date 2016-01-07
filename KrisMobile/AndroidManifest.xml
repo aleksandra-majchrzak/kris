@@ -23,9 +23,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.krismobile.main.MenuActivity"
-            android:label="@string/title_activity_menu" 
+            android:name=".main.MenuActivity"
+            android:label="@string/title_activity_menu"
             android:theme="@style/SettingsFragmentTheme" >
+        </activity>
+        <activity
+            android:name="com.example.krismobile.contractors.ContractorsActivity"
+            android:label="@string/title_activity_contractors" >
         </activity>
     </application>
 

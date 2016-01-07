@@ -1,18 +1,18 @@
 package com.example.krismobile.main;
 
+import java.io.IOException;
+
+import com.couchbase.lite.CouchbaseLiteException;
+import com.couchbase.lite.Database;
 import com.example.krismobile.R;
+import com.example.krismobile.database.DatabaseManager;
 import com.example.krismobile.main.adapters.MainSectionsPagerAdapter;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.util.AttributeSet;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 
 public class MenuActivity extends Activity {
@@ -34,6 +34,19 @@ public class MenuActivity extends Activity {
 
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
+		
+		try {
+			
+			DatabaseManager.getManagerInstance(this);
+			Database database = DatabaseManager.getDatabaseInstance();
+			//database.close();
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		} catch(CouchbaseLiteException e){
+			
+			e.printStackTrace();
+		}
 
 	}
 

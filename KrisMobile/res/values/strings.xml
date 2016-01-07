@@ -20,6 +20,7 @@
     <string name="dialog_title_edittext_preference">Tytuł dialogu z edit textem</string>
     <string name="title_list_preference">Pref z listą</string>
     <string name="summary_list_preference">Opis pref z listą</string>
+
     <string-array name="entries_list_preference">
         <item>text_string</item>
         <item>text_string2</item>
@@ -30,6 +31,7 @@
         <item>text_string2</item>
         <item>text_string3</item>
     </string-array>
+
     <string name="dialog_title_list_preference">Tytuł dialogu z listą</string>
     <string name="launch_preferences">launch_preferences</string>
     <string name="title_screen_preference">title_screen_preference</string>
@@ -48,5 +50,6 @@
     <string name="payments">Płatności</string>
     <string name="items">Towary</string>
     <string name="warehouses">Magazyny</string>
+    <string name="title_activity_contractors">ContractorsActivity</string>
 
 </resources>

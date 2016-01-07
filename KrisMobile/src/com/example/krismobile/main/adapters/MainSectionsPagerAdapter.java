@@ -17,7 +17,7 @@ public class MainSectionsPagerAdapter extends FragmentPagerAdapter {
 	private Context context;
 	
 	private final int POSITION_MENU = 0;
-	private final int POSITION_SETTINGS  = 1;
+	//private final int POSITION_SETTINGS  = 1;
 
 	public MainSectionsPagerAdapter(FragmentManager fm, Context context) {
 		super(fm);

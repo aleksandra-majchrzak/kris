@@ -5,17 +5,26 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.krismobile.R;
+import com.example.krismobile.contractors.ContractorsActivity;
 import com.example.krismobile.main.adapters.MenuAdapter;
 import com.example.krismobile.main.entities.MenuItem;
 
 public class MenuFragment extends Fragment {
+	
+	private final int POSITION_CONTRACTORS = 0;
+	private final int POSITION_DOCUMENTS = 1;
+	private final int POSITION_PAYMENTS = 2;
+	private final int POSITION_ITEMS = 3;
+	private final int POSITION_WAREHOUSES = 4;
 	
 	private Context context;
 	private ListView menuListView;
@@ -60,6 +69,27 @@ public class MenuFragment extends Fragment {
 		menuAdapter = new MenuAdapter(context, 0, itemList);
 		
 		menuListView.setAdapter(menuAdapter);
+		menuListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				
+				switch(position){
+				case POSITION_CONTRACTORS:
+					
+					Intent intent = new Intent(context, ContractorsActivity.class);
+					startActivity(intent);
+					break;
+					
+				default:
+					break;
+				}
+				
+			}
+			
+			
+		});
 		
 	}
 }
