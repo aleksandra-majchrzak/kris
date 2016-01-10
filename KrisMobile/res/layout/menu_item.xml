@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="200dp"
     android:gravity="center"
-    android:orientation="horizontal" >
+    android:orientation="horizontal" 
+    style="@style/MenuRow" >
+    <!--android:background="@drawable/menu_item_bg" -->
 
     <ImageView
         android:id="@+id/menu_item_icon"
