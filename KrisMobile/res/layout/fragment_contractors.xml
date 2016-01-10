@@ -17,12 +17,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#212121"
         android:orientation="vertical" >
 
         <EditText
             android:id="@+id/contractors_search_editText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="@string/search"
             android:ems="10" />
 
     </LinearLayout>

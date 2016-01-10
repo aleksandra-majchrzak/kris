@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.couchbase.lite.Document;
 import com.example.krismobile.R;
+import com.example.krismobile.database.managers.ContractorsManager;
 
 import android.app.Activity;
 import android.content.Context;
@@ -57,33 +58,40 @@ public class ContractorsAdapter extends  BaseAdapter{
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-
-		if(convertView == null){
+	
+		Map<String, Object> props = this.contractorsList.get(position).getProperties();
 			
-			Map<String, Object> props = this.contractorsList.get(position).getProperties();
-
+		if(convertView == null){
 			LayoutInflater inflater = ((Activity)context).getLayoutInflater();
 
 			convertView = inflater.inflate(R.layout.contractor_row, null);
-			
-			if(((Integer)(props.get("contractorTypeId"))).intValue() == SELLER_TYPE){
+		}	
+		
+		if(((Integer)(props.get("TypeId"))).intValue() == SELLER_TYPE){
 				
-				//ustawienie obrazka dla sprzedawcy
+			//ustawienie obrazka dla sprzedawcy
 				
-			} else{
-				//ustawienie obrazka dla kupca
+		} else{
+			//ustawienie obrazka dla kupca
 				
-			}
-			
-			TextView contractorCodeTextView = (TextView) convertView.findViewById(R.id.contractor_code_textView);
-			contractorCodeTextView.setText((String)props.get("contractorCode"));
-			
-			TextView contractorAddressTextView = (TextView) convertView.findViewById(R.id.contractor_address_textView);
-			contractorAddressTextView.setText((String)props.get("contractorAddress"));
-			
 		}
+			
+		TextView contractorCodeTextView = (TextView) convertView.findViewById(R.id.contractor_code_textView);
+		contractorCodeTextView.setText((String)props.get("Code"));
+			
+		TextView contractorAddressTextView = (TextView) convertView.findViewById(R.id.contractor_address_textView);
+		contractorAddressTextView.setText((String)props.get("Address"));
+
 		
 		return convertView;
+	}
+	
+	@Override
+	public void notifyDataSetChanged(){
+		
+		contractorsList = ContractorsManager.getInstance().getAllContractors();
+		
+		super.notifyDataSetChanged();
 	}
 
 }

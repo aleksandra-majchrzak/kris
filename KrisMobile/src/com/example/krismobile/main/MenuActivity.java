@@ -39,7 +39,7 @@ public class MenuActivity extends Activity {
 			
 			DatabaseManager.getManagerInstance(this);
 			Database database = DatabaseManager.getDatabaseInstance();
-			//database.close();
+			//database.delete();
 		} catch (IOException e) {
 			
 			e.printStackTrace();
@@ -65,5 +65,11 @@ public class MenuActivity extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	@Override
+	public void onDestroy(){
+		super.onDestroy();
+		DatabaseManager.close();
 	}
 }

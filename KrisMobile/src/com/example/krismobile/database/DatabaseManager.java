@@ -29,4 +29,10 @@ public class DatabaseManager {
 	    }
 	    return database;
 	}
+	
+	public static void close(){
+		database.close();
+		manager = null;
+		database = null;
+	}
 }

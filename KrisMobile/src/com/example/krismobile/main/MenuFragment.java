@@ -2,8 +2,6 @@ package com.example.krismobile.main;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,9 +14,10 @@ import android.widget.ListView;
 import com.example.krismobile.R;
 import com.example.krismobile.contractors.ContractorsActivity;
 import com.example.krismobile.main.adapters.MenuAdapter;
+import com.example.krismobile.main.base.FragmentBase;
 import com.example.krismobile.main.entities.MenuItem;
 
-public class MenuFragment extends Fragment {
+public class MenuFragment extends FragmentBase {
 	
 	private final int POSITION_CONTRACTORS = 0;
 	private final int POSITION_DOCUMENTS = 1;
@@ -26,18 +25,10 @@ public class MenuFragment extends Fragment {
 	private final int POSITION_ITEMS = 3;
 	private final int POSITION_WAREHOUSES = 4;
 	
-	private Context context;
 	private ListView menuListView;
 	private MenuAdapter menuAdapter;
 
 	public MenuFragment() {
-	}
-
-	@Override
-	public void onAttach(Activity activity) {
-
-	    super.onAttach(activity);
-	    this.context=activity;
 	}
 
 	@Override

@@ -28,8 +28,28 @@
             android:theme="@style/SettingsFragmentTheme" >
         </activity>
         <activity
-            android:name="com.example.krismobile.contractors.ContractorsActivity"
-            android:label="@string/title_activity_contractors" >
+            android:name=".contractors.ContractorsActivity"
+            android:label="@string/title_activity_contractors"
+            android:parentActivityName=".main.MenuActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.krismobile.main.MenuActivity" />
+        </activity>
+        <activity
+            android:name=".contractors.ContractorActivity"
+            android:label="@string/title_activity_contractor"
+            android:parentActivityName=".contractors.ContractorsActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.krismobile.contractors.ContractorsActivity" />
+        </activity>
+        <activity
+            android:name="com.example.krismobile.contractors.ModifyContractorActivity"
+            android:label="@string/title_activity_modify_contractor" 
+		 	android:parentActivityName=".contractors.ContractorsActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.krismobile.contractors.ContractorsActivity" />
         </activity>
     </application>
 

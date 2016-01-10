@@ -1,6 +1,7 @@
 package com.example.krismobile.database.managers;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -20,24 +21,45 @@ import com.example.krismobile.database.DatabaseManager;
 
 public class ContractorsManager {
 	
+	private static ContractorsManager manager;
+	private static final String DOC_TYPE = "Contractor";
+	
+	public static ContractorsManager getInstance(){
+		if(manager == null)
+			manager = new ContractorsManager();
+		
+		return manager;
+	}
+	
 	public String saveContractor(Contractor contractor){
 		
 		Document document;
+		String documentId;
 		try {
-			
-			document = DatabaseManager.getDatabaseInstance().createDocument();
-			String documentId = document.getId();
 	    
 			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("contractorId", contractor.getId());
-			map.put("contractorCode", contractor.getCode());
-			map.put("contractorTypeId", contractor.getTypeId());
-			map.put("contractorNIP", contractor.getNIP());
-			map.put("contractorAddress", contractor.getAddress());
-			map.put("contractorDescription", contractor.getDescription());
+			map.put("DocType", DOC_TYPE);
+//			map.put("Id", contractor.getId());
+			map.put("Code", contractor.getCode());
+			map.put("TypeId", contractor.getTypeId());
+			map.put("NIP", contractor.getNIP());
+			map.put("Address", contractor.getAddress());
+			map.put("Description", contractor.getDescription());
+			map.put("ModificationTS", new Date().getTime());			
+			
+			if(contractor.getId().equals("")){
+				document = DatabaseManager.getDatabaseInstance().createDocument();
+				
+			}else{
+				document = DatabaseManager.getDatabaseInstance().getDocument(contractor.getId());	
+				map.put("_rev", document.getProperty("_rev"));
+			}
+			
+			documentId = document.getId();
+
 	    
 			document.putProperties(map);
-			
+	
 			return documentId;
 			
 		} catch (CouchbaseLiteException e) {
@@ -91,15 +113,15 @@ public class ContractorsManager {
 				@Override
 				public void map(Map<String, Object> document, Emitter emitter) {
 					
-					if(document.get("contractorCode") != null){
+					if(document.get("DocType").equals(DOC_TYPE)){
 						
 						ArrayList<Object> keys = new ArrayList<Object>();
-                        keys.add(document.get("contractorCode"));
-                        keys.add(document.get("contactorId"));
-                        keys.add(document.get("contractorTypeId"));
-                        keys.add(document.get("contractorNIP"));
-                        keys.add(document.get("contractorAddress"));
-                        keys.add(document.get("contractorDescription"));
+                        keys.add(document.get("Code"));
+//                        keys.add(document.get("Id"));
+                        keys.add(document.get("TypeId"));
+                        keys.add(document.get("NIP"));
+                        keys.add(document.get("Address"));
+                        keys.add(document.get("Description"));
 						
 						emitter.emit(keys , document);
 					}

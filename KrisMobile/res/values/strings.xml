@@ -50,6 +50,21 @@
     <string name="payments">Płatności</string>
     <string name="items">Towary</string>
     <string name="warehouses">Magazyny</string>
-    <string name="title_activity_contractors">ContractorsActivity</string>
-
+    <string name="title_activity_contractors">Kontrahenci</string>
+    <string name="title_activity_contractor">ContractorActivity</string>
+    <string name="action_add_contractor">Dodaj kontrahenta</string>
+    <string name="action_edit_contractor">Edytuj kontrahenta</string>
+    <string name="code">Kod</string>
+    <string name="type">Typ</string>
+    <string name="NIP">NIP</string>
+    <string name="address">Adres</string>
+    <string name="description">Opis</string>
+    <string name="action_save_contractor">Zapisz kontrahenta</string>
+    <string name="title_activity_modify_contractor">ModifyContractorActivity</string>
+	<string-array name="contractor_types">
+        <item>Dostawca</item>
+        <item>Kupiec</item>
+    </string-array>
+        <string name="search">Wyszukaj</string>
+    
 </resources>

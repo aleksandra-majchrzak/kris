@@ -2,14 +2,23 @@ package com.example.krismobile.contractors;
 
 public class Contractor {
 	
-	private int id;
+	private String id;
 	private String code;
 	private int typeId;
 	private String address;
 	private String description;
 	private String NIP;
 	
-	public Contractor(int id, String code, int typeId, String address,
+	public Contractor(){
+		this.id = "";
+		this.code = "";
+		this.typeId = 1;
+		this.address = "";
+		this.description = "";
+		this.NIP = "";
+	}
+	
+	public Contractor(String id, String code, int typeId, String address,
 			String description, String NIP) {
 
 		this.id = id;
@@ -20,11 +29,11 @@ public class Contractor {
 		this.NIP = NIP;
 	}
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

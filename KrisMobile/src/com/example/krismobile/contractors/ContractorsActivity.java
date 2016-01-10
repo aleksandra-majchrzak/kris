@@ -1,27 +1,25 @@
 package com.example.krismobile.contractors;
 
 import com.example.krismobile.R;
-import com.example.krismobile.R.id;
-import com.example.krismobile.R.layout;
-import com.example.krismobile.R.menu;
 
 import android.app.Activity;
-import android.app.ActionBar;
-import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
 
 public class ContractorsActivity extends Activity {
+	
+	public static final int RESULT_ADD_NEW_CONTRACTOR = 1;
+	public static final int RESULT_OK = 1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
+		
+		getActionBar().setDisplayHomeAsUpEnabled(true);
 		setContentView(R.layout.activity_contractors);
 		
 		if (savedInstanceState == null) {
@@ -41,9 +39,24 @@ public class ContractorsActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
+		
+		if(id == android.R.id.home){
+	        NavUtils.navigateUpFromSameTask(this);
+	        return true;
 		}
+		
 		return super.onOptionsItemSelected(item);
+	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data){
+		
+//		if(requestCode == RESULT_ADD_NEW_CONTRACTOR){
+//			if(resultCode == RESULT_OK){
+//				
+//			}
+//		}
+//		else
+			super.onActivityResult(requestCode, resultCode, data);
 	}
 }
