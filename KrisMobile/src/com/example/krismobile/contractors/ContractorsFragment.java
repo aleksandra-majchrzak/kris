@@ -65,6 +65,18 @@ public class ContractorsFragment extends FragmentBase {
 			
 		});
 		
+		contractorsListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				ModifyContractorDialog dialog = new ModifyContractorDialog(ContractorsFragment.this, ((Document)adapter.getItem(position)).getId());
+				dialog.show();
+				return true;
+			}
+			
+		});
+		
 		return rootView;
 	}
 	
@@ -109,6 +121,10 @@ public class ContractorsFragment extends FragmentBase {
 			}
 		}
 
+	}
+	
+	public void refresh(){
+		adapter.notifyDataSetChanged();
 	}
 	
 }

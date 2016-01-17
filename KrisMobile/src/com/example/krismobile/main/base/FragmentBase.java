@@ -13,4 +13,8 @@ public class FragmentBase extends Fragment{
 	    super.onAttach(activity);
 	    this.context=activity;
 	}
+	
+	public Context getContext(){
+		return this.context;
+	}
 }

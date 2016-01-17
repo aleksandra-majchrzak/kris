@@ -72,5 +72,6 @@
     <string name="no">Nie</string>
     <string name="contractor_deleted">Kontrahent usunięty</string>
     <string name="contractor_deleted_error">Nie można usunąć kontrahenta</string>
+    <string name="action_view_contractor">Szczegóły</string>
     
 </resources>
