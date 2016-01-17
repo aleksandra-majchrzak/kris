@@ -1,6 +1,8 @@
 package com.example.krismobile.contractors;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -11,8 +13,10 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.krismobile.R;
+import com.example.krismobile.database.managers.ContractorsManager;
 import com.example.krismobile.main.base.FragmentBase;
 
 public class ContractorFragment extends FragmentBase {
@@ -60,7 +64,12 @@ public class ContractorFragment extends FragmentBase {
 			args.putString("contractorId", contractor.getId());
 			intent.putExtras(args);
 			
-			startActivityForResult(intent,ContractorsActivity.RESULT_ADD_NEW_CONTRACTOR);
+			startActivityForResult(intent,ContractorsActivity.REQUEST_ADD_NEW_CONTRACTOR);
+			return true;
+		}
+		else if(id == R.id.action_delete_contractor){
+			
+			deleteContractor();
 			return true;
 		}
 		
@@ -71,7 +80,7 @@ public class ContractorFragment extends FragmentBase {
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data){
 	
-		if(requestCode == ContractorsActivity.RESULT_ADD_NEW_CONTRACTOR){
+		if(requestCode == ContractorsActivity.REQUEST_ADD_NEW_CONTRACTOR){
 			if(resultCode == ContractorsActivity.RESULT_OK){
 
 				contractor = ((ContractorActivity)context).reloadContractor();
@@ -98,5 +107,41 @@ public class ContractorFragment extends FragmentBase {
 		contractorAddressTextView.setText(contractor.getAddress());
 		contractorNIPTextView.setText(contractor.getNIP());
 		contractorDescriptionTextView.setText(contractor.getDescription());
+	}
+	
+	
+	private void deleteContractor(){
+		
+		AlertDialog.Builder builder = new AlertDialog.Builder(
+				context);
+
+		builder.setMessage(R.string.do_you_want_to_delete_contractor)
+				.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+
+						boolean isDeleted = ContractorsManager.getInstance().deleteContractor(contractor.getId());
+						dialog.cancel();
+						
+						if(isDeleted){
+							Toast.makeText(context, R.string.contractor_deleted, Toast.LENGTH_LONG).show();
+							getActivity().setResult(ContractorsActivity.RESULT_OK);
+							getActivity().finish();
+						}
+						else
+							Toast.makeText(context, R.string.contractor_deleted_error, Toast.LENGTH_LONG).show();
+						
+					}
+				})
+				.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.cancel();					
+					}
+				});
+		
+		builder.create().show();
 	}
 }

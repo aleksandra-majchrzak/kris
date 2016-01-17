@@ -158,8 +158,21 @@ public class ContractorsManager {
 		    }	    
 		}
 		
-		return contractorsList;
+		return contractorsList;		
+	}
+	
+	public boolean deleteContractor(String contractorId){
+		Document contractorToDelete = getContractor(contractorId);
 		
+		try {
+			
+			contractorToDelete.delete();
+			return true;
+		} catch (CouchbaseLiteException e) {
+
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 }

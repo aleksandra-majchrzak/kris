@@ -59,7 +59,7 @@ public class ContractorsFragment extends FragmentBase {
 				args.putString("contractorId", ((Document)adapter.getItem(position)).getId());
 				intent.putExtras(args);
 				
-				startActivity(intent);
+				startActivityForResult(intent, ContractorsActivity.REQUEST_DELETE_CONTRACTOR);
 				
 			}
 			
@@ -81,7 +81,7 @@ public class ContractorsFragment extends FragmentBase {
 			args.putString("contractorId", "");
 			intent.putExtras(args);
 			
-			startActivityForResult(intent,ContractorsActivity.RESULT_ADD_NEW_CONTRACTOR);
+			startActivityForResult(intent,ContractorsActivity.REQUEST_ADD_NEW_CONTRACTOR);
 			return true;
 			
 		}
@@ -96,7 +96,13 @@ public class ContractorsFragment extends FragmentBase {
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data){
 		
-		if(requestCode == ContractorsActivity.RESULT_ADD_NEW_CONTRACTOR){
+		if(requestCode == ContractorsActivity.REQUEST_ADD_NEW_CONTRACTOR){
+			if(resultCode == ContractorsActivity.RESULT_OK){
+
+				adapter.notifyDataSetChanged();
+			}
+		}
+		else if(requestCode == ContractorsActivity.REQUEST_DELETE_CONTRACTOR){
 			if(resultCode == ContractorsActivity.RESULT_OK){
 
 				adapter.notifyDataSetChanged();

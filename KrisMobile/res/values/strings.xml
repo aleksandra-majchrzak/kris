@@ -65,6 +65,12 @@
         <item>Dostawca</item>
         <item>Kupiec</item>
     </string-array>
-        <string name="search">Wyszukaj</string>
+    <string name="search">Wyszukaj</string>
+    <string name="action_delete_contractor">Usuń kontrahenta</string>
+    <string name="do_you_want_to_delete_contractor">Czy chcesz usunąć kontrahenta?</string>
+    <string name="yes">Tak</string>
+    <string name="no">Nie</string>
+    <string name="contractor_deleted">Kontrahent usunięty</string>
+    <string name="contractor_deleted_error">Nie można usunąć kontrahenta</string>
     
 </resources>

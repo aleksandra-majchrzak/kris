@@ -11,8 +11,10 @@ import android.view.MenuItem;
 
 public class ContractorsActivity extends Activity {
 	
-	public static final int RESULT_ADD_NEW_CONTRACTOR = 1;
+	public static final int REQUEST_ADD_NEW_CONTRACTOR = 1;
+	public static final int REQUEST_DELETE_CONTRACTOR = 2;
 	public static final int RESULT_OK = 1;
+	public static final int RESULT_ERROR = 2;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

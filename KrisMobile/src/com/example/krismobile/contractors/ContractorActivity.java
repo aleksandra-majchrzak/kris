@@ -56,6 +56,8 @@ public class ContractorActivity extends Activity {
 		contractor.setDescription((String)props.get("Description"));
 		contractor.setNIP((String)props.get("NIP"));
 		
+		getActionBar().setTitle((String)props.get("Code"));
+		
 		return contractor;
 	}
 
