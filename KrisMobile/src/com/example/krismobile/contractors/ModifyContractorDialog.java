@@ -1,6 +1,7 @@
 package com.example.krismobile.contractors;
 
 import com.example.krismobile.R;
+import com.example.krismobile.contractors.adapters.ModifyContractorDialogAdapter;
 import com.example.krismobile.database.managers.ContractorsManager;
 
 import android.app.Activity;

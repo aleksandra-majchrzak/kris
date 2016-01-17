@@ -1,4 +1,4 @@
-package com.example.krismobile.contractors;
+package com.example.krismobile.contractors.adapters;
 
 import com.example.krismobile.R;
 
