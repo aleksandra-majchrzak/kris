@@ -8,12 +8,21 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.couchbase.lite.Document;
 import com.example.krismobile.R;
+import com.example.krismobile.contractors.documents.ContractorDocumentsActivity;
 import com.example.krismobile.database.managers.ContractorsManager;
+import com.example.krismobile.database.managers.DocumentsManager;
+import com.example.krismobile.documents.DocumentActivity;
+import com.example.krismobile.documents.DocumentsActivity;
+import com.example.krismobile.documents.KrisDocument;
 import com.example.krismobile.main.base.FragmentBase;
+import com.example.krismobile.main.utilities.DateUtilities;
 
 public class ContractorFragment extends FragmentBase {
 
@@ -23,6 +32,8 @@ public class ContractorFragment extends FragmentBase {
 	private TextView contractorAddressTextView;
 	private TextView contractorNIPTextView;
 	private TextView contractorDescriptionTextView;
+	private TextView contractorLatestDocumentTextView;
+	private TextView contractorLatestDocumentDateTextView;
 	
 	public ContractorFragment() {
 	}
@@ -83,6 +94,13 @@ public class ContractorFragment extends FragmentBase {
 				fillControls();	
 			}
 		}
+		else if(requestCode == ContractorActivity.REQUEST_REFRESH_VIEW){
+			if(resultCode == ContractorActivity.RESULT_OK){
+
+				//contractor = ((ContractorActivity)context).reloadContractor();
+				fillControls();	
+			}
+		}
 
 	}
 		
@@ -92,7 +110,37 @@ public class ContractorFragment extends FragmentBase {
 		contractorAddressTextView = (TextView) rootView.findViewById(R.id.contractor_address_textView);
 		contractorNIPTextView = (TextView) rootView.findViewById(R.id.contractor_NIP_textView);
 		contractorDescriptionTextView = (TextView) rootView.findViewById(R.id.contractor_description_textView);
+		contractorLatestDocumentTextView = (TextView) rootView.findViewById(R.id.contractor_document_number_textView);
+		contractorLatestDocumentDateTextView = (TextView) rootView.findViewById(R.id.contractor_document_date_textView);
 		
+		LinearLayout documentLinearLayout = (LinearLayout) rootView.findViewById(R.id.contractor_document_row_ll);
+		documentLinearLayout.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+
+				Intent intent = new Intent(context, ContractorDocumentsActivity.class);
+				//Intent intent = new Intent(context, TmpPagedActivity.class);
+				
+				Bundle args = new Bundle();
+				args.putParcelable("Contractor", contractor);
+				intent.putExtras(args);
+				
+				startActivityForResult(intent, ContractorActivity.REQUEST_REFRESH_VIEW);
+				
+			}
+		});
+		
+		ImageView menuDocumentsImageView = (ImageView) rootView.findViewById(R.id.contractor_documents_more_imageView);
+/*		menuDocumentsImageView.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+*/		
 		if(!contractor.getId().equals(""))
 			fillControls();	
 	}
@@ -103,6 +151,18 @@ public class ContractorFragment extends FragmentBase {
 		contractorAddressTextView.setText(contractor.getAddress());
 		contractorNIPTextView.setText(contractor.getNIP());
 		contractorDescriptionTextView.setText(contractor.getDescription());
+		
+		KrisDocument latestDocument = DocumentsManager.getInstance().getLatestContractorDocument(contractor.getId());
+		
+		if(latestDocument != null){
+			contractorLatestDocumentTextView.setText(latestDocument.getNumber());
+			contractorLatestDocumentDateTextView.setVisibility(View.VISIBLE);
+			contractorLatestDocumentDateTextView.setText(DateUtilities.contvertDateToString(context, latestDocument.getDocumentDate()));
+		}
+		else{
+			contractorLatestDocumentTextView.setText(R.string.none);
+			contractorLatestDocumentDateTextView.setVisibility(View.GONE);
+		}
 	}
 	
 	

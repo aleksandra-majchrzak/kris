@@ -44,12 +44,40 @@
                 android:value="com.example.krismobile.contractors.ContractorsActivity" />
         </activity>
         <activity
-            android:name="com.example.krismobile.contractors.ModifyContractorActivity"
-            android:label="@string/title_activity_modify_contractor" 
-		 	android:parentActivityName=".contractors.ContractorsActivity" >
+            android:name=".contractors.ModifyContractorActivity"
+            android:label="@string/title_activity_modify_contractor"
+            android:parentActivityName=".contractors.ContractorsActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.krismobile.contractors.ContractorsActivity" />
+        </activity>
+        <activity
+            android:name=".documents.DocumentsActivity"
+            android:label="@string/title_activity_documents" 
+            android:parentActivityName=".main.MenuActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.krismobile.main.MenuActivity" />
+        </activity>
+        <activity
+            android:name=".documents.DocumentActivity"
+            android:label="@string/title_activity_document"
+            android:parentActivityName=".documents.DocumentsActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.krismobile.documents.DocumentsActivity" />
+        </activity>
+        <activity
+            android:name=".contractors.documents.ContractorDocumentsActivity"
+            android:label="@string/title_activity_contractor_document"
+            android:parentActivityName=".contractors.ContractorActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.krismobile.contractors.ContractorActivity" />
+        </activity>
+        <activity
+            android:name=".TmpPagedActivity"
+            android:label="@string/title_activity_tmp_paged" >
         </activity>
     </application>
 

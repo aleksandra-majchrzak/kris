@@ -14,6 +14,8 @@ import android.view.MenuItem;
 
 public class ContractorActivity extends Activity {
 	
+	public static final int REQUEST_REFRESH_VIEW = 1;
+	public static final int RESULT_OK = 1;
 	private Contractor contractor;
 
 	@Override

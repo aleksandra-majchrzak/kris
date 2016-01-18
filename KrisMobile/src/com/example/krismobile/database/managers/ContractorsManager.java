@@ -21,6 +21,9 @@ import com.example.krismobile.database.DatabaseManager;
 
 public class ContractorsManager {
 	
+	public static final int SELLER_TYPE = 1;
+	public static final int BUYER_TYPE = 2;
+	
 	private static ContractorsManager manager;
 	private static final String DOC_TYPE = "Contractor";
 	

@@ -20,9 +20,6 @@ public class ContractorsAdapter extends  BaseAdapter{
 	private Context context;
 	private ArrayList<Document> contractorsList;
 	
-	private final int SELLER_TYPE = 1;
-	private final int BUYER_TYPE = 2;
-	
 	public ContractorsAdapter(Context context, ArrayList<Document> contractorsList){
 		
 		this.context = context;
@@ -67,7 +64,7 @@ public class ContractorsAdapter extends  BaseAdapter{
 			convertView = inflater.inflate(R.layout.contractor_row, null);
 		}	
 		
-		if(((Integer)(props.get("TypeId"))).intValue() == SELLER_TYPE){
+		if(((Integer)(props.get("TypeId"))).intValue() == ContractorsManager.SELLER_TYPE){
 				
 			//ustawienie obrazka dla sprzedawcy
 				

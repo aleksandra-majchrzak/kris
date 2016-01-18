@@ -33,12 +33,7 @@ public class ModifyContractorActivity extends Activity {
 		} else{
 			Document contractorDoc = ContractorsManager.getInstance().getContractor(contractorId);
 			Map<?,?> props = contractorDoc.getProperties();
-			contractor = new Contractor(contractorDoc.getId(), 
-								(String)props.get("Code"), 
-								(Integer)props.get("TypeId"), 
-								(String)props.get("Address"), 
-								(String)props.get("Description"),
-								(String)props.get("NIP"));
+			contractor = new Contractor(contractorDoc);
 			
 			getActionBar().setTitle((String)props.get("Code"));
 		}

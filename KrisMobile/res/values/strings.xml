@@ -61,10 +61,12 @@
     <string name="description">Opis</string>
     <string name="action_save_contractor">Zapisz kontrahenta</string>
     <string name="title_activity_modify_contractor">ModifyContractorActivity</string>
-	<string-array name="contractor_types">
+
+    <string-array name="contractor_types">
         <item>Dostawca</item>
         <item>Kupiec</item>
     </string-array>
+
     <string name="search">Wyszukaj</string>
     <string name="action_delete_contractor">Usuń kontrahenta</string>
     <string name="do_you_want_to_delete_contractor">Czy chcesz usunąć kontrahenta?</string>
@@ -73,5 +75,41 @@
     <string name="contractor_deleted">Kontrahent usunięty</string>
     <string name="contractor_deleted_error">Nie można usunąć kontrahenta</string>
     <string name="action_view_contractor">Szczegóły</string>
-    
+    <string name="title_activity_documents">Dokumenty</string>
+    <string name="title_activity_document">DocumentActivity</string>
+    <string name="action_add_document">Dodaj dokument</string>
+    <string name="action_edit_document">Edytuj dokument</string>
+    <string name="action_save_document">Zapisz dokument</string>
+    <string name="action_delete_document">Usuń dokument</string>
+    <string name="do_you_want_to_delete_document">Czy chcesz usunąć dokument?</string>
+    <string name="document_deleted">Dokument usunięty</string>
+    <string name="document_deleted_error">Nie można usunąć dokumentu</string>
+    <string name="document_number">Numer dokumentu</string>
+    <string name="contractor">Kontrahent</string>
+    <string name="document_date">Data wystawienia</string>
+    <string name="payment_date">Data płatności</string>
+    <string name="number">Numer</string>
+    <string name="document_value">Wartość dokumentu</string>  
+    <string name="document_type">Typ dokumentu</string>    
+    <string-array name="document_types">
+        <item>Zamówienie sprzedaży</item>
+        <item>Zamówienie zakupu</item>
+        <item>Faktura sprzedaży</item>
+        <item>Faktura zakupu</item>
+        <item>Przyjęcie z magazynu</item>
+        <item>Wydanie do magazynu</item>
+    </string-array>
+	<string name="payment_form">Forma płatności</string>
+	<string-array name="payment_forms">
+	    <item>Gotówka</item>
+	    <item>Przelew</item>
+	    <item>Pobranie</item>
+	</string-array>
+    <string name="title_activity_tmp_paged">TmpPagedActivity</string>
+    <string name="PLN">(PLN)</string>
+    <string name="positions">Pozycje</string>
+    <string name="header">Nagłówek</string>
+    <string name="title_activity_contractor_document">ContracterDocumentsActivity</string>
+    <string name="none">Brak</string>
+
 </resources>
