@@ -11,8 +11,7 @@ import android.view.MenuItem;
 
 public class DocumentsActivity extends Activity {
 	
-	public static final int REQUEST_ADD_NEW_DOCUMENT = 1;
-	public static final int REQUEST_DELETE_DOCUMENT = 2;
+	public static final int REQUEST_REFRESH= 1;
 	public static final int RESULT_OK = 1;
 	public static final int RESULT_ERROR = 2;
 

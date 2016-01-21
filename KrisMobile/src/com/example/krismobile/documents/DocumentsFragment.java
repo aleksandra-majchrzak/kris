@@ -58,7 +58,7 @@ public class DocumentsFragment extends FragmentBase {
 				args.putString("documentId", ((Document)adapter.getItem(position)).getId());
 				intent.putExtras(args);
 				
-				startActivityForResult(intent, DocumentsActivity.REQUEST_DELETE_DOCUMENT);
+				startActivityForResult(intent, DocumentsActivity.REQUEST_REFRESH);
 				
 			}
 			
@@ -82,18 +82,13 @@ public class DocumentsFragment extends FragmentBase {
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data){
 		
-		if(requestCode == DocumentsActivity.REQUEST_ADD_NEW_DOCUMENT){
+		if(requestCode == DocumentsActivity.REQUEST_REFRESH){
 			if(resultCode == DocumentsActivity.RESULT_OK){
 
 				adapter.notifyDataSetChanged();
 			}
 		}
-		else if(requestCode == DocumentsActivity.REQUEST_DELETE_DOCUMENT){
-			if(resultCode == DocumentsActivity.RESULT_OK){
 
-				adapter.notifyDataSetChanged();
-			}
-		}
 	}
 	
 }

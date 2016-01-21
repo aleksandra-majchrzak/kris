@@ -115,7 +115,7 @@ public class DocumentFragment extends FragmentBase {
 		}
 		else if(id == R.id.action_delete_document){
 			
-			//deleteDocument();
+			deleteDocument();
 			return true;
 		}
 		else if(id == R.id.action_save_document){
