@@ -121,7 +121,7 @@ public class DocumentFragment extends FragmentBase {
 		else if(id == R.id.action_save_document){
 			
 			DocumentsManager.getInstance().saveKrisDocument(document);
-			getActivity().setResult(ContractorDocumentsActivity.RESULT_OK);
+			getActivity().setResult(DocumentsActivity.RESULT_OK);
 			getActivity().finish();
 			return true;
 		}

@@ -71,7 +71,7 @@ public class ContractorFragment extends FragmentBase {
 			args.putString("contractorId", contractor.getId());
 			intent.putExtras(args);
 			
-			startActivityForResult(intent,ContractorsActivity.REQUEST_ADD_NEW_CONTRACTOR);
+			startActivityForResult(intent,ContractorActivity.REQUEST_REFRESH_VIEW);
 			return true;
 		}
 		else if(id == R.id.action_delete_contractor){
@@ -87,17 +87,17 @@ public class ContractorFragment extends FragmentBase {
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data){
 	
-		if(requestCode == ContractorsActivity.REQUEST_ADD_NEW_CONTRACTOR){
+	/*	if(requestCode == ContractorsActivity.REQUEST_ADD_NEW_CONTRACTOR){
 			if(resultCode == ContractorsActivity.RESULT_OK){
 
 				contractor = ((ContractorActivity)context).reloadContractor();
 				fillControls();	
 			}
 		}
-		else if(requestCode == ContractorActivity.REQUEST_REFRESH_VIEW){
-			if(resultCode == ContractorActivity.RESULT_OK){
+		else */ if(requestCode == ContractorActivity.REQUEST_REFRESH_VIEW){
+			if(resultCode == ContractorActivity.RESULT_OK || resultCode == DocumentActivity.RESULT_OK){
 
-				//contractor = ((ContractorActivity)context).reloadContractor();
+				contractor = ((ContractorActivity)context).reloadContractor();
 				fillControls();	
 			}
 		}

@@ -6,7 +6,6 @@ import java.util.Map;
 
 import android.app.Activity;
 import android.content.Context;
-import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,14 +14,13 @@ import android.widget.TextView;
 
 import com.couchbase.lite.Document;
 import com.example.krismobile.R;
-import com.example.krismobile.database.managers.ContractorsManager;
 import com.example.krismobile.database.managers.DocumentsManager;
 import com.example.krismobile.main.utilities.DateUtilities;
 
 public class DocumentsAdapter extends  BaseAdapter{
 	
-	protected Context context;
-	protected ArrayList<Document> documentsList;
+	private Context context;
+	private ArrayList<Document> documentsList;
 	
 	public DocumentsAdapter(Context context, ArrayList<Document> documentsList){
 		

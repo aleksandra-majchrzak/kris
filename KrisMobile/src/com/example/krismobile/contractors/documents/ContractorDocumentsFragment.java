@@ -119,12 +119,16 @@ public class ContractorDocumentsFragment extends FragmentBase{
 		
 		if(requestCode == DocumentsActivity.REQUEST_ADD_NEW_DOCUMENT){
 			if(resultCode == DocumentsActivity.RESULT_OK){
+				
+				getActivity().setResult(DocumentsActivity.RESULT_OK);
 
 				adapter.notifyDataSetChanged();
 			}
 		}
 		else if(requestCode == DocumentsActivity.REQUEST_DELETE_DOCUMENT){
 			if(resultCode == DocumentsActivity.RESULT_OK){
+				
+				getActivity().setResult(DocumentsActivity.RESULT_OK);
 
 				adapter.notifyDataSetChanged();
 			}

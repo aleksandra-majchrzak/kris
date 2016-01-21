@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import android.util.Log;
@@ -123,15 +124,15 @@ public class DocumentsManager {
 					
 					if(document.get("DocType").equals(DOC_TYPE)){
 						
-						ArrayList<Object> keys = getAllKeysToEmit(document);
+		//				ArrayList<Object> keys = getAllKeysToEmit(document);
 						
-						emitter.emit(keys , document);
+						emitter.emit(document.get("DocumentDate") , document);
 					}
 				}
 				
-			}, "2");
+			}, "3");
 			
-			documentsList = getDocumentsListFromView(allKrisDocumentsView, 0);	    
+			documentsList = getDocumentsListFromView(allKrisDocumentsView, 0, null, true);	    
 		}
 		
 		return documentsList;		
@@ -149,18 +150,25 @@ public class DocumentsManager {
 				@Override
 				public void map(Map<String, Object> document, Emitter emitter) {
 					
-					if(document.get("DocType").equals(DOC_TYPE)
-							&& document.get("ContractorId").equals(contractorId)){
+					if(document.get("DocType").equals(DOC_TYPE) ){
+	//						&& document.get("ContractorId").equals(contractorId)){
 						
-						ArrayList<Object> keys = getAllKeysToEmit(document);
+	//					ArrayList<Object> keys = getAllKeysToEmit(document);
+						ArrayList<Object> keys = new ArrayList<Object>();
+						keys.add(document.get("ContractorId"));
+						keys.add(document.get("DocumentDate"));
 						
-						emitter.emit(keys , document);
+						emitter.emit(document.get("ContractorId"), document);
+						emitter.emit(document.get("DocumentDate"), document);
 					}
 				}
 				
-			}, "2");
+			}, "5");
 			
-			documentsList = getDocumentsListFromView(contratorKrisDocumentsView, 0);
+			List<Object> keys = new ArrayList<Object>();
+			keys.add(contractorId);
+			
+			documentsList = getDocumentsListFromView(contratorKrisDocumentsView, 0, keys, true);
 		}
 		
 		return documentsList;		
@@ -182,13 +190,18 @@ public class DocumentsManager {
         return keys;
 	}
 	
-	private ArrayList<Document> getDocumentsListFromView(View queryView, int limit){
+	private ArrayList<Document> getDocumentsListFromView(View queryView, int limit, List<Object> keys, boolean descending){
 		
 		ArrayList<Document> documentsList = new ArrayList<Document>();
 		Query orderedQuery = queryView.createQuery();
 		
 		if(limit > 0)
 			orderedQuery.setLimit(limit);
+		
+		if(keys != null && ! keys.isEmpty())
+			orderedQuery.setKeys(keys);
+		
+		orderedQuery.setDescending(descending);
 
 		try {
 			
@@ -240,18 +253,26 @@ public class DocumentsManager {
 				@Override
 				public void map(Map<String, Object> document, Emitter emitter) {
 					
-					if(document.get("DocType").equals(DOC_TYPE)
-							&& document.get("ContractorId").equals(contractorId)){
+					if(document.get("DocType").equals(DOC_TYPE)){
+				//			&& document.get("ContractorId").equals(contractorId)){
 						
-						ArrayList<Object> keys = getAllKeysToEmit(document);
+						//ArrayList<Object> keys = getAllKeysToEmit(document);
 						
-						emitter.emit(keys , document);
+						//ArrayList<Object> keys = new ArrayList<Object>();
+						//keys.add(document.get("ContractorId"));
+						//keys.add(document.get("DocumentDate"));
+						
+						emitter.emit(document.get("ContractorId") , document);
+						emitter.emit(document.get("DocumentDate") , document);
 					}
 				}
 				
-			}, "2");
+			}, "6");
 			
-			documentsList = getDocumentsListFromView(latestContratorKrisDocumentView, 1);
+			List<Object> keys = new ArrayList<Object>();
+			keys.add(contractorId);
+			
+			documentsList = getDocumentsListFromView(latestContratorKrisDocumentView, 1, keys, true);
 		}
 		
 		if(documentsList.isEmpty())

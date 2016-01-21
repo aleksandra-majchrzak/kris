@@ -1,6 +1,7 @@
 package com.example.krismobile.contractors.documents;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
@@ -44,6 +45,12 @@ public class ContractorDocumentsActivity extends Activity {
 		}
 		
 		return super.onOptionsItemSelected(item);
+	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data){
+		
+		super.onActivityResult(requestCode, resultCode, data);
 	}
 	
 	public Contractor getContractor() {
