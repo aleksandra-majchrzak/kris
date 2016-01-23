@@ -3,6 +3,7 @@ package com.example.krismobile.contractors;
 import com.example.krismobile.R;
 import com.example.krismobile.contractors.adapters.ModifyContractorDialogAdapter;
 import com.example.krismobile.database.managers.ContractorsManager;
+import com.example.krismobile.database.managers.ItemsManager;
 
 import android.app.Activity;
 import android.app.AlertDialog;

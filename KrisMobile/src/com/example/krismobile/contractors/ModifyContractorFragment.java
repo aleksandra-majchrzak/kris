@@ -10,6 +10,7 @@ import android.widget.Spinner;
 
 import com.example.krismobile.R;
 import com.example.krismobile.database.managers.ContractorsManager;
+import com.example.krismobile.database.managers.ItemsManager;
 import com.example.krismobile.main.base.FragmentBase;
 
 public class ModifyContractorFragment  extends FragmentBase {

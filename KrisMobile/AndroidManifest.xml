@@ -53,7 +53,7 @@
         </activity>
         <activity
             android:name=".documents.DocumentsActivity"
-            android:label="@string/title_activity_documents" 
+            android:label="@string/title_activity_documents"
             android:parentActivityName=".main.MenuActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -78,6 +78,26 @@
         <activity
             android:name=".TmpPagedActivity"
             android:label="@string/title_activity_tmp_paged" >
+        </activity>
+        <activity
+            android:name=".items.ItemsActivity"
+            android:label="@string/title_activity_items"
+            android:parentActivityName=".main.MenuActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.krismobile.main.MenuActivity" />
+        </activity>
+        <activity
+            android:name=".items.ItemActivity"
+            android:label="@string/title_activity_item"
+            android:parentActivityName=".items.ItemsActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.krismobile.items.ItemsActivity" />
+        </activity>
+        <activity
+            android:name="com.example.krismobile.items.ModifyItemActivity"
+            android:label="@string/title_activity_modify_item" >
         </activity>
     </application>
 

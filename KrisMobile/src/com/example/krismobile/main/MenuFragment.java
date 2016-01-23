@@ -14,6 +14,7 @@ import android.widget.ListView;
 import com.example.krismobile.R;
 import com.example.krismobile.contractors.ContractorsActivity;
 import com.example.krismobile.documents.DocumentsActivity;
+import com.example.krismobile.items.ItemsActivity;
 import com.example.krismobile.main.adapters.MenuAdapter;
 import com.example.krismobile.main.base.FragmentBase;
 import com.example.krismobile.main.entities.MenuItem;
@@ -79,6 +80,11 @@ public class MenuFragment extends FragmentBase {
 				case POSITION_DOCUMENTS:
 					
 					intent = new Intent(context, DocumentsActivity.class);
+					startActivity(intent);
+					break;
+					
+				case POSITION_ITEMS:
+					intent = new Intent(context, ItemsActivity.class);
 					startActivity(intent);
 					break;
 					

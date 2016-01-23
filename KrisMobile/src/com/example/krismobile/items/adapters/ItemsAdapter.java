@@ -1,4 +1,4 @@
-package com.example.krismobile.contractors.adapters;
+package com.example.krismobile.items.adapters;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -16,27 +16,27 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-public class ContractorsAdapter extends  BaseAdapter{
+public class ItemsAdapter extends  BaseAdapter{
 	
 	private Context context;
-	private ArrayList<Document> contractorsList;
+	private ArrayList<Document> itemsList;
 	
-	public ContractorsAdapter(Context context, ArrayList<Document> contractorsList){
+	public ItemsAdapter(Context context, ArrayList<Document> itemssList){
 		
 		this.context = context;
-		this.contractorsList = contractorsList;
+		this.itemsList = itemssList;
 	}
 	
 	@Override
 	public int getCount() {
 		
-		return this.contractorsList.size();
+		return this.itemsList.size();
 	}
 
 	@Override
 	public Object getItem(int position) {
 		
-		return this.contractorsList.get(position);
+		return this.itemsList.get(position);
 	}
 
 	@Override
@@ -46,8 +46,8 @@ public class ContractorsAdapter extends  BaseAdapter{
 	}
 	
 	public int getIndexOf(String id) {
-        for(int i = 0; i < this.contractorsList.size(); i++) {
-            if(this.contractorsList.get(i).getId().equals(id)) {
+        for(int i = 0; i < this.itemsList.size(); i++) {
+            if(this.itemsList.get(i).getId().equals(id)) {
                 return i;
             }
         }
@@ -57,37 +57,43 @@ public class ContractorsAdapter extends  BaseAdapter{
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 	
-		Map<String, Object> props = this.contractorsList.get(position).getProperties();
+		Map<String, Object> props = this.itemsList.get(position).getProperties();
+		
 			
 		if(convertView == null){
 			LayoutInflater inflater = ((Activity)context).getLayoutInflater();
 
-			convertView = inflater.inflate(R.layout.contractor_row, null);
+			convertView = inflater.inflate(R.layout.item_row, null);
 		}	
 		
-		if(((Integer)(props.get("TypeId"))).intValue() == ContractorsManager.SELLER_TYPE){
+//		if(((Integer)(props.get("TypeId"))).intValue() == ItemsManager.BUYER_TYPE){
 				
 			//ustawienie obrazka dla sprzedawcy
 				
-		} else{
+//		} else{
 			//ustawienie obrazka dla kupca
 				
-		}
+//		}
 			
-		TextView contractorCodeTextView = (TextView) convertView.findViewById(R.id.contractor_code_textView);
-		contractorCodeTextView.setText((String)props.get("Code"));
+		TextView itemCodeNameTextView = (TextView) convertView.findViewById(R.id.item_code_name_textView);
+		itemCodeNameTextView.setText("[" + (String)props.get("Code") + "] " + (String)props.get("Name"));
 			
-		TextView contractorAddressTextView = (TextView) convertView.findViewById(R.id.contractor_address_textView);
-		contractorAddressTextView.setText((String)props.get("Address"));
+// jakos musisz zapamietywac te cene i pobierac ja		
+		TextView itemNetPriceTextView = (TextView) convertView.findViewById(R.id.item_netPrice_textView);
+		itemNetPriceTextView.setText("ho");
+		
+		TextView itemGrossPriceTextView = (TextView) convertView.findViewById(R.id.item_grossPrice_textView);
+		itemGrossPriceTextView.setText("hu");
 
 		
 		return convertView;
+		
 	}
 	
 	@Override
 	public void notifyDataSetChanged(){
 		
-		contractorsList = ContractorsManager.getInstance().getAllContractors();
+		itemsList = ItemsManager.getInstance().getAllItems();
 		
 		super.notifyDataSetChanged();
 	}

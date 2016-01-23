@@ -6,7 +6,7 @@ import java.util.Map;
 import com.couchbase.lite.Document;
 import com.example.krismobile.R;
 import com.example.krismobile.contractors.Contractor;
-import com.example.krismobile.database.managers.ContractorsManager;
+import com.example.krismobile.database.managers.ItemsManager;
 import com.example.krismobile.database.managers.DocumentsManager;
 import com.example.krismobile.documents.adapters.DocumentSectionsPagerAdapter;
 

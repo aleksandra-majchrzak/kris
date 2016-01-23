@@ -5,6 +5,7 @@ import java.util.Map;
 import com.couchbase.lite.Document;
 import com.example.krismobile.R;
 import com.example.krismobile.database.managers.ContractorsManager;
+import com.example.krismobile.database.managers.ItemsManager;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -42,9 +43,9 @@ public class ContractorActivity extends Activity {
 		
 		setContentView(R.layout.activity_contractor);
 		
-
-		getFragmentManager().beginTransaction()
-			.add(R.id.container, new ContractorFragment()).commit();
+		if(getFragmentManager().findFragmentById(R.id.container) == null)
+			getFragmentManager().beginTransaction()
+				.add(R.id.container, new ContractorFragment()).commit();
 
 	}
 	

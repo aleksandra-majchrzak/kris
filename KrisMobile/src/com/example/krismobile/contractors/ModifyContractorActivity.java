@@ -5,6 +5,7 @@ import java.util.Map;
 import com.couchbase.lite.Document;
 import com.example.krismobile.R;
 import com.example.krismobile.database.managers.ContractorsManager;
+import com.example.krismobile.database.managers.ItemsManager;
 
 import android.app.Activity;
 import android.os.Bundle;
