@@ -1,10 +1,5 @@
 package com.example.krismobile.main;
 
-import java.io.File;
-
-import com.couchbase.lite.Context;
-import com.couchbase.lite.NetworkReachabilityManager;
-import com.couchbase.lite.storage.SQLiteStorageEngineFactory;
 
 public class CouchbaseContext { //implements Context{
 /*

@@ -17,12 +17,8 @@ import com.couchbase.lite.Query;
 import com.couchbase.lite.QueryEnumerator;
 import com.couchbase.lite.QueryRow;
 import com.couchbase.lite.View;
-import com.example.krismobile.contractors.Contractor;
 import com.example.krismobile.database.DatabaseManager;
 import com.example.krismobile.items.Item;
-import com.example.krismobile.items.entities.Material;
-import com.example.krismobile.items.entities.Price;
-import com.example.krismobile.items.entities.Size;
 
 public class ItemsManager {
 	
@@ -288,6 +284,128 @@ public class ItemsManager {
 		
 	}
 	
+	public String[] getItemTypes(){
+		String[] itemTypes = null;
+		View itemTypesView = getView("allItemTypes");
+		
+//		Log.i("KrisMobile", DatabaseManager.getDatabaseInstance())
+		
+		if(itemTypesView != null){
+			
+			itemTypesView.setMap(new Mapper(){
+
+				@Override
+				public void map(Map<String, Object> document, Emitter emitter) {
+					
+					if(document.get("DocType").equals(DOC_TYPE)){
+						
+						emitter.emit(document.get("Type") , document.get("Type"));
+					}
+				}
+				
+			}, "1");
+			
+			itemTypes = geValuesArrayFromView(itemTypesView, 0, null, false);
+		}
+		
+		return itemTypes;		
+	}
+	
+	
+	public String[] getItemSizes(){
+		
+		String[] itemSizes = null;
+		View itemSizesView = getView("allItemSizes");
+		
+//		Log.i("KrisMobile", DatabaseManager.getDatabaseInstance())
+		
+		if(itemSizesView != null){
+			
+			itemSizesView.setMap(new Mapper(){
+
+				@Override
+				public void map(Map<String, Object> document, Emitter emitter) {
+					
+					if(document.get("DocType").equals(DOC_TYPE)){
+						
+						emitter.emit(document.get("Size") , document.get("Size"));
+					}
+				}
+				
+			}, "1");
+			
+			itemSizes = geValuesArrayFromView(itemSizesView, 0, null, false);
+		}
+		
+		return itemSizes;		
+	}
+	
+	public String[] getItemMaterials(){
+		
+		String[] itemMaterials = null;
+		View itemMaterialsView = getView("allItemMaterials");
+		
+//		Log.i("KrisMobile", DatabaseManager.getDatabaseInstance())
+		
+		if(itemMaterialsView != null){
+			
+			itemMaterialsView.setMap(new Mapper(){
+
+				@Override
+				public void map(Map<String, Object> document, Emitter emitter) {
+					
+					if(document.get("DocType").equals(DOC_TYPE)){
+						
+						emitter.emit(document.get("Material") , document.get("Material"));
+					}
+				}
+				
+			}, "1");
+			
+			itemMaterials = geValuesArrayFromView(itemMaterialsView, 0, null, false);
+		}
+		
+		return itemMaterials;		
+	}
+	
+	
+	private String[] geValuesArrayFromView(View queryView, int limit, List<Object> keys, boolean descending){
+		
+		ArrayList<String> valuesArray = new ArrayList<String>();
+		Query orderedQuery = queryView.createQuery();
+		
+		if(limit > 0)
+			orderedQuery.setLimit(limit);
+		
+		if(keys != null && ! keys.isEmpty())
+			orderedQuery.setKeys(keys);
+		
+		orderedQuery.setDescending(descending);
+
+		try {
+			
+	        QueryEnumerator results = orderedQuery.run();
+
+	       for (Iterator<QueryRow> it = results; it.hasNext();) {
+	          QueryRow row = it.next();
+	          String doc = (String)row.getValue();
+	          
+	          valuesArray.add(doc);
+
+	          Log.i("KrisMobile", "Found party:" + row);
+	       }
+	       
+	       
+	    } catch (CouchbaseLiteException e) {
+	    	
+	        Log.e("KrisMobile", "Error querying view.", e);
+	        
+	    }	  
+		
+		return valuesArray.toArray(new String[valuesArray.size()]);
+		
+	}
+
 	public boolean deleteItem(String itemId){
 		Document itemToDelete = getItem(itemId);
 		

@@ -1,7 +1,6 @@
 package com.example.krismobile.items;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -9,11 +8,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.couchbase.lite.Document;
-import com.example.krismobile.contractors.Contractor;
 import com.example.krismobile.database.managers.ItemsManager;
-import com.example.krismobile.items.entities.Material;
 import com.example.krismobile.items.entities.Price;
-import com.example.krismobile.items.entities.Size;
 import com.example.krismobile.warehouses.stocks.ItemStocks;
 
 public class Item implements Parcelable{

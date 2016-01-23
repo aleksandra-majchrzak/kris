@@ -1,12 +1,5 @@
 package com.example.krismobile.contractors;
 
-import com.couchbase.lite.Document;
-import com.example.krismobile.R;
-import com.example.krismobile.contractors.adapters.ContractorsAdapter;
-import com.example.krismobile.database.managers.ContractorsManager;
-import com.example.krismobile.database.managers.ItemsManager;
-import com.example.krismobile.main.base.FragmentBase;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import com.couchbase.lite.Document;
+import com.example.krismobile.R;
+import com.example.krismobile.contractors.adapters.ContractorsAdapter;
+import com.example.krismobile.database.managers.ContractorsManager;
+import com.example.krismobile.main.base.FragmentBase;
 
 public class ContractorsFragment extends FragmentBase {
 	

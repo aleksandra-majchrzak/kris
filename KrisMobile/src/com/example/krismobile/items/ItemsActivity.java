@@ -1,13 +1,13 @@
 package com.example.krismobile.items;
 
-import com.example.krismobile.R;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.example.krismobile.R;
 
 public class ItemsActivity extends Activity {
 	

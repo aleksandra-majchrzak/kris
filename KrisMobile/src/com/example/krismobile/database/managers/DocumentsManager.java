@@ -173,7 +173,7 @@ public class DocumentsManager {
 		
 		return documentsList;		
 	}
-
+/*
 	private ArrayList<Object> getAllKeysToEmit(Map<String, Object> document){
 		ArrayList<Object> keys = new ArrayList<Object>();
 		
@@ -189,7 +189,7 @@ public class DocumentsManager {
         
         return keys;
 	}
-	
+*/	
 	private ArrayList<Document> getDocumentsListFromView(View queryView, int limit, List<Object> keys, boolean descending){
 		
 		ArrayList<Document> documentsList = new ArrayList<Document>();

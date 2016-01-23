@@ -1,23 +1,21 @@
 package com.example.krismobile.documents;
 
-import java.util.Date;
 import java.util.Map;
 
-import com.couchbase.lite.Document;
-import com.example.krismobile.R;
-import com.example.krismobile.contractors.Contractor;
-import com.example.krismobile.database.managers.ItemsManager;
-import com.example.krismobile.database.managers.DocumentsManager;
-import com.example.krismobile.documents.adapters.DocumentSectionsPagerAdapter;
-
 import android.app.ActionBar;
+import android.app.ActionBar.Tab;
 import android.app.Activity;
 import android.app.FragmentTransaction;
-import android.app.ActionBar.Tab;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.couchbase.lite.Document;
+import com.example.krismobile.R;
+import com.example.krismobile.contractors.Contractor;
+import com.example.krismobile.database.managers.DocumentsManager;
+import com.example.krismobile.documents.adapters.DocumentSectionsPagerAdapter;
 
 public class DocumentActivity extends Activity implements ActionBar.TabListener{
 

@@ -9,7 +9,6 @@ import android.os.Parcelable;
 import com.couchbase.lite.Document;
 import com.example.krismobile.contractors.Contractor;
 import com.example.krismobile.database.managers.ContractorsManager;
-import com.example.krismobile.database.managers.ItemsManager;
 
 public class KrisDocument implements Parcelable{
 	

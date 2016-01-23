@@ -15,8 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.krismobile.R;
-import com.example.krismobile.contractors.ContractorsActivity;
-import com.example.krismobile.contractors.documents.ContractorDocumentsActivity;
 import com.example.krismobile.database.managers.DocumentsManager;
 import com.example.krismobile.main.base.FragmentBase;
 

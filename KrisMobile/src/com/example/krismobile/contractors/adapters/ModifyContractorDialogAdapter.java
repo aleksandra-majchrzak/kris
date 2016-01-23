@@ -1,7 +1,5 @@
 package com.example.krismobile.contractors.adapters;
 
-import com.example.krismobile.R;
-
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.krismobile.R;
 
 public class ModifyContractorDialogAdapter extends BaseAdapter {
 	

@@ -2,9 +2,6 @@ package com.example.krismobile.main.adapters;
 
 import java.util.List;
 
-import com.example.krismobile.R;
-import com.example.krismobile.main.entities.MenuItem;
-
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -15,6 +12,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.krismobile.R;
+import com.example.krismobile.main.entities.MenuItem;
 
 public class MenuAdapter extends ArrayAdapter<MenuItem>{
 	

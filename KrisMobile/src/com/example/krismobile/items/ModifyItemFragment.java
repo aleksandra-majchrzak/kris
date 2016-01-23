@@ -2,21 +2,16 @@ package com.example.krismobile.items;
 
 import java.util.List;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.krismobile.R;
 import com.example.krismobile.contractors.ContractorsActivity;
-import com.example.krismobile.database.managers.ContractorsManager;
 import com.example.krismobile.database.managers.ItemsManager;
 import com.example.krismobile.items.entities.Price;
 import com.example.krismobile.main.base.FragmentBase;
@@ -114,7 +109,10 @@ private Item item;
 		
 		itemCodeEditText.setText(item.getName());
 		itemNameEditText.setText(item.getCode());
-		itemTypeSpinner.setText(item.getType());
+		
+		itemTypeSpinner.setText(item.getType());		
+		String[] itemTypes = ItemsManager.getInstance().getItemTypes();
+		itemTypeSpinner.setSuggestionSource(context, itemTypes);
 		
 		if(price != null){
 			itemNetPriceEditText.setText(String.valueOf(item.getPrice().getNetPrice()));
@@ -126,7 +124,12 @@ private Item item;
 		}
 		
 		itemSizeSpinner.setText(item.getSize());
+		String[] itemSizes = ItemsManager.getInstance().getItemSizes();
+		itemSizeSpinner.setSuggestionSource(context, itemSizes);
+		
 		itemMaterialSpinner.setText(item.getMaterial());
+		String[] itemMateials = ItemsManager.getInstance().getItemMaterials();
+		itemMaterialSpinner.setSuggestionSource(context, itemMateials);
 /*		
 		if(itemStocks == null || itemStocks.isEmpty())
 			itemStocksButton.setText(R.string.none);

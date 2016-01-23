@@ -2,10 +2,10 @@ package com.example.krismobile.items.entities;
 
 import java.util.Map;
 
-import com.couchbase.lite.Document;
-
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import com.couchbase.lite.Document;
 
 public class Price implements Parcelable{
 	

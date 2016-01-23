@@ -1,7 +1,5 @@
 package com.example.krismobile.main;
 
-import com.example.krismobile.R;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +10,8 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.example.krismobile.R;
 
 
 public class MainActivity extends Activity {

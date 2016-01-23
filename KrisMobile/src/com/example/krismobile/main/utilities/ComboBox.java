@@ -1,14 +1,15 @@
 package com.example.krismobile.main.utilities;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.text.InputType;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.SimpleCursorAdapter;
+
+import com.example.krismobile.R;
 
 public class ComboBox extends LinearLayout {
 
@@ -53,44 +54,21 @@ public class ComboBox extends LinearLayout {
                        LayoutParams.WRAP_CONTENT));
    }
 
-   /**
-    * Sets the source for DDLB suggestions.
-    * Cursor MUST be managed by supplier!!
-    * @param source Source of suggestions.
-    * @param column Which column from source to show.
-    */
-   public void setSuggestionSource(Cursor source, String column) {
-       String[] from = new String[] { column };
-       int[] to = new int[] { android.R.id.text1 };
+   public void setSuggestionSource(Context context, String[] suggestions) {
+	   
+       ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, R.layout.simple_row , suggestions);
        
-       SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(this.getContext(),
-                       android.R.layout.simple_dropdown_item_1line, source, from, to);
-       
-       // this is to ensure that when suggestion is selected
-       // it provides the value to the textbox
-       cursorAdapter.setStringConversionColumn(source.getColumnIndex(column));
-       autocompleteTextView.setAdapter(cursorAdapter);
+       autocompleteTextView.setAdapter(adapter);
    }
 
-   /**
-    * Gets the text in the combo box.
-    *
-    * @return Text.
-    */
    public String getText() {
        return autocompleteTextView.getText().toString();
    }
 
-   /**
-    * Sets the text in combo box.
-    */
    public void setText(String text) {   
        autocompleteTextView.setText(text);
    }
-   
-   /**
-    * Sets the text in combo box.
-    */
+ 
    public void setPosition(int position) {
 	   String text = (String) autocompleteTextView.getAdapter().getItem(position);
        autocompleteTextView.setText(text);

@@ -2,18 +2,18 @@ package com.example.krismobile.main;
 
 import java.io.IOException;
 
-import com.couchbase.lite.CouchbaseLiteException;
-import com.couchbase.lite.Database;
-import com.example.krismobile.R;
-import com.example.krismobile.database.DatabaseManager;
-import com.example.krismobile.main.adapters.MainSectionsPagerAdapter;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
+
+import com.couchbase.lite.CouchbaseLiteException;
+import com.couchbase.lite.Database;
+import com.example.krismobile.R;
+import com.example.krismobile.database.DatabaseManager;
+import com.example.krismobile.main.adapters.MainSectionsPagerAdapter;
 
 public class MenuActivity extends Activity {
 

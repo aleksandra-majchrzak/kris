@@ -1,10 +1,5 @@
 package com.example.krismobile.contractors;
 
-import com.example.krismobile.R;
-import com.example.krismobile.contractors.adapters.ModifyContractorDialogAdapter;
-import com.example.krismobile.database.managers.ContractorsManager;
-import com.example.krismobile.database.managers.ItemsManager;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -17,6 +12,10 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
+
+import com.example.krismobile.R;
+import com.example.krismobile.contractors.adapters.ModifyContractorDialogAdapter;
+import com.example.krismobile.database.managers.ContractorsManager;
 
 public class ModifyContractorDialog extends Dialog{
 	

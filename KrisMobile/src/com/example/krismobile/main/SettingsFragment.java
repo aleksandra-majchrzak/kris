@@ -1,9 +1,9 @@
 package com.example.krismobile.main;
 
-import com.example.krismobile.R;
-
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
+
+import com.example.krismobile.R;
 
 public class SettingsFragment extends PreferenceFragment {
 

@@ -2,16 +2,15 @@ package com.example.krismobile.contractors;
 
 import java.util.Map;
 
-import com.couchbase.lite.Document;
-import com.example.krismobile.R;
-import com.example.krismobile.database.managers.ContractorsManager;
-import com.example.krismobile.database.managers.ItemsManager;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.couchbase.lite.Document;
+import com.example.krismobile.R;
+import com.example.krismobile.database.managers.ContractorsManager;
 
 public class ModifyContractorActivity extends Activity {
 

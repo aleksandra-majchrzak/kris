@@ -13,11 +13,7 @@ import android.widget.ListView;
 
 import com.couchbase.lite.Document;
 import com.example.krismobile.R;
-import com.example.krismobile.contractors.ContractorsActivity;
-import com.example.krismobile.contractors.ModifyContractorActivity;
-import com.example.krismobile.database.managers.DocumentsManager;
 import com.example.krismobile.database.managers.ItemsManager;
-import com.example.krismobile.documents.adapters.DocumentsAdapter;
 import com.example.krismobile.items.adapters.ItemsAdapter;
 import com.example.krismobile.main.base.FragmentBase;
 

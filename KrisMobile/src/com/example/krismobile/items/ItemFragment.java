@@ -1,29 +1,22 @@
 package com.example.krismobile.items;
 
-import java.util.Date;
 import java.util.List;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.krismobile.R;
-import com.example.krismobile.contractors.ContractorsActivity;
-import com.example.krismobile.contractors.documents.ContractorDocumentsActivity;
-import com.example.krismobile.database.managers.DocumentsManager;
 import com.example.krismobile.database.managers.ItemsManager;
 import com.example.krismobile.main.base.FragmentBase;
-import com.example.krismobile.main.utilities.ComboBox;
 import com.example.krismobile.warehouses.stocks.ItemStocks;
 
 public class ItemFragment extends FragmentBase {
