@@ -17,6 +17,7 @@ import com.example.krismobile.items.ItemsActivity;
 import com.example.krismobile.main.adapters.MenuAdapter;
 import com.example.krismobile.main.base.FragmentBase;
 import com.example.krismobile.main.entities.MenuItem;
+import com.example.krismobile.warehouses.stocks.SynchronizationManager;
 
 public class MenuFragment extends FragmentBase {
 	
@@ -25,6 +26,7 @@ public class MenuFragment extends FragmentBase {
 	private final int POSITION_PAYMENTS = 2;
 	private final int POSITION_ITEMS = 3;
 	private final int POSITION_WAREHOUSES = 4;
+	private final int POSITION_SYNCHRONIZATION = 5;
 	
 	private ListView menuListView;
 	private MenuAdapter menuAdapter;
@@ -57,6 +59,7 @@ public class MenuFragment extends FragmentBase {
 		itemList.add(new MenuItem(context.getResources().getString(R.string.payments), R.drawable.payments));
 		itemList.add(new MenuItem(context.getResources().getString(R.string.items), R.drawable.items));
 		itemList.add(new MenuItem(context.getResources().getString(R.string.warehouses), R.drawable.warehouses));
+		itemList.add(new MenuItem(context.getResources().getString(R.string.synchronization), R.drawable.synchronization));
 		
 		menuAdapter = new MenuAdapter(context, 0, itemList);
 		
@@ -87,13 +90,14 @@ public class MenuFragment extends FragmentBase {
 					startActivity(intent);
 					break;
 					
+				case POSITION_SYNCHRONIZATION:
+					SynchronizationManager.setupConnection();
+					break;
 				default:
 					break;
-				}
-				
+				}			
 			}
-			
-			
+					
 		});
 		
 	}

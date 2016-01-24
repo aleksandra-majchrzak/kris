@@ -133,5 +133,7 @@
     <string name="gross">(B)</string>
     <string name="title_activity_modify_item">ModifyItemActivity</string>
     <string name="item_name">Nazwa</string>
+    <string name="synchronization">Synchronizacja</string>
+    <string name="server_address">Adres serwera</string>
 
 </resources>

@@ -264,10 +264,11 @@ public class DocumentsManager {
 						
 						emitter.emit(document.get("ContractorId") , document);
 						emitter.emit(document.get("DocumentDate") , document);
+						//emitter.emit(keys , document);
 					}
 				}
 				
-			}, "6");
+			}, "8");
 			
 			List<Object> keys = new ArrayList<Object>();
 			keys.add(contractorId);
