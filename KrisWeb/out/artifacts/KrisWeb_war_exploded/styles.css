@@ -1,0 +1,43 @@
+body{
+    display: block;
+}
+
+.main-navbar{
+    background-color: #001933;
+    display: block;
+    text-transform: uppercase;
+    color: white !important;
+    font-weight: bold;
+}
+
+.nav-menu{
+    margin-right: 20px;
+}
+
+.container{
+    min-height: 100%;
+    max-height: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    margin-bottom: -50px;
+}
+
+.container:after {
+    content: "";
+    display: block;
+}
+
+#push, .footer, .container:after {
+    height: 50px;
+}
+
+.footer {
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    background-color: #001933;
+}
+
+#footer-text{
+    color: gray;
+}

@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="KrisWeb:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/KrisWeb_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="KrisWeb/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="KrisWeb" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
