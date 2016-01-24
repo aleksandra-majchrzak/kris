@@ -15,15 +15,18 @@
 </head>
 <body>
 <jsp:include page="navbar.jsp" />
-<script type="text/javascript"> $('#login-tab').addClass("active") </script>
+<script type="text/javascript"> $('#register-tab').addClass("active") </script>
 <div class="container">
-    <h1>Logowanie</h1>
-    <form role="form" action="LoginServlet" method="post" style="max-width: 300px;">
+    <h1>Rejestracja</h1>
+    <form role="form" action="RegisterServlet" method="post" style="max-width: 300px;">
         <div class="form-group">
             <input type="text" name="username" placeholder="Wpisz login" class="form-control"/>
         </div>
         <div class="form-group">
             <input type="password" name="password" placeholder="Hasło" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <input type="password" name="password_confirmation" placeholder="Powtórz hasło" class="form-control"/>
         </div>
         <button type="submit" class="btn btn-default">Zatwierdź</button>&nbsp;<a href="${pageContext.request.contextPath}/">
         <button type="button" class="btn btn-primary">Anuluj</button></a>
