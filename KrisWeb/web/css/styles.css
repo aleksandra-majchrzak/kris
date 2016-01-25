@@ -27,6 +27,14 @@ body{
     display: block;
 }
 
+.kris-panel{
+    margin-top: 60px;
+}
+
+.details-panel{
+    margin-top: 20px;
+}
+
 #push, .footer, .container:after {
     height: 50px;
 }

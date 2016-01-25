@@ -9,10 +9,11 @@
     </ul>
     <br/>
     <ul class="nav nav-pills navbar-right nav-submenu">
-        <li role="presentation" id="contractors-tab"><a href="${pageContext.request.contextPath}/contractors.jsp">Kontrahenci</a></li>
-        <li role="presentation" id="documents-tab"><a href="${pageContext.request.contextPath}/documents.jsp">Dokumenty</a></li>
-        <li role="presentation" id="items-tab"><a href="${pageContext.request.contextPath}/items.jsp">Towary</a></li>
-        <li role="presentation" id="payments-tab"><a href="${pageContext.request.contextPath}/payments.jsp">Platnosci</a></li>
-        <li role="presentation" id="warehouses-tab"><a href="${pageContext.request.contextPath}/warehouses.jsp">Magazyny</a></li>
+       <!--  <li role="presentation" id="contractors-tab"><a href="${pageContext.request.contextPath}/contractors.jsp">Kontrahenci</a></li> -->
+        <li role="presentation" id="contractors-tab"><a href="ContractorServlet">Kontrahenci</a></li>
+        <li role="presentation" id="documents-tab"><a href="DocumentServlet">Dokumenty</a></li>
+        <li role="presentation" id="items-tab"><a href="ItemServlet">Towary</a></li>
+        <li role="presentation" id="payments-tab"><a href="PaymentServlet">Platnosci</a></li>
+        <li role="presentation" id="warehouses-tab"><a href="WarehouseServlet">Magazyny</a></li>
     </ul>
 </div>

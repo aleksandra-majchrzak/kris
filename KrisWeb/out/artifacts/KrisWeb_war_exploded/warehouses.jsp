@@ -15,9 +15,11 @@
 </head>
 <body>
 <jsp:include page="navbar.jsp" />
+<script type="text/javascript"> $('#warehouses-tab').addClass("active") </script>
 <div class="container">
-    <h1>Magazyny</h1>
-    <p>To invoke the java servlet click <a href="MainServlet">here</a></p>
+    <jsp:include page="reusable-list.jsp"   flush="true" />    <!-- w jakis posob przekazywac parametry z jednej strony do drugiej?? servletami?? -->
+    <!-- if uzytkownik wybrany-->
+    <jsp:include page="details-view.jsp"   flush="true" />
 </div>
 <jsp:include page="footer.jsp" />
 </body>

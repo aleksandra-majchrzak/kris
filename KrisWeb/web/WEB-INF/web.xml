@@ -19,6 +19,31 @@
         <servlet-class>com.web.kris.main.RegisterServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>ContractorServlet</servlet-name>
+        <servlet-class>com.web.kris.main.ContractorServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>DocumentServlet</servlet-name>
+        <servlet-class>com.web.kris.main.DocumentServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>ItemServlet</servlet-name>
+        <servlet-class>com.web.kris.main.ItemServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>PaymentServlet</servlet-name>
+        <servlet-class>com.web.kris.main.PaymentServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>WarehouseServlet</servlet-name>
+        <servlet-class>com.web.kris.main.WarehouseServlet</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>MainServlet</servlet-name>
         <url-pattern>/MainServlet</url-pattern>
@@ -32,6 +57,31 @@
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/RegisterServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ContractorServlet</servlet-name>
+        <url-pattern>/ContractorServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>DocumentServlet</servlet-name>
+        <url-pattern>/DocumentServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ItemServlet</servlet-name>
+        <url-pattern>/ItemServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>PaymentServlet</servlet-name>
+        <url-pattern>/PaymentServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>WarehouseServlet</servlet-name>
+        <url-pattern>/WarehouseServlet</url-pattern>
     </servlet-mapping>
 <!--
     <error-page>
