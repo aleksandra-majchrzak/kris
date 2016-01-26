@@ -1,4 +1,4 @@
-package com.web.kris.main;
+package com.web.kris.main.servlets;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

@@ -1,4 +1,4 @@
-package com.web.kris.main;
+package com.web.kris.main.servlets;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,16 +10,16 @@ import java.io.IOException;
 /**
  * Created by Mohru on 2016-01-25.
  */
-@WebServlet(name = "WarehouseServlet")
-public class WarehouseServlet extends HttpServlet {
+@WebServlet(name = "DcumentServlet")
+public class DocumentServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        request.setAttribute("panel-name", "Magazyny");
-        request.setAttribute("panel-detail-name", "Nazwa magazynu");
+        request.setAttribute("panel-name", "Dokumenty");
+        request.setAttribute("panel-detail-name", "Nazwa dokumentu");
         request.getRequestDispatcher("contractors.jsp").forward(request, response);
     }
 }

@@ -1,4 +1,4 @@
-package com.example.krismobile.warehouses.stocks;
+package com.example.krismobile.synchronization;
 
 import java.net.MalformedURLException;
 import java.net.URL;

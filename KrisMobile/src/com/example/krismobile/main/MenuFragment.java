@@ -17,7 +17,7 @@ import com.example.krismobile.items.ItemsActivity;
 import com.example.krismobile.main.adapters.MenuAdapter;
 import com.example.krismobile.main.base.FragmentBase;
 import com.example.krismobile.main.entities.MenuItem;
-import com.example.krismobile.warehouses.stocks.SynchronizationManager;
+import com.example.krismobile.synchronization.SynchronizationManager;
 
 public class MenuFragment extends FragmentBase {
 	
