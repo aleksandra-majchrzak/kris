@@ -20,6 +20,6 @@ public class WarehouseServlet extends HttpServlet {
 
         request.setAttribute("panel-name", "Magazyny");
         request.setAttribute("panel-detail-name", "Nazwa magazynu");
-        request.getRequestDispatcher("contractors.jsp").forward(request, response);
+        request.getRequestDispatcher("warehouses.jsp").forward(request, response);
     }
 }

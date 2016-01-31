@@ -20,6 +20,6 @@ public class PaymentServlet extends HttpServlet {
 
         request.setAttribute("panel-name", "Płatności");
         request.setAttribute("panel-detail-name", "Nazwa płatności");
-        request.getRequestDispatcher("contractors.jsp").forward(request, response);
+        request.getRequestDispatcher("payments.jsp").forward(request, response);
     }
 }

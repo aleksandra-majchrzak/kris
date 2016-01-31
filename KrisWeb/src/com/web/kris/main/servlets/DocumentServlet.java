@@ -20,6 +20,6 @@ public class DocumentServlet extends HttpServlet {
 
         request.setAttribute("panel-name", "Dokumenty");
         request.setAttribute("panel-detail-name", "Nazwa dokumentu");
-        request.getRequestDispatcher("contractors.jsp").forward(request, response);
+        request.getRequestDispatcher("documents.jsp").forward(request, response);
     }
 }
