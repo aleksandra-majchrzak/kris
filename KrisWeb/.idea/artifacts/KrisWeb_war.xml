@@ -3,6 +3,11 @@
     <output-path>$PROJECT_DIR$/out/artifacts/KrisWeb_war</output-path>
     <root id="archive" name="KrisWeb_war.war">
       <element id="artifact" artifact-name="KrisWeb:war exploded" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Couchbase-Java-Client-2.2" />
+        </element>
+      </element>
     </root>
   </artifact>
 </component>

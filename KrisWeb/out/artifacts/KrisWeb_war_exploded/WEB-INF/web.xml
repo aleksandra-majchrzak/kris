@@ -6,42 +6,42 @@
 
     <servlet>
         <servlet-name>MainServlet</servlet-name>
-        <servlet-class>com.web.kris.main.MainServlet</servlet-class>
+        <servlet-class>com.web.kris.main.servlets.MainServlet</servlet-class>
     </servlet>
 
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>com.web.kris.main.LoginServlet</servlet-class>
+        <servlet-class>com.web.kris.main.servlets.LoginServlet</servlet-class>
     </servlet>
 
     <servlet>
         <servlet-name>RegisterServlet</servlet-name>
-        <servlet-class>com.web.kris.main.RegisterServlet</servlet-class>
+        <servlet-class>com.web.kris.main.servlets.RegisterServlet</servlet-class>
     </servlet>
 
     <servlet>
         <servlet-name>ContractorServlet</servlet-name>
-        <servlet-class>com.web.kris.main.ContractorServlet</servlet-class>
+        <servlet-class>com.web.kris.main.servlets.ContractorServlet</servlet-class>
     </servlet>
 
     <servlet>
         <servlet-name>DocumentServlet</servlet-name>
-        <servlet-class>com.web.kris.main.DocumentServlet</servlet-class>
+        <servlet-class>com.web.kris.main.servlets.DocumentServlet</servlet-class>
     </servlet>
 
     <servlet>
         <servlet-name>ItemServlet</servlet-name>
-        <servlet-class>com.web.kris.main.ItemServlet</servlet-class>
+        <servlet-class>com.web.kris.main.servlets.ItemServlet</servlet-class>
     </servlet>
 
     <servlet>
         <servlet-name>PaymentServlet</servlet-name>
-        <servlet-class>com.web.kris.main.PaymentServlet</servlet-class>
+        <servlet-class>com.web.kris.main.servlets.PaymentServlet</servlet-class>
     </servlet>
 
     <servlet>
         <servlet-name>WarehouseServlet</servlet-name>
-        <servlet-class>com.web.kris.main.WarehouseServlet</servlet-class>
+        <servlet-class>com.web.kris.main.servlets.WarehouseServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>

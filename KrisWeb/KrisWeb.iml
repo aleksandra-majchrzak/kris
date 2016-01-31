@@ -24,5 +24,6 @@
     <orderEntry type="library" scope="PROVIDED" name="Tomcat 7.0.67" level="application_server_libraries" />
     <orderEntry type="library" name="jquery.tmpl" level="application" />
     <orderEntry type="library" name="jquery" level="application" />
+    <orderEntry type="library" name="Couchbase-Java-Client-2.2" level="project" />
   </component>
 </module>

@@ -1,5 +1,8 @@
 package com.web.kris.main.servlets;
 
+import com.couchbase.client.java.CouchbaseCluster;
+import com.web.kris.main.managers.DatabaseManager;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -49,6 +52,8 @@ public class MainServlet extends HttpServlet {
             writer.println("</body>");
             writer.println("</html>");
         }
+
+        System.out.print("hello");
     }
 
     @Override
