@@ -11,6 +11,7 @@ import com.couchbase.client.java.view.ViewResult;
 import com.couchbase.client.java.view.ViewRow;
 
 import javax.management.Query;
+import java.util.List;
 
 /**
  * Created by Mohru on 2016-01-26.
@@ -19,42 +20,26 @@ import javax.management.Query;
 public class DatabaseManager {
 
     private static DatabaseManager manager;
+    private static CouchbaseEnvironment env = DefaultCouchbaseEnvironment.builder().autoreleaseAfter(6000).build();
     private Cluster cluster;
     private Bucket bucket;
 
     public static DatabaseManager getInstance(){
 
-
         if(manager == null)
             manager = new DatabaseManager();
-
-        System.out.println("in database manager");
 
         return manager;
     }
 
+    public Bucket getBucketInstance(){
+        if(bucket == null)
+            bucket = cluster.openBucket();
+
+        return bucket;
+    }
+
     public boolean establishConnection(){
-/*
-        // Set up at least two URIs in case one server fails
-
-        List<URI> servers = new ArrayList<URI>();
-        servers.add("http://<host>:8091/pools");
-        servers.add("http://<host>:8091/pools");
-
-    // Create a client talking to the default bucket
-
-        CouchbaseClient cbc = new CouchbaseClient(servers, "default", "");
-
-    // Create a client talking to the default bucket
-
-        CouchbaseClient cbc = new CouchbaseClient(servers, "default", "");
-
-        System.err.println(cbc.get(“thisname") +
-                " is off developing with Couchbase!");
-
-
- */
-        CouchbaseEnvironment env =DefaultCouchbaseEnvironment.builder().autoreleaseAfter(6000).build();
 
         System.out.println("in database manager2");
         // Connect to localhost
@@ -63,26 +48,23 @@ public class DatabaseManager {
 // Open the default bucket and the "beer-sample" one
         bucket = cluster.openBucket();
 
-        Bucket beerSampleBucket = cluster.openBucket("beer-sample");
+//        Bucket beerSampleBucket = cluster.openBucket("beer-sample");
 
 
         //just an example
-        ViewResult result = beerSampleBucket.query(ViewQuery.from("dev_beer", "by_name"));
+        //ViewResult result = beerSampleBucket.query(ViewQuery.from("dev_beer", "by_name"));
+/*        ViewResult result = bucket.query(ViewQuery.from("dev_contractors", "by_name"));
 
-        for (ViewRow row : result) {
+        List<ViewRow> rows = result.allRows();
+        System.out.println(rows);
+
+        for (ViewRow row : rows) {
             JsonDocument doc = row.document();
 
-            if (doc.content().getString("type").equals("beer")) {
-                System.out.println(doc.content().getString("name"));
+            if (doc.content().getString("DocType").equals("Contractor")) {
+                System.out.println(doc.content().getString("Code"));
             }
         }
-/*
-        bucket
-                .async()
-                .query(Query.simple(select("*").from("beer-sample").limit(10)))
-                .flatMap(AsyncQueryResult::rows)
-                .toBlocking()
-                .forEach(row -> System.out.println(row.value()));
 */
         return true;
     }

@@ -16,16 +16,22 @@ import java.io.IOException;
 public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        this.login();
 
         if(request.getMethod().equals("login"))
             this.login();
         else if(request.getMethod().equals("logout"))
             this.logout();
-        else
+        else {
+            request.getRequestDispatcher("index.jsp").forward(request, response);
             return;
+        }
+
+        request.getRequestDispatcher("index.jsp").forward(request, response);
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 
     }
 
@@ -40,7 +46,7 @@ public class LoginServlet extends HttpServlet {
     private void logout(){
 
         /*
-        *   tu powinno byc wylogowywanie
+        *   tu powinno byc wylogowywanie i reserowanie o uzytkowniku (zeby nie wyswietlal sie na nav barze)
         * */
 
         DatabaseManager.getInstance().closeConnection();

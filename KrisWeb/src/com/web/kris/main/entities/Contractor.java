@@ -1,5 +1,8 @@
 package com.web.kris.main.entities;
 
+import com.couchbase.client.java.document.*;
+import com.couchbase.client.java.document.json.JsonObject;
+
 /**
  * Created by Mohru on 2016-01-26.
  */
@@ -30,6 +33,17 @@ public class Contractor {
         this.address = address;
         this.description = description;
         this.NIP = NIP;
+    }
+
+    public Contractor(JsonDocument document){
+        JsonObject content = document.content();
+
+        this.id = content.getString("Id");
+        this.code = content.getString("Code");
+        this.typeId = Integer.valueOf(content.getString("TypeId"));
+        this.address = content.getString("Address");
+        this.description = content.getString("Description");
+        this.NIP = content.getString("NIP");
     }
 
     public String getId() {

@@ -5,7 +5,8 @@
   Time: 15:55
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <title>Kris Web</title>
@@ -17,7 +18,7 @@
 <jsp:include page="navbar.jsp" />
 <script type="text/javascript"> $('#warehouses-tab').addClass("active") </script>
 <div class="container">
-    <jsp:include page="reusable-list.jsp"   flush="true" />    <!-- w jakis posob przekazywac parametry z jednej strony do drugiej?? servletami?? -->
+    <jsp:include page="reusable-panel.jsp"   flush="true" />    <!-- w jakis posob przekazywac parametry z jednej strony do drugiej?? servletami?? -->
     <!-- if uzytkownik wybrany-->
     <jsp:include page="details-view.jsp"   flush="true" />
 </div>

@@ -25,5 +25,6 @@
     <orderEntry type="library" name="jquery.tmpl" level="application" />
     <orderEntry type="library" name="jquery" level="application" />
     <orderEntry type="library" name="Couchbase-Java-Client-2.2" level="project" />
+    <orderEntry type="library" name="jstl-1.2" level="project" />
   </component>
 </module>
