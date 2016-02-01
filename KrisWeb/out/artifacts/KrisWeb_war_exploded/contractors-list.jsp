@@ -2,7 +2,7 @@
 
 <ul class="list-group">
     <c:forEach items="${contractors}" var="contractor" varStatus="loop">
-        <a href="ContractorServlet?contractorIndex=${loop.index}" class="list-group-item kris-item-group-item">
+        <a href="ContractorServlet?contractorIndex=${loop.index}" class="list-group-item kris-list-group-item">
             <div>
                 <h4>${contractor.code}</h4>
                 <p>${contractor.address}</p>

@@ -5,15 +5,25 @@
         <h1>${contractor.code}</h1>
     </div>
     <div class="panel-body kris-panel-body">
-        <div class="col-lg-6">
-            <h5>Typ kontrahenta</h5>
-            <p>${contractor.type.name}</p>
-            <h5>Adres</h5>
-            <p>${contractor.address}</p>
-            <h5>NIP</h5>
-            <p>${contractor.NIP}</p>
-            <h5>Opis</h5>
-            <p>${contractor.description}</p>
+        <div class=" col-lg-12">
+            <ul class="list-group details-list-group">
+                <li class="list-group-item kris-list-group-item">
+                    <h4>Typ kontrahenta</h4>
+                    <p>${contractor.type.name}</p>
+                </li>
+                <li class="list-group-item kris-list-group-item">
+                    <h4>Adres</h4>
+                    <p>${contractor.address}</p>
+                </li>
+                <li class="list-group-item kris-list-group-item">
+                    <h4>NIP</h4>
+                    <p>${contractor.NIP}</p>
+                </li>
+                <li class="list-group-item kris-list-group-item">
+                    <h4>Opis</h4>
+                    <p>${contractor.description}</p>
+                </li>
+            </ul>
         </div>
     </div>
 

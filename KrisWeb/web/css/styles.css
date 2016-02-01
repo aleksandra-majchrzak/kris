@@ -2,6 +2,10 @@ body{
     display: block;
 }
 
+h4{
+    font-weight: bold;
+}
+
 .main-navbar{
     background-color: #001933;
     display: block;
@@ -48,6 +52,10 @@ body{
     min-height: 380px;
     max-height: 380px;
     overflow-y: scroll;
+}
+
+.details-list-group{
+    overflow-y: hidden;
 }
 
 .kris-panel-body{
