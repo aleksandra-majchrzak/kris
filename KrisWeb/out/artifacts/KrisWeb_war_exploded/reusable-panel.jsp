@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <div class="panel panel-default col-lg-4 kris-panel">
     <!-- Default panel contents -->
-    <div class="panel-heading">
+    <div class="panel-heading kris-panel-heading">
         <h1><%= request.getAttribute("panel-name") %></h1>
     </div>
     <div class="panel-body">

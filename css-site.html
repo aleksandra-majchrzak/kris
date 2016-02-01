@@ -1,8 +1,13 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<div class="panel panel-default col-lg-4 kris-panel">
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" media="screen">
+</head>
+    <body>
+        <div class="panel panel-default col-lg-4 kris-panel">
     <!-- Default panel contents -->
-    <div class="panel-heading kris-panel-heading">
-        <h1><%= request.getAttribute("panel-name") %></h1>
+    <div class="panel-heading" style="height: 50px">
+        <h1 style="display: inline">Kontrahenci</h1>
     </div>
     <div class="panel-body">
         <div class="col-lg-8 ">
@@ -17,10 +22,6 @@
         </div>
     </div>
 
-    <!-- List group -->
-    <c:set var="contractors" scope="page" value="${contractors}"/>
-    <c:if test = "${contractors != null}">
-        <jsp:include page="contractors-list.jsp"  flush="true" />
-    </c:if>
-
 </div>
+    </body>
+</html>

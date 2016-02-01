@@ -31,8 +31,28 @@ body{
     margin-top: 60px;
 }
 
+.kris-panel-heading, .kris-list-group-item{
+    min-height: 80px;
+    max-height: 80px;
+}
+
+.kris-panel-heading>h1{
+
+}
+
 .details-panel{
     margin-top: 20px;
+}
+
+.list-group{
+    min-height: 380px;
+    max-height: 380px;
+    overflow-y: scroll;
+}
+
+.kris-panel-body{
+    min-height: 445px;
+    max-height: 445px;
 }
 
 #push, .footer, .container:after {

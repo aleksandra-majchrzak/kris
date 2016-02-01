@@ -2,7 +2,7 @@
 
 <ul class="list-group">
     <c:forEach items="${contractors}" var="contractor">
-        <a href="#" class="list-group-item">
+        <a href="#" class="list-group-item kris-list-group-item">
             <div>
                 <h4>${contractor.code}</h4>
                 <p>${contractor.address}</p>
