@@ -1,8 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <ul class="list-group">
-    <c:forEach items="${contractors}" var="contractor">
-        <a href="#" class="list-group-item kris-list-group-item">
+    <c:forEach items="${contractors}" var="contractor" varStatus="loop">
+        <a href="ContractorServlet?contractorIndex=${loop.index}" class="list-group-item kris-item-group-item">
             <div>
                 <h4>${contractor.code}</h4>
                 <p>${contractor.address}</p>

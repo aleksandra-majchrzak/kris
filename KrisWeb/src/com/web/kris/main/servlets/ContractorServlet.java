@@ -23,6 +23,8 @@ import java.util.List;
 @WebServlet(name = "ContractorServlet")
 public class ContractorServlet extends HttpServlet {
 
+    private List<Contractor> contractors;
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
@@ -32,10 +34,19 @@ public class ContractorServlet extends HttpServlet {
         request.setAttribute("panel-name", "Kontrahenci");
         request.setAttribute("panel-detail-name", "Nazwa Kontrahenta");
 
-
-        List<Contractor> contractors = ContractorsManager.getInstance().getAllContractors();
+        if(contractors == null || request.getParameter("refresh") != null)
+            contractors = ContractorsManager.getInstance().getAllContractors();
 
         request.setAttribute("contractors", contractors);
+
+        String contractorIndex = request.getParameter("contractorIndex");
+
+        if(contractorIndex != null){
+            int index = Integer.valueOf(contractorIndex);
+            Contractor contractor = contractors.get(index);
+
+            request.setAttribute("contractor", contractor);
+        }
 
         request.getRequestDispatcher("contractors.jsp").forward(request, response);
     }

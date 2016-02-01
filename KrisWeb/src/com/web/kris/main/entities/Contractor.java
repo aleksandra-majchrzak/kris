@@ -2,6 +2,7 @@ package com.web.kris.main.entities;
 
 import com.couchbase.client.java.document.*;
 import com.couchbase.client.java.document.json.JsonObject;
+import com.web.kris.main.enums.ContractorType;
 
 /**
  * Created by Mohru on 2016-01-26.
@@ -10,7 +11,7 @@ public class Contractor {
 
     private String id;
     private String code;
-    private int typeId;
+    private ContractorType type;
     private String address;
     private String description;
     private String NIP;
@@ -18,7 +19,7 @@ public class Contractor {
     public Contractor(){
         this.id = "";
         this.code = "";
-        this.typeId = 1;
+        this.type = ContractorType.Buyer;
         this.address = "";
         this.description = "";
         this.NIP = "";
@@ -29,7 +30,7 @@ public class Contractor {
 
         this.id = id;
         this.code = code;
-        this.typeId = typeId;
+        this.type = ContractorType.values()[typeId];
         this.address = address;
         this.description = description;
         this.NIP = NIP;
@@ -40,7 +41,7 @@ public class Contractor {
 
         this.id = content.getString("Id");
         this.code = content.getString("Code");
-        this.typeId = Integer.valueOf(content.getString("TypeId"));
+        this.type = ContractorType.values()[Integer.valueOf(content.getString("TypeId"))];
         this.address = content.getString("Address");
         this.description = content.getString("Description");
         this.NIP = content.getString("NIP");
@@ -62,12 +63,12 @@ public class Contractor {
         this.code = code;
     }
 
-    public int getTypeId() {
-        return typeId;
+    public ContractorType getType() {
+        return type;
     }
 
-    public void setTypeId(int typeId) {
-        this.typeId = typeId;
+    public void setType(ContractorType type) {
+        this.type = type;
     }
 
     public String getAddress() {
