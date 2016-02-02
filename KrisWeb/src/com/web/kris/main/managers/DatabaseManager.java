@@ -45,27 +45,9 @@ public class DatabaseManager {
         // Connect to localhost
         cluster = CouchbaseCluster.create(env);
 
-// Open the default bucket and the "beer-sample" one
+
         bucket = cluster.openBucket();
 
-//        Bucket beerSampleBucket = cluster.openBucket("beer-sample");
-
-
-        //just an example
-        //ViewResult result = beerSampleBucket.query(ViewQuery.from("dev_beer", "by_name"));
-/*        ViewResult result = bucket.query(ViewQuery.from("dev_contractors", "by_name"));
-
-        List<ViewRow> rows = result.allRows();
-        System.out.println(rows);
-
-        for (ViewRow row : rows) {
-            JsonDocument doc = row.document();
-
-            if (doc.content().getString("DocType").equals("Contractor")) {
-                System.out.println(doc.content().getString("Code"));
-            }
-        }
-*/
         return true;
     }
 

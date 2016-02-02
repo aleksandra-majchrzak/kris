@@ -19,7 +19,7 @@ public class AuthenFilter implements Filter{
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        // np. przed kazdym przekirowaniem sprawdza czy uzytownik jest zalogowany, jesli nie, to przekierowuje a glowna strone
+
 
         HttpSession session = ((HttpServletRequest) servletRequest).getSession(false);
         User user = (User)((session != null) ? session.getAttribute("user") : null);
@@ -30,7 +30,7 @@ public class AuthenFilter implements Filter{
 
         try {
             if (!isExcludedPath && (user == null || !user.getIsActive())) {
-                //servletRequest.getRequestDispatcher("index.jsp").forward(servletRequest, servletResponse);
+
                 ((HttpServletResponse) servletResponse).sendRedirect("/");
             } else
                 filterChain.doFilter(servletRequest, servletResponse);

@@ -62,8 +62,5 @@ public class RegisterServlet extends HttpServlet {
             DatabaseManager.getInstance().closeConnection();
 
         return success;
-        /*
-        *   tu powinno byc logowanie, autentykacja uzytkownika i ustawianie danych waznych dla calego okresu mieszy zalogowaniem a wylogowaniem0 tobedzie przekazywane potem do jsp
-        * */
     }
 }

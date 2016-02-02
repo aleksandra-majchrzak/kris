@@ -71,7 +71,7 @@ public class ContractorServlet extends HttpServlet {
 
         request.setAttribute("panel-name", "Kontrahenci");
 
-    //    if(contractors == null || request.getParameter("refresh") != null)
+
         contractors = ContractorsManager.getInstance().getAllContractors();
 
         request.setAttribute("contractors", contractors);

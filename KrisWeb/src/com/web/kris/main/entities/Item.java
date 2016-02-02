@@ -17,7 +17,6 @@ public class Item {
     private String description;
     private String type;
     private List<ItemStocks> itemStocks;
-    // zdjęcie ??chyba by sie przydalo
 
 
     public Item() {

@@ -19,14 +19,14 @@ public class AdminFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        // np. przed kazdym przekirowaniem sprawdza czy uzytownik jest zalogowany, jesli nie, to przekierowuje a glowna strone
+
 
         HttpSession session = ((HttpServletRequest) servletRequest).getSession(false);
         User user = (User)((session != null) ? session.getAttribute("user") : null);
 
         try {
             if (user == null || !user.getIsAdmin()) {
-                //servletRequest.getRequestDispatcher("index.jsp").forward(servletRequest, servletResponse);
+
                 ((HttpServletResponse) servletResponse).sendRedirect("/");
             } else
                 filterChain.doFilter(servletRequest, servletResponse);

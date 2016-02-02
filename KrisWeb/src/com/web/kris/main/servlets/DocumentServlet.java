@@ -28,8 +28,7 @@ public class DocumentServlet extends HttpServlet {
         request.setAttribute("panel-name", "Dokumenty");
         request.setAttribute("panel-detail-name", "Nazwa dokumentu");
 
-     //   if(documents == null || request.getParameter("refresh") != null)
-            documents = DocumentsManager.getInstance().getAllDocuments();
+        documents = DocumentsManager.getInstance().getAllDocuments();
 
         request.setAttribute("documents", documents);
 

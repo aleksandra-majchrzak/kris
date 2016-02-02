@@ -33,7 +33,6 @@ public class LoginServlet extends HttpServlet {
 
         response.sendRedirect("/");
 
-       // request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -50,16 +49,10 @@ public class LoginServlet extends HttpServlet {
         DatabaseManager.getInstance().establishConnection();
 
         return UsersManager.getInstance().authenticateUser(login, password);
-        /*
-        *   tu powinno byc logowanie, autentykacja uzytkownika i ustawianie danych waznych dla calego okresu mieszy zalogowaniem a wylogowaniem0 tobedzie przekazywane potem do jsp
-        * */
+
     }
 
     private void logout(){
-
-        /*
-        *   tu powinno byc wylogowywanie i reserowanie o uzytkowniku (zeby nie wyswietlal sie na nav barze)
-        * */
 
         DatabaseManager.getInstance().closeConnection();
     }
