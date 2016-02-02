@@ -4,17 +4,20 @@
     <div class="panel-heading kris-panel-heading">
         <h1>
             ${contractor.code}
-                <a href="ContractorServlet?contractorToEditIndex=${contractorIndex}">
-                    <button type="button" class="btn btn-default edit-button" aria-label="Left Align">
-                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                    </button>
-                </a>
-                <a href="#">
-                    <button type="button" class="btn btn-default delete-button" aria-label="Left Align">
-                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                    </button>
-                </a>
+                <div class="edit-buttons">
+                    <a href="ContractorServlet?contractorToEditIndex=${contractorIndex}">
+                        <button type="button" class="btn btn-default edit-button" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                        </button>
+                    </a>
+                    <form role="form" action="ContractorServlet" method="post" class="delete-button">
+                        <input type="hidden" name="contractorToDeleteIndex" id="contractorToDeleteIndex" value="${contractorIndex}" />
+                        <button type="submit" class="btn btn-default delete-button" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                        </button>
+                    </form>
 
+                </div>
 
         </h1>
     </div>

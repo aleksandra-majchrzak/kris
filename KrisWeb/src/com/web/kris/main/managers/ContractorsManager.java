@@ -75,13 +75,16 @@ public class ContractorsManager {
         for (ViewRow row : rows) {
             JsonDocument doc = row.document();
 
-            contractors.add(new Contractor(doc));
+            if(doc != null && doc.content() != null)
+                contractors.add(new Contractor(doc));
         }
 
         return contractors;
     }
 
     public boolean deleteContractor(String contractorId){
+
+        DatabaseManager.getInstance().getBucketInstance().remove(contractorId);
         return true;
     }
 }

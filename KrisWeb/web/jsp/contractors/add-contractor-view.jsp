@@ -27,7 +27,7 @@
                     <h4>Typ kontrahenta</h4>
                     <c:choose>
                         <c:when test="${contractor != null}">
-                            <input type="text" name="type" placeholder="Typ" class="form-control" value="${contractor.type}"/>
+                            <input type="text" name="type" placeholder="Typ" class="form-control" value="${contractor.type.value}"/>
                         </c:when>
                         <c:otherwise>
                             <input type="text" name="type" placeholder="Typ" class="form-control"/>

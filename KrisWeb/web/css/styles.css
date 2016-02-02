@@ -79,6 +79,11 @@ h4{
     height: 50px;
 }
 
+.edit-buttons{
+    float: right;
+    display: inline-block;
+}
+
 .footer {
     bottom: 0;
     width: 100%;

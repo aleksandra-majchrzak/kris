@@ -22,4 +22,8 @@ public enum ContractorType {
         return this.name;
     }
 
+    public int getValue(){
+        return this.value;
+    }
+
 }

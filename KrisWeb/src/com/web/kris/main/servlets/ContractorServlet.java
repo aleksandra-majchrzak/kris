@@ -28,6 +28,22 @@ public class ContractorServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        String contractorToDeleteIndex = request.getParameter("contractorToDeleteIndex");
+
+        if(contractorToDeleteIndex != null){
+            int index = Integer.valueOf(contractorToDeleteIndex);
+
+            ContractorsManager.getInstance().deleteContractor(contractors.get(index).getId());
+
+            request.setAttribute("panel-name", "Kontrahenci");
+
+            contractors = ContractorsManager.getInstance().getAllContractors();
+            request.setAttribute("contractors", contractors);
+
+            request.getRequestDispatcher("contractors/contractors.jsp").forward(request, response);
+            return;
+        }
+
         String contractorId = request.getParameter("contractorId");
 
         Contractor contractorToSave = new Contractor();
