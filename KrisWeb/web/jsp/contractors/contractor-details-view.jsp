@@ -4,29 +4,18 @@
     <div class="panel-heading kris-panel-heading">
         <h1>
             ${contractor.code}
+                <a href="ContractorServlet?contractorToEditIndex=${contractorIndex}">
+                    <button type="button" class="btn btn-default edit-button" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                    </button>
+                </a>
+                <a href="#">
+                    <button type="button" class="btn btn-default delete-button" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    </button>
+                </a>
 
-                <c:set var="isNew" scope="page" value="${isNew}"/>
-                <c:choose>
-                    <c:when test="${isNew != null && isNew}">
-                        <button type="button" class="btn btn-default accept-button" aria-label="Left Align">
-                            <a href="#">
-                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                            </a>
-                        </button>
-                    </c:when>
-                    <c:otherwise>
-                        <button type="button" class="btn btn-default edit-button" aria-label="Left Align">
-                            <a href="#">
-                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                            </a>
-                        </button>
-                        <button type="button" class="btn btn-default delete-button" aria-label="Left Align">
-                            <a href="#">
-                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                            </a>
-                        </button>
-                    </c:otherwise>
-                </c:choose>
+
         </h1>
     </div>
     <div class="panel-body kris-panel-body">

@@ -1,5 +1,5 @@
-<button type="button" class="btn btn-default add-new-button" aria-label="Left Align">
-    <a href="DocumentServlet?addNewDocument=true">
+<a href="DocumentServlet?addNewDocument=true">
+    <button type="button" class="btn btn-default add-new-button" aria-label="Left Align">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-    </a>
-</button>
+    </button>
+</a>

@@ -5,6 +5,7 @@ import com.couchbase.client.java.view.ViewQuery;
 import com.couchbase.client.java.view.ViewResult;
 import com.couchbase.client.java.view.ViewRow;
 import com.web.kris.main.entities.Contractor;
+import com.web.kris.main.enums.ContractorType;
 import com.web.kris.main.managers.ContractorsManager;
 import com.web.kris.main.managers.DatabaseManager;
 
@@ -27,15 +28,35 @@ public class ContractorServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        String contractorId = request.getParameter("contractorId");
+
+        Contractor contractorToSave = new Contractor();
+
+        if(contractorId != null)
+            contractorToSave.setId(contractorId);
+
+        contractorToSave.setCode(request.getParameter("code"));
+        contractorToSave.setAddress(request.getParameter("address"));
+        contractorToSave.setDescription(request.getParameter("description"));
+        contractorToSave.setNIP(request.getParameter("NIP"));
+        contractorToSave.setType(ContractorType.values()[Integer.valueOf(request.getParameter("type"))]);
+
+        ContractorsManager.getInstance().saveContractor(contractorToSave);
+
+        request.setAttribute("panel-name", "Kontrahenci");
+
+        contractors = ContractorsManager.getInstance().getAllContractors();
+        request.setAttribute("contractors", contractors);
+
+        request.getRequestDispatcher("contractors/contractors.jsp").forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         request.setAttribute("panel-name", "Kontrahenci");
-        request.setAttribute("panel-detail-name", "Nazwa Kontrahenta");
 
-        if(contractors == null || request.getParameter("refresh") != null)
-            contractors = ContractorsManager.getInstance().getAllContractors();
+    //    if(contractors == null || request.getParameter("refresh") != null)
+        contractors = ContractorsManager.getInstance().getAllContractors();
 
         request.setAttribute("contractors", contractors);
 
@@ -46,16 +67,25 @@ public class ContractorServlet extends HttpServlet {
             Contractor contractor = contractors.get(index);
 
             request.setAttribute("contractor", contractor);
+            request.setAttribute("contractorIndex", index);
         }
-        else{
-            request.removeAttribute("contractor");
-        }
+
 
         String addNewContractor = request.getParameter("addNewContractor");
         if(addNewContractor != null)
             request.setAttribute("addNewContractor", true);
-        else
-            request.removeAttribute("addNewContractor");
+
+
+        String editContractorIndex = request.getParameter("contractorToEditIndex");
+
+        if(editContractorIndex != null) {
+            request.setAttribute("addNewContractor", true);
+
+            int index = Integer.valueOf(editContractorIndex);
+            Contractor contractorToEdit = contractors.get(index);
+
+            request.setAttribute("contractorToEdit", contractorToEdit);
+        }
 
         request.getRequestDispatcher("contractors/contractors.jsp").forward(request, response);
     }

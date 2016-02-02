@@ -19,10 +19,15 @@
 <script type="text/javascript"> $('#documents-tab').addClass("active") </script>
 <div class="container">
     <jsp:include page="../reusable-panel.jsp"   flush="true" />    <!-- w jakis posob przekazywac parametry z jednej strony do drugiej?? servletami?? -->
-    <!-- if uzytkownik wybrany-->
+
     <c:set var="document" scope="page" value="${document}"/>
     <c:if test="${document != null}">
         <jsp:include page="document-details-view.jsp" flush="true" />
+    </c:if>
+
+    <c:set var="addNewDocument" scope="page" value="${addNewDocument}"/>
+    <c:if test="${addNewDocument != null}">
+        <jsp:include page="add-document-view.jsp" flush="true" />
     </c:if>
 </div>
 <jsp:include page="../footer.jsp" />

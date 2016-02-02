@@ -1,12 +1,14 @@
 package com.web.kris.main.managers;
 
 import com.couchbase.client.java.document.JsonDocument;
+import com.couchbase.client.java.document.json.JsonObject;
 import com.couchbase.client.java.view.ViewQuery;
 import com.couchbase.client.java.view.ViewResult;
 import com.couchbase.client.java.view.ViewRow;
 import com.web.kris.main.entities.Contractor;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,7 +30,30 @@ public class ContractorsManager {
     }
 
     public String saveContractor(Contractor contractor){    //  save & update
-        return "";
+
+        JsonObject content = JsonObject.empty()
+                .put("DocType", DOC_TYPE)
+                .put("Code", contractor.getCode())
+                .put("TypeId", String.valueOf(contractor.getType().ordinal()))
+                .put("NIP", contractor.getNIP())
+                .put("Address", contractor.getAddress())
+                .put("Description", contractor.getDescription())
+                .put("ModificationTS", String.valueOf((new Date()).getTime()));
+
+        JsonDocument inserted = null;
+
+        String docId = DOC_TYPE+String.valueOf(DatabaseManager.getInstance().getBucketInstance().counter(DOC_TYPE, 1, 0));
+
+        if(!contractor.getId().equals("")){
+            JsonDocument doc = JsonDocument.create(contractor.getId(), content);
+            inserted = DatabaseManager.getInstance().getBucketInstance().replace(doc);
+        }
+        else{
+            JsonDocument doc = JsonDocument.create(docId, content);
+            inserted = DatabaseManager.getInstance().getBucketInstance().insert(doc);
+        }
+
+        return inserted.content().getString("id");
     }
 
     public Contractor getContractor(String contractorId){

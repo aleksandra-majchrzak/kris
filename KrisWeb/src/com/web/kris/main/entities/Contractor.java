@@ -39,7 +39,7 @@ public class Contractor {
     public Contractor(JsonDocument document){
         JsonObject content = document.content();
 
-        this.id = content.getString("Id");
+        this.id = document.id();
         this.code = content.getString("Code");
         this.type = ContractorType.values()[Integer.valueOf(content.getString("TypeId"))];
         this.address = content.getString("Address");

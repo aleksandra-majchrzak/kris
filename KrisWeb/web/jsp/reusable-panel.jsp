@@ -47,10 +47,10 @@
             <jsp:include page="items/items-list.jsp"  flush="true" />
         </c:when>
         <c:when test = "${payments != null}">
-            <jsp:include page="payments-list.jsp"  flush="true" />
+            <jsp:include page="payments/payments-list.jsp"  flush="true" />
         </c:when>
         <c:when test = "${warehouses != null}">
-            <jsp:include page="warehouses-list.jsp"  flush="true" />
+            <jsp:include page="warehouses/warehouses-list.jsp"  flush="true" />
         </c:when>
     </c:choose>
 

@@ -27,7 +27,7 @@
 
     <c:set var="addNewContractor" scope="page" value="${addNewContractor}"/>
     <c:if test="${addNewContractor != null}">
-        <jsp:include page="contractor-details-view.jsp" flush="true" />
+        <jsp:include page="add-contractor-view.jsp" flush="true" />
     </c:if>
 
 </div>
