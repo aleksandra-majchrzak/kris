@@ -18,34 +18,37 @@ import java.io.IOException;
 public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        this.login();
+        String login = request.getParameter("username");
+        String password = request.getParameter("password");
 
-        if(request.getMethod().equals("login"))
-            this.login();
-        else if(request.getMethod().equals("logout"))
-            this.logout();
-        else {
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+        User user =  this.login(login, password);
+
+        request.getSession().setAttribute("user", user);
+
+        if (user == null) {
+            request.setAttribute("errorMessage", "Bledny login lub haslo.");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
             return;
         }
 
-        String login = request.getParameter("username");
-        String password = request.getParameter("password");
-        User user = UserManager.getInstance().authenticateUser(login, password);
+        response.sendRedirect("/");
 
-        request.getSession().setAttribute("User", user);
-
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+       // request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if(request.getParameter("logout") != null) {
+            request.getSession().removeAttribute("user");
+            this.logout();
+            response.sendRedirect("/");
 
-
+        }
     }
 
-    private void login(){
+    private User login(String login, String password){
         DatabaseManager.getInstance().establishConnection();
 
+        return UserManager.getInstance().authenticateUser(login, password);
         /*
         *   tu powinno byc logowanie, autentykacja uzytkownika i ustawianie danych waznych dla calego okresu mieszy zalogowaniem a wylogowaniem0 tobedzie przekazywane potem do jsp
         * */

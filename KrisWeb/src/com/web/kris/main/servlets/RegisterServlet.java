@@ -18,22 +18,26 @@ import java.io.IOException;
 public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        this.login();
+        if(request.getParameter("password").equals(request.getParameter("password_confirmation"))) {
 
-        if(request.getMethod().equals("login"))
-            this.login();
-        else if(request.getMethod().equals("logout"))
-            this.logout();
-        else {
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-            return;
+            User user = new User(request.getParameter("username"),
+                    UserManager.getInstance().hashPswd(request.getParameter("password")),
+                    false,
+                    false);
+
+            boolean success = this.register(user);
+
+            if (success)
+                request.setAttribute("waitMessage", "Rejestracja zakonczyla sie powodzeniem. Musisz poczekac na zaakceptowanie przez administratora.");
+            else
+                request.setAttribute("errorMessage", "Rejestracja zakoczona niepowodzeniem. Uzytkownik o podanym loginie istnieje.");
         }
+        else
+            request.setAttribute("passwordErrorMessage", "Rejestracja zakoczona niepowodzeniem. Hasla nie sa zgodne");
 
-        User user = UserManager.getInstance().getUser("");
-
-        request.getSession().setAttribute("User", user);
-
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+//        request.getSession().setAttribute("User", user);
+//        response.sendRedirect("/");
+        request.getRequestDispatcher("register.jsp").forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -41,20 +45,17 @@ public class RegisterServlet extends HttpServlet {
 
     }
 
-    private void login(){
+    private boolean register(User user) {
         DatabaseManager.getInstance().establishConnection();
 
+        String userId = UserManager.getInstance().saveUser(user);
+        boolean success = !userId.equals("");
+
+        DatabaseManager.getInstance().closeConnection();
+
+        return success;
         /*
         *   tu powinno byc logowanie, autentykacja uzytkownika i ustawianie danych waznych dla calego okresu mieszy zalogowaniem a wylogowaniem0 tobedzie przekazywane potem do jsp
         * */
-    }
-
-    private void logout(){
-
-        /*
-        *   tu powinno byc wylogowywanie i reserowanie o uzytkowniku (zeby nie wyswietlal sie na nav barze)
-        * */
-
-        DatabaseManager.getInstance().closeConnection();
     }
 }

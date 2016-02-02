@@ -32,6 +32,33 @@
         <button type="submit" class="btn btn-default">Zatwierdź</button>&nbsp;<a href="${pageContext.request.contextPath}/">
         <button type="button" class="btn btn-primary">Anuluj</button></a>
     </form>
+    <div class="message-div">
+        <c:set var="errorMessage" scope="page" value="${errorMessage}"/>
+        <c:set var="waitMessage" scope="page" value="${waitMessage}"/>
+        <c:set var="passwordErrorMessage" scope="page" value="${passwordErrorMessage}"/>
+
+        <c:choose>
+            <c:when test="${errorMessage != null}">
+                <div class="alert alert-danger" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only">Error:</span>
+                    ${errorMessage}
+                </div>
+            </c:when>
+            <c:when test="${waitMessage != null}">
+                <div class="alert alert-info" role="alert">
+                        ${waitMessage}
+                </div>
+            </c:when>
+            <c:when test="${passwordErrorMessage != null}">
+                <div class="alert alert-danger" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only">Error:</span>
+                    ${passwordErrorMessage}
+                </div>
+            </c:when>
+        </c:choose>
+    </div>
 </div>
 <jsp:include page="footer.jsp" />
 </body>

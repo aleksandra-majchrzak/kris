@@ -1,6 +1,8 @@
 package com.web.kris.main.managers;
 
 import com.couchbase.client.java.document.JsonDocument;
+import com.couchbase.client.java.document.json.JsonObject;
+import com.couchbase.client.java.error.DocumentAlreadyExistsException;
 import com.couchbase.client.java.view.ViewQuery;
 import com.couchbase.client.java.view.ViewResult;
 import com.couchbase.client.java.view.ViewRow;
@@ -15,6 +17,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -34,7 +37,31 @@ public class UserManager {
     }
     public String saveUser(User user){    //  save & update
 
-        return "";
+        JsonObject content = JsonObject.empty()
+                .put("DocType", DOC_TYPE)
+                .put("Login", user.getLogin())
+                .put("HashedPassword", user.getHashedPassword())
+                .put("IsAdmin", false)
+                .put("IsActive", false)
+                .put("ModificationTS", String.valueOf((new Date()).getTime()));
+
+        JsonDocument inserted = null;
+
+        String docId = user.getLogin();
+
+        try {
+            if (!user.getId().equals("")) {
+                JsonDocument doc = JsonDocument.create(user.getId(), content);
+                inserted = DatabaseManager.getInstance().getBucketInstance().replace(doc);
+            } else {
+                JsonDocument doc = JsonDocument.create(docId, content);
+                inserted = DatabaseManager.getInstance().getBucketInstance().insert(doc);
+            }
+        }catch(DocumentAlreadyExistsException e){
+            return "";
+        }
+
+        return inserted.id();
     }
 
     public User getUser(String userId){
@@ -43,7 +70,7 @@ public class UserManager {
 
     public User authenticateUser(String login, String password){
 
-        ViewResult result = DatabaseManager.getInstance().getBucketInstance().query(ViewQuery.from("dev_contractors", "by_name"));
+        ViewResult result = DatabaseManager.getInstance().getBucketInstance().query(ViewQuery.from("dev_users", "by_login_password"));
         String hashedPswd = hashPswd(password);
 
         List<ViewRow> rows = result.allRows();
@@ -53,7 +80,7 @@ public class UserManager {
             JsonDocument doc = row.document();
 
             if(doc != null && doc.content() != null)
-                if(doc.content().getString("Login").equals(login) && doc.content().equals(hashedPswd))
+                if(doc.content().getString("Login").equals(login) && doc.content().getString("HashedPassword").equals(hashedPswd))
                 return new User(doc);
         }
 
@@ -65,7 +92,7 @@ public class UserManager {
         return true;
     }
 
-    private String hashPswd(String pswd){
+    public String hashPswd(String pswd){
 
         try {
             MessageDigest md;

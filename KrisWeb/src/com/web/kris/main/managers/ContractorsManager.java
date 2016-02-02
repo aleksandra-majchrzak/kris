@@ -53,7 +53,7 @@ public class ContractorsManager {
             inserted = DatabaseManager.getInstance().getBucketInstance().insert(doc);
         }
 
-        return inserted.content().getString("id");
+        return inserted.id();
     }
 
     public Contractor getContractor(String contractorId){

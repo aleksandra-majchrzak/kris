@@ -22,14 +22,14 @@ public class AuthenFilter implements Filter{
         // np. przed kazdym przekirowaniem sprawdza czy uzytownik jest zalogowany, jesli nie, to przekierowuje a glowna strone
 
         HttpSession session = ((HttpServletRequest) servletRequest).getSession(false);
-        User user = (User)((session != null) ? session.getAttribute("User") : null);
+        User user = (User)((session != null) ? session.getAttribute("user") : null);
 
         String path = ((HttpServletRequest) servletRequest).getRequestURI();
         boolean isExcludedPath = path.equals("/") || path.startsWith("/index") || path.startsWith("/login") || path.startsWith("/register")
-                  ||  path.equals("/styles.css") || path.equals("/logo.png");
+                  ||  path.equals("/styles.css") || path.equals("/logo.png") || path.equals("/RegisterServlet") || path.equals("/LoginServlet");
 
         try {
-            if (!isExcludedPath && (user == null || !user.isActive())) {
+            if (!isExcludedPath && (user == null || !user.getIsActive())) {
                 //servletRequest.getRequestDispatcher("index.jsp").forward(servletRequest, servletResponse);
                 ((HttpServletResponse) servletResponse).sendRedirect("/");
             } else

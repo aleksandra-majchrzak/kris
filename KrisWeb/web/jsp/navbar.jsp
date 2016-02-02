@@ -4,9 +4,18 @@
         <img src="logo.png">
     </a>
     <!-- jesli nie zalogowany, to wyswietlaj navbar do logowania, jesli zalogowany to komunikat o zaligowaniu -->
+    <c:set var="user" scope="session" value="${pageContext.request.session.getAttribute('user')}"/>
     <ul class="nav nav-pills navbar-right nav-menu">
-        <li role="presentation" id="register-tab"><a href="${pageContext.request.contextPath}/register.jsp">Zarejestruj</a></li>
-        <li role="presentation" id="login-tab"><a href="${pageContext.request.contextPath}/login.jsp">Zaloguj</a></li>
+        <c:choose>
+            <c:when test="${user == null || !user.isActive}">
+                <li role="presentation" id="register-tab"><a href="${pageContext.request.contextPath}/register.jsp">Zarejestruj</a></li>
+                <li role="presentation" id="login-tab"><a href="${pageContext.request.contextPath}/login.jsp">Zaloguj</a></li>
+            </c:when>
+            <c:otherwise>
+                <h4>Jestes zalogowany jako ${user.login}</h4>
+                <li role="presentation" id="logout-tab"><a href="LoginServlet?logout=true">Wyloguj</a></li>
+            </c:otherwise>
+        </c:choose>
     </ul>
     <br/>
     <ul class="nav nav-pills navbar-right nav-submenu">

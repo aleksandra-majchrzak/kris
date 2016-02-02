@@ -29,6 +29,19 @@
         <button type="submit" class="btn btn-default">Zatwierdź</button>&nbsp;<a href="${pageContext.request.contextPath}/">
         <button type="button" class="btn btn-primary">Anuluj</button></a>
     </form>
+
+    <div class="message-div">
+        <c:set var="errorMessage" scope="page" value="${errorMessage}"/>
+
+        <c:if test="${errorMessage != null}">
+            <div class="alert alert-danger" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+                    ${errorMessage}
+            </div>
+        </c:if>
+
+    </div>
 </div>
 <jsp:include page="footer.jsp" />
 </body>

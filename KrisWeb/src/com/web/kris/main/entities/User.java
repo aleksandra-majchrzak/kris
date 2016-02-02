@@ -16,6 +16,7 @@ public class User {
     private boolean isActive;
 
     public User(){
+        this.id = "";
         this.login = "";
         this.hashedPassword = "";
         this.isAdmin = false;
@@ -23,6 +24,7 @@ public class User {
     }
 
     public User(String login, String hashedPassword, boolean isAdmin, boolean isActive) {
+        this.id = "";
         this.login = login;
         this.hashedPassword = hashedPassword;
         this.isAdmin = isAdmin;
@@ -37,6 +39,15 @@ public class User {
         this.hashedPassword = content.getString("HashedPassword");
         this.isAdmin =  content.getBoolean("IsAdmin");
         this.isActive = content.getBoolean("IsActive");
+    }
+
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public boolean isAdmin() {
@@ -63,11 +74,12 @@ public class User {
         this.hashedPassword = hashedPassword;
     }
 
-    public boolean isActive() {
+    public boolean getIsActive() {
         return isActive;
     }
 
-    public void setActive(boolean isActive) {
+    public void setIsActive(boolean isActive) {
+
         this.isActive = isActive;
     }
 
