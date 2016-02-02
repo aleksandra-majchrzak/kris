@@ -13,9 +13,9 @@ public enum ContractorType {
         this.value = value;
 
         if(value == 0)
-            name = "Kupiec";
-        else
             name = "Dostawca";
+        else
+            name = "Kupiec";
     }
 
     public String getName(){

@@ -19,7 +19,9 @@
     <div class="container">
         <div class="jumbotron">
             <h1>Witaj w aplikacji KrisWeb!</h1>
-            <h4>Zarejestruj sie, by poznac wszystkie sekrety naszej aplikacji.</h4>
+            <c:if test="${user == null}">
+                <h4>Zarejestruj sie, by poznac wszystkie sekrety naszej aplikacji.</h4>
+            </c:if>
         </div>
     </div>
     <jsp:include page="footer.jsp" />

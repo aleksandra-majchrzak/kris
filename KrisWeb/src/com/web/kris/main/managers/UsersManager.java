@@ -6,32 +6,26 @@ import com.couchbase.client.java.error.DocumentAlreadyExistsException;
 import com.couchbase.client.java.view.ViewQuery;
 import com.couchbase.client.java.view.ViewResult;
 import com.couchbase.client.java.view.ViewRow;
-import com.sun.org.apache.xml.internal.security.utils.Base64;
 import com.web.kris.main.entities.User;
 
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
-import java.security.spec.KeySpec;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
 
 /**
  * Created by Mohru on 2016-01-26.
  */
-public class UserManager {
+public class UsersManager {
 
-    private static UserManager manager;
+    private static UsersManager manager;
     private static final String DOC_TYPE = "User";
 
-    public static UserManager getInstance(){
+    public static UsersManager getInstance(){
         if(manager == null)
-            manager = new UserManager();
+            manager = new UsersManager();
 
         return manager;
     }
@@ -41,8 +35,8 @@ public class UserManager {
                 .put("DocType", DOC_TYPE)
                 .put("Login", user.getLogin())
                 .put("HashedPassword", user.getHashedPassword())
-                .put("IsAdmin", false)
-                .put("IsActive", false)
+                .put("IsAdmin", user.getIsAdmin())
+                .put("IsActive", user.getIsActive())
                 .put("ModificationTS", String.valueOf((new Date()).getTime()));
 
         JsonDocument inserted = null;
@@ -54,6 +48,15 @@ public class UserManager {
                 JsonDocument doc = JsonDocument.create(user.getId(), content);
                 inserted = DatabaseManager.getInstance().getBucketInstance().replace(doc);
             } else {
+                // tylko do wersji rozwojowej- slabo jest za kazdym razem sprawdzac czy user jest pierwszy
+                ViewResult result = DatabaseManager.getInstance().getBucketInstance().query(ViewQuery.from("dev_users", "by_login"));
+                if(result.totalRows() == 0){
+                    content.put("IsAdmin", true)
+                            .put("IsActive", true);
+                    user.setIsAdmin(true);
+                    user.setIsActive(true);
+                }
+
                 JsonDocument doc = JsonDocument.create(docId, content);
                 inserted = DatabaseManager.getInstance().getBucketInstance().insert(doc);
             }
@@ -70,7 +73,7 @@ public class UserManager {
 
     public User authenticateUser(String login, String password){
 
-        ViewResult result = DatabaseManager.getInstance().getBucketInstance().query(ViewQuery.from("dev_users", "by_login_password"));
+        ViewResult result = DatabaseManager.getInstance().getBucketInstance().query(ViewQuery.from("dev_users", "by_login_active"));
         String hashedPswd = hashPswd(password);
 
         List<ViewRow> rows = result.allRows();
@@ -87,8 +90,27 @@ public class UserManager {
         return null;
     }
 
+    public List<User> getAllUsers(){
+        ViewResult result = DatabaseManager.getInstance().getBucketInstance().query(ViewQuery.from("dev_users", "by_login"));
+
+        List<ViewRow> rows = result.allRows();
+        System.out.println(rows);
+
+        List<User> users = new ArrayList<>();
+
+        for (ViewRow row : rows) {
+            JsonDocument doc = row.document();
+
+            if(doc != null && doc.content() != null)
+                users.add(new User(doc));
+        }
+
+        return users;
+    }
+
     public boolean deleteUser(String userId){
 
+        DatabaseManager.getInstance().getBucketInstance().remove(userId);
         return true;
     }
 

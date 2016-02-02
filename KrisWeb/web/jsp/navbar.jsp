@@ -14,6 +14,9 @@
             <c:otherwise>
                 <h4>Jestes zalogowany jako ${user.login}</h4>
                 <li role="presentation" id="logout-tab"><a href="LoginServlet?logout=true">Wyloguj</a></li>
+                <c:if test="${user.isAdmin}">
+                    <li role="presentation" id="admin-tab"><a href="UserServlet">Panel admina</a></li>
+                </c:if>
             </c:otherwise>
         </c:choose>
     </ul>

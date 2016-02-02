@@ -2,7 +2,7 @@ package com.web.kris.main.servlets;
 
 import com.web.kris.main.entities.User;
 import com.web.kris.main.managers.DatabaseManager;
-import com.web.kris.main.managers.UserManager;
+import com.web.kris.main.managers.UsersManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,6 +37,7 @@ public class LoginServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         if(request.getParameter("logout") != null) {
             request.getSession().removeAttribute("user");
             this.logout();
@@ -48,7 +49,7 @@ public class LoginServlet extends HttpServlet {
     private User login(String login, String password){
         DatabaseManager.getInstance().establishConnection();
 
-        return UserManager.getInstance().authenticateUser(login, password);
+        return UsersManager.getInstance().authenticateUser(login, password);
         /*
         *   tu powinno byc logowanie, autentykacja uzytkownika i ustawianie danych waznych dla calego okresu mieszy zalogowaniem a wylogowaniem0 tobedzie przekazywane potem do jsp
         * */

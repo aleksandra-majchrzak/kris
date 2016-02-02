@@ -31,7 +31,7 @@ h4{
     display: block;
 }
 
-.kris-panel{
+.kris-panel, .admin-panel{
     margin-top: 60px;
 }
 
@@ -84,6 +84,21 @@ h4{
     display: inline-block;
 }
 
+.admin-button-container{
+    float: right;
+}
+
+.admin-button-container,
+.admin-button-container form,
+.admin-button-container form div {
+    display: inline-block;
+}
+
+.admin-button-container button {
+    display: inline-block;
+    vertical-align: middle;
+}
+
 .jumbotron{
     margin: 100px;
 }
@@ -97,4 +112,7 @@ h4{
 
 #footer-text{
     color: gray;
+    vertical-align: middle;
+    margin-left: 20px;
+    display: inline;
 }

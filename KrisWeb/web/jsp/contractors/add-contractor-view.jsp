@@ -27,10 +27,17 @@
                     <h4>Typ kontrahenta</h4>
                     <c:choose>
                         <c:when test="${contractor != null}">
-                            <input type="text" name="type" placeholder="Typ" class="form-control" value="${contractor.type.value}"/>
+                            <select name="type" id="type">
+                                <option value="0">Dostawca</option>
+                                <option value="1">Kupiec</option>
+                            </select>
+                            <script type="text/javascript"> $('#type').val('${contractor.type.value}') </script>
                         </c:when>
                         <c:otherwise>
-                            <input type="text" name="type" placeholder="Typ" class="form-control"/>
+                            <select name="type" id="type">
+                                <option value="0">Dostawca</option>
+                                <option value="1">Kupiec</option>
+                            </select>
                         </c:otherwise>
                     </c:choose>
                 </div>

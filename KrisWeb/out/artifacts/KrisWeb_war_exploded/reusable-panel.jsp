@@ -22,6 +22,7 @@
         </h1>
 
     </div>
+    <!--
     <div class="panel-body">
         <div class="col-lg-8 ">
             <div class="input-group">
@@ -31,9 +32,9 @@
                             <span class="glyphicon glyphicon-search"></span>
                         </button>
                      </span>
-            </div><!-- /input-group -->
+            </div>
         </div>
-    </div>
+    </div>-->
 
     <!-- List group -->
     <c:choose>
