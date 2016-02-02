@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <div class="main-navbar">
     <a id="main-logo" href="${pageContext.request.contextPath}/">
-        <img src="logo.png">
+        <img src="/logo.png">
     </a>
     <!-- jesli nie zalogowany, to wyswietlaj navbar do logowania, jesli zalogowany to komunikat o zaligowaniu -->
     <c:set var="user" scope="session" value="${pageContext.request.session.getAttribute('user')}"/>

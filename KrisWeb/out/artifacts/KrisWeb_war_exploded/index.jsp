@@ -17,8 +17,10 @@
 <body>
     <jsp:include page="navbar.jsp" />
     <div class="container">
-        <h1>Simple Java Web App Demo</h1>
-        <p>To invoke the java servlet click <a href="MainServlet">here</a></p>
+        <div class="jumbotron">
+            <h1>Witaj w aplikacji KrisWeb!</h1>
+            <h4>Zarejestruj sie, by poznac wszystkie sekrety naszej aplikacji.</h4>
+        </div>
     </div>
     <jsp:include page="footer.jsp" />
 </body>

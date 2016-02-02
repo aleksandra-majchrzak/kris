@@ -44,6 +44,11 @@
         <servlet-class>com.web.kris.main.servlets.WarehouseServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>ErrorServlet</servlet-name>
+        <servlet-class>com.web.kris.main.servlets.ErrorServlet</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>MainServlet</servlet-name>
         <url-pattern>/MainServlet</url-pattern>
@@ -84,6 +89,10 @@
         <url-pattern>/WarehouseServlet</url-pattern>
     </servlet-mapping>
 
+    <servlet-mapping>
+        <servlet-name>ErrorServlet</servlet-name>
+        <url-pattern>/ErrorServlet</url-pattern>
+    </servlet-mapping>
 
     <filter>
         <filter-name>AuthenFilter</filter-name>
@@ -100,6 +109,6 @@
 
     <error-page>
         <error-code>404</error-code>
-        <location>/web/jsp/404-errorPage.jsp</location>
+        <location>/ErrorServlet</location>
     </error-page>
 </web-app>

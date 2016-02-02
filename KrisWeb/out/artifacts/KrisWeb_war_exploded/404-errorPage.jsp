@@ -16,8 +16,10 @@
 <body>
 <jsp:include page="navbar.jsp" />
 <div class="container">
-    <h1>Błąd 404</h1>
-    <h5>Niestety strona o podanym adresie nie istnieje. Spróbuj wrócic na poprzednią stronę.</h5>
+    <div class="jumbotron">
+        <h1>Błąd 404</h1>
+        <h4>Niestety strona o podanym adresie nie istnieje :( Spróbuj wrócic na poprzednią stronę.</h4>
+    </div>
 </div>
 <jsp:include page="footer.jsp" />
 </body>
