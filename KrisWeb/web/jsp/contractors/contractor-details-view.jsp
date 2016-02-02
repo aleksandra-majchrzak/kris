@@ -20,6 +20,11 @@
                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                             </a>
                         </button>
+                        <button type="button" class="btn btn-default delete-button" aria-label="Left Align">
+                            <a href="#">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                            </a>
+                        </button>
                     </c:otherwise>
                 </c:choose>
         </h1>

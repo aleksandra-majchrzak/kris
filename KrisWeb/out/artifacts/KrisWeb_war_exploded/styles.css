@@ -54,7 +54,7 @@ h4{
     overflow-y: scroll;
 }
 
-.add-new-button, .edit-button, .accept-button{
+.add-new-button, .edit-button, .accept-button, .delete-button{
     float: right;
 }
 

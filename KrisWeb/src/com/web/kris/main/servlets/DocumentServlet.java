@@ -41,7 +41,16 @@ public class DocumentServlet extends HttpServlet {
 
             request.setAttribute("document", document);
         }
+        else{
+            request.removeAttribute("document");
+        }
 
-        request.getRequestDispatcher("documents.jsp").forward(request, response);
+        String addNewDocument = request.getParameter("addNewDocument");
+        if(addNewDocument != null)
+            request.setAttribute("addNewDocument", true);
+        else
+            request.removeAttribute("addNewDocument");
+
+        request.getRequestDispatcher("documents/documents.jsp").forward(request, response);
     }
 }

@@ -15,16 +15,16 @@
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-<jsp:include page="navbar.jsp" />
+<jsp:include page="../navbar.jsp" />
 <script type="text/javascript"> $('#items-tab').addClass("active") </script>
 <div class="container">
-    <jsp:include page="reusable-panel.jsp"   flush="true" />    <!-- w jakis posob przekazywac parametry z jednej strony do drugiej?? servletami?? -->
+    <jsp:include page="../reusable-panel.jsp"   flush="true" />    <!-- w jakis posob przekazywac parametry z jednej strony do drugiej?? servletami?? -->
     <!-- if uzytkownik wybrany-->
-    <c:set var="item" scope="session" value="${item}"/>
+    <c:set var="item" scope="page" value="${item}"/>
     <c:if test="${item != null}">
         <jsp:include page="item-details-view.jsp" flush="true" />
     </c:if>
 </div>
-<jsp:include page="footer.jsp" />
+<jsp:include page="../footer.jsp" />
 </body>
 </html>

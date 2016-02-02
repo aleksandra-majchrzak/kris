@@ -11,11 +11,14 @@
     <div class="panel-heading kris-panel-heading">
         <h1>
             <%= request.getAttribute("panel-name") %>
-            <button type="button" class="btn btn-default add-new-button" aria-label="Left Align">
-                <a href="#">
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                </a>
-            </button>
+            <c:choose>
+                <c:when test = "${contractors != null}">
+                    <jsp:include page="buttons/add-contractor-button.jsp" />
+                </c:when>
+                <c:when test = "${documents != null}">
+                    <jsp:include page="buttons/add-document-button.jsp" />
+                </c:when>
+            </c:choose>
         </h1>
 
     </div>
@@ -35,13 +38,13 @@
     <!-- List group -->
     <c:choose>
         <c:when test = "${contractors != null}">
-            <jsp:include page="contractors-list.jsp"  flush="true" />
+            <jsp:include page="contractors/contractors-list.jsp"  flush="true" />
         </c:when>
         <c:when test = "${documents != null}">
-            <jsp:include page="documents-list.jsp"  flush="true" />
+            <jsp:include page="documents/documents-list.jsp"  flush="true" />
         </c:when>
         <c:when test = "${items != null}">
-            <jsp:include page="items-list.jsp"  flush="true" />
+            <jsp:include page="items/items-list.jsp"  flush="true" />
         </c:when>
         <c:when test = "${payments != null}">
             <jsp:include page="payments-list.jsp"  flush="true" />

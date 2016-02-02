@@ -20,6 +20,6 @@ public class ItemServlet extends HttpServlet {
 
         request.setAttribute("panel-name", "Towary");
         request.setAttribute("panel-detail-name", "Nazwa towaru");
-        request.getRequestDispatcher("items.jsp").forward(request, response);
+        request.getRequestDispatcher("items/items.jsp").forward(request, response);
     }
 }

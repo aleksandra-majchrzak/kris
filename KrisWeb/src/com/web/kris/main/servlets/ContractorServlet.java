@@ -47,7 +47,16 @@ public class ContractorServlet extends HttpServlet {
 
             request.setAttribute("contractor", contractor);
         }
+        else{
+            request.removeAttribute("contractor");
+        }
 
-        request.getRequestDispatcher("contractors.jsp").forward(request, response);
+        String addNewContractor = request.getParameter("addNewContractor");
+        if(addNewContractor != null)
+            request.setAttribute("addNewContractor", true);
+        else
+            request.removeAttribute("addNewContractor");
+
+        request.getRequestDispatcher("contractors/contractors.jsp").forward(request, response);
     }
 }
