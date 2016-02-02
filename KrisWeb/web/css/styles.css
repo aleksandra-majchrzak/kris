@@ -54,8 +54,20 @@ h4{
     overflow-y: scroll;
 }
 
+.add-new-button, .edit-button, .accept-button{
+    float: right;
+}
+
+.btn:focus {
+    outline: none;
+}
+
 .details-list-group{
     overflow-y: hidden;
+}
+
+.document-details-list-group{
+    overflow-y: scroll;
 }
 
 .kris-panel-body{

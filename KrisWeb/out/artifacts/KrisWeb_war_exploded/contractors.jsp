@@ -22,7 +22,7 @@
     <!-- if uzytkownik wybrany-->
     <c:set var="contractor" scope="session" value="${contractor}"/>
     <c:if test="${contractor != null}">
-        <jsp:include page="details-view.jsp" flush="true" />
+        <jsp:include page="contractor-details-view.jsp" flush="true" />
     </c:if>
 
 </div>

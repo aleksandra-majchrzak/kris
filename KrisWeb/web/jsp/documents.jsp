@@ -20,7 +20,10 @@
 <div class="container">
     <jsp:include page="reusable-panel.jsp"   flush="true" />    <!-- w jakis posob przekazywac parametry z jednej strony do drugiej?? servletami?? -->
     <!-- if uzytkownik wybrany-->
-    <jsp:include page="details-view.jsp"   flush="true" />
+    <c:set var="document" scope="session" value="${document}"/>
+    <c:if test="${document != null}">
+        <jsp:include page="document-details-view.jsp" flush="true" />
+    </c:if>
 </div>
 <jsp:include page="footer.jsp" />
 </body>

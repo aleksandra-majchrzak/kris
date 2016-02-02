@@ -32,7 +32,10 @@ public class ContractorsManager {
     }
 
     public Contractor getContractor(String contractorId){
-        return null;
+
+        JsonDocument contractorDoc = DatabaseManager.getInstance().getBucketInstance().get(contractorId);
+
+        return new Contractor(contractorDoc);
     }
 
     public List<Contractor> getAllContractors(){
