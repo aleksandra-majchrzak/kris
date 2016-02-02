@@ -83,10 +83,23 @@
         <servlet-name>WarehouseServlet</servlet-name>
         <url-pattern>/WarehouseServlet</url-pattern>
     </servlet-mapping>
-<!--
+
+
+    <filter>
+        <filter-name>AuthenFilter</filter-name>
+        <filter-class>com.web.kris.main.filters.AuthenFilter</filter-class>
+        <init-param>
+            <param-name>test-param</param-name>
+            <param-value>Initialization Paramter</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthenFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
     <error-page>
         <error-code>404</error-code>
         <location>/web/jsp/404-errorPage.jsp</location>
     </error-page>
-   -->
 </web-app>

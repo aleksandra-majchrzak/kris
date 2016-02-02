@@ -1,6 +1,8 @@
 package com.web.kris.main.servlets;
 
+import com.web.kris.main.entities.User;
 import com.web.kris.main.managers.DatabaseManager;
+import com.web.kris.main.managers.UserManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,6 +28,12 @@ public class LoginServlet extends HttpServlet {
             request.getRequestDispatcher("index.jsp").forward(request, response);
             return;
         }
+
+        String login = request.getParameter("username");
+        String password = request.getParameter("password");
+        User user = UserManager.getInstance().authenticateUser(login, password);
+
+        request.getSession().setAttribute("User", user);
 
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
