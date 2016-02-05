@@ -53,7 +53,10 @@ public class RegisterServlet extends HttpServlet {
     }
 
     private boolean register(User user) {
-        DatabaseManager.getInstance().establishConnection();
+        String host = getServletContext().getInitParameter("host");
+        String port =  getServletContext().getInitParameter("port");
+
+        DatabaseManager.getInstance().establishConnection(host, port);
 
         String userId = UsersManager.getInstance().saveUser(user);
         boolean success = !userId.equals("");

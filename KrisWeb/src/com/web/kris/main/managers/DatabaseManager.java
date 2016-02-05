@@ -39,11 +39,11 @@ public class DatabaseManager {
         return bucket;
     }
 
-    public boolean establishConnection(){
+    public boolean establishConnection(String host, String port){
 
         System.out.println("in database manager2");
         // Connect to localhost
-        cluster = CouchbaseCluster.create(env);
+        cluster = CouchbaseCluster.create(env, host+":"+port);
 
 
         bucket = cluster.openBucket();

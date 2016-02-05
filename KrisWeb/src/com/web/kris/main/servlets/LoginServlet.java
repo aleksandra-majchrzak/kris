@@ -46,7 +46,9 @@ public class LoginServlet extends HttpServlet {
     }
 
     private User login(String login, String password){
-        DatabaseManager.getInstance().establishConnection();
+        String host = getServletContext().getInitParameter("host");
+        String port =  getServletContext().getInitParameter("port");
+        DatabaseManager.getInstance().establishConnection(host, port);
 
         return UsersManager.getInstance().authenticateUser(login, password);
 
