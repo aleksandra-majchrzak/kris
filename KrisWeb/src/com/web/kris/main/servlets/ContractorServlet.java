@@ -55,7 +55,7 @@ public class ContractorServlet extends HttpServlet {
         contractorToSave.setAddress(request.getParameter("address"));
         contractorToSave.setDescription(request.getParameter("description"));
         contractorToSave.setNIP(request.getParameter("NIP"));
-        contractorToSave.setType(ContractorType.values()[Integer.valueOf(request.getParameter("type"))]);
+        contractorToSave.setType(ContractorType.values()[Integer.valueOf(request.getParameter("conType"))]);
 
         ContractorsManager.getInstance().saveContractor(contractorToSave);
 
@@ -70,7 +70,6 @@ public class ContractorServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         request.setAttribute("panel-name", "Kontrahenci");
-
 
         contractors = ContractorsManager.getInstance().getAllContractors();
 

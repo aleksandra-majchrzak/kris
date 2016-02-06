@@ -18,7 +18,7 @@
 <jsp:include page="../navbar.jsp" />
 <script type="text/javascript"> $('#documents-tab').addClass("active") </script>
 <div class="container">
-    <jsp:include page="../reusable-panel.jsp"   flush="true" />    <!-- w jakis posob przekazywac parametry z jednej strony do drugiej?? servletami?? -->
+    <jsp:include page="../reusable-panel.jsp"   flush="true" />
 
     <c:set var="document" scope="page" value="${document}"/>
     <c:if test="${document != null}">

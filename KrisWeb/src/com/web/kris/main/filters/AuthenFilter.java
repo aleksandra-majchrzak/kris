@@ -36,7 +36,7 @@ public class AuthenFilter implements Filter{
                 filterChain.doFilter(servletRequest, servletResponse);
 
         } catch(Exception e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
 
         }
     }

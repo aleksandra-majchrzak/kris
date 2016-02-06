@@ -5,29 +5,20 @@
     <div class="panel-heading kris-panel-heading">
         <h1>
             ${document.number}
-
-            <c:set var="isNew" scope="page" value="${isNew}"/>
-            <c:choose>
-                <c:when test="${isNew != null && isNew}">
-                    <button type="button" class="btn btn-default accept-button" aria-label="Left Align">
-                        <a href="#">
-                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                        </a>
-                    </button>
-                </c:when>
-                <c:otherwise>
-                    <button type="button" class="btn btn-default edit-button" aria-label="Left Align">
-                        <a href="#">
+                <div class="edit-buttons">
+                    <a href="DocumentServlet?documentToEditIndex=${documentIndex}">
+                        <button type="button" class="btn btn-default edit-button" aria-label="Left Align">
                             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                        </a>
-                    </button>
-                    <button type="button" class="btn btn-default delete-button" aria-label="Left Align">
-                        <a href="#">
+                        </button>
+                    </a>
+                    <form role="form" action="DocumentServlet" method="post" class="delete-button">
+                        <input type="hidden" name="documentToDeleteIndex" id="documentToDeleteIndex" value="${documentIndex}" />
+                        <button type="submit" class="btn btn-default delete-button" aria-label="Left Align">
                             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                        </a>
-                    </button>
-                </c:otherwise>
-            </c:choose>
+                        </button>
+                    </form>
+
+                </div>
         </h1>
     </div>
     <div class="panel-body kris-panel-body">
@@ -51,7 +42,7 @@
                 </li>
                 <li class="list-group-item kris-list-group-item">
                     <h4>Forma płatności</h4>
-                    <p>${document.paymentDate}</p>
+                    <p>${document.paymentForm.name}</p>
                 </li>
                 <li class="list-group-item kris-list-group-item">
                     <h4>Wartość</h4>

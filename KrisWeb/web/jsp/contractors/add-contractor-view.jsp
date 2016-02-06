@@ -6,7 +6,14 @@
 
     <div class="panel-heading kris-panel-heading">
         <h1>
-            Nowy kontrahent
+            <c:choose>
+                <c:when test="${contractor == null}">
+                    Nowy kontrahent
+                </c:when>
+                <c:otherwise>
+                    Edytuj kontrahenta
+                </c:otherwise>
+            </c:choose>
         </h1>
     </div>
     <div class="panel-body kris-panel-body">
@@ -27,11 +34,11 @@
                     <h4>Typ kontrahenta</h4>
                     <c:choose>
                         <c:when test="${contractor != null}">
-                            <select name="type" id="type">
+                            <select name="conType" id="conType">
                                 <option value="0">Dostawca</option>
                                 <option value="1">Kupiec</option>
                             </select>
-                            <script type="text/javascript"> $('#type').val('${contractor.type.value}') </script>
+                            <script type="text/javascript"> $('#conType').val('${contractor.type.value}') </script>
                         </c:when>
                         <c:otherwise>
                             <select name="type" id="type">

@@ -3,6 +3,7 @@ package com.web.kris.main.entities;
 import com.couchbase.client.java.document.JsonDocument;
 import com.couchbase.client.java.document.json.JsonObject;
 import com.web.kris.main.enums.DocumentType;
+import com.web.kris.main.enums.PaymentForm;
 import com.web.kris.main.managers.ContractorsManager;
 
 import java.util.Date;
@@ -19,7 +20,7 @@ public class Document {
     private Date documentDate;
     private Date paymentDate;
     private String description;
-    private int paymentForm;
+    private PaymentForm paymentForm;
     private double value;
 
 
@@ -31,7 +32,7 @@ public class Document {
         this.documentDate = new Date();
         this.paymentDate = new Date();
         this.description = "";
-        this.paymentForm = 0;
+        this.paymentForm = PaymentForm.Cash;
         this.value = 0.0;
     }
 
@@ -46,7 +47,7 @@ public class Document {
         this.documentDate = documentDate;
         this.paymentDate = paymentDate;
         this.description = description;
-        this.paymentForm = paymentForm;
+        this.paymentForm = PaymentForm.values()[paymentForm];
         this.value = value;
     }
 
@@ -54,14 +55,14 @@ public class Document {
 
         JsonObject content = document.content();
 
-        this.id = content.getString("id");
+        this.id = document.id();
         this.number = content.getString("Number");
         this.type = DocumentType.values()[content.getInt("TypeId")];
         this.contractor = ContractorsManager.getInstance().getContractor(content.getString("ContractorId"));
-        this.documentDate = new Date(Long.valueOf(content.getString("DocumentDate")));
-        this.paymentDate = new Date (Long.valueOf(content.getString("PaymentDate")));
+        this.documentDate = new Date(content.getLong("DocumentDate"));
+        this.paymentDate = new Date (content.getLong("PaymentDate"));
         this.description = content.getString("Description");
-        this.paymentForm = content.getInt("PaymentForm");
+        this.paymentForm = PaymentForm.values()[content.getInt("PaymentForm")];
         this.value = content.getDouble("Value");
     }
 
@@ -121,12 +122,12 @@ public class Document {
         this.description = description;
     }
 
-    public int getPaymentForm() {
+    public PaymentForm getPaymentForm() {
         return paymentForm;
     }
 
     public void setPaymentForm(int paymentForm) {
-        this.paymentForm = paymentForm;
+        this.paymentForm = PaymentForm.values()[paymentForm];
     }
 
     public double getValue() {

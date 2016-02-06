@@ -22,7 +22,7 @@
         </h1>
 
     </div>
-    <!--
+    <%--
     <div class="panel-body">
         <div class="col-lg-8 ">
             <div class="input-group">
@@ -34,7 +34,7 @@
                      </span>
             </div>
         </div>
-    </div>-->
+    </div>--%>
 
     <!-- List group -->
     <c:choose>
