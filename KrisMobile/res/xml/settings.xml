@@ -18,7 +18,8 @@
                 android:key="server_address_preference"
                 android:title="@string/server_address"
                 android:summary="@string/summary_edittext_preference"
-                android:dialogTitle="@string/server_address" />
+                android:dialogTitle="@string/server_address" 
+                android:inputType="number" />
                 
         <ListPreference
                 android:key="list_preference"
