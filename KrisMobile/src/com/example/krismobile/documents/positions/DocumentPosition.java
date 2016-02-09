@@ -1,6 +1,7 @@
 package com.example.krismobile.documents.positions;
 
 import java.util.Map;
+import java.util.Observable;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -9,7 +10,7 @@ import com.couchbase.lite.Document;
 import com.example.krismobile.database.managers.ItemsManager;
 import com.example.krismobile.items.Item;
 
-public class DocumentPosition implements Parcelable{
+public class DocumentPosition extends Observable implements Parcelable{
 	String id;
 	String documentId;
 	Item item;
@@ -110,6 +111,9 @@ public class DocumentPosition implements Parcelable{
 
 	public void setQuantity(double quantity) {
 		this.quantity = quantity;
+		
+		this.setChanged();
+		this.notifyObservers("quantity");
 	}
 
 	public double getNetValue() {

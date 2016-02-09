@@ -28,6 +28,7 @@ import com.example.krismobile.documents.adapters.DocumentPositionsAdapter;
 import com.example.krismobile.documents.adapters.DocumentsAdapter;
 import com.example.krismobile.documents.positions.DocumentPosition;
 import com.example.krismobile.documents.positions.DocumentPositionDialog;
+import com.example.krismobile.documents.positions.DocumentPositionObserver;
 import com.example.krismobile.items.Item;
 import com.example.krismobile.main.base.FragmentBase;
 
@@ -201,6 +202,7 @@ public class DocumentFragment extends FragmentBase implements Observer{
 					newPosition.setNetValue(item.getPrice().getNetPrice());
 					newPosition.setGrossValue(item.getPrice().getGrossPrice());
 					newPosition.setOrdinal(document.getPositionsList().size() +1 );
+					newPosition.addObserver(new DocumentPositionObserver());
 					
 					isPositionNew = true;
 				}

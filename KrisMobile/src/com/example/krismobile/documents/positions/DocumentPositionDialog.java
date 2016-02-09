@@ -10,6 +10,8 @@ import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -63,7 +65,29 @@ public class DocumentPositionDialog extends DialogFragment{
 	    quantityEditText.setText(String.valueOf(position.getQuantity()));
 	    valueNetTextView.setText(String.valueOf(position.getNetValue()));
 	    valueGrossTextView.setText(String.valueOf(position.getGrossValue()));
+	    
+	    quantityEditText.addTextChangedListener(new TextWatcher(){
 
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				
+				if(s.length() > 0){
+					position.setQuantity(Double.valueOf(s.toString()));
+					valueNetTextView.setText(String.valueOf(position.getNetValue()));
+				    valueGrossTextView.setText(String.valueOf(position.getGrossValue()));
+				}
+				
+			}
+	    	
+	    });
 	    
 	    if( !canEdit)
 	    	quantityEditText.setEnabled(false);
