@@ -286,8 +286,21 @@ public class DocumentsManager {
 		
 		try {
 			
+			DatabaseManager.getDatabaseInstance().beginTransaction();
+			
 			documentToDelete.delete();
+			
+			ArrayList<DocumentPosition> docsPos = this.getDocumentPositions(documentToDelete.getId());
+			
+			for(DocumentPosition docPos : docsPos){
+				deleteKrisDocument(docPos.getId());
+				
+			}
+			
+			DatabaseManager.getDatabaseInstance().endTransaction(true);
+			
 			return true;
+			
 		} catch (CouchbaseLiteException e) {
 
 			e.printStackTrace();
