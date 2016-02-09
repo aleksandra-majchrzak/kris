@@ -19,6 +19,8 @@ import com.couchbase.lite.QueryRow;
 import com.couchbase.lite.View;
 import com.example.krismobile.database.DatabaseManager;
 import com.example.krismobile.documents.KrisDocument;
+import com.example.krismobile.documents.positions.DocumentPosition;
+import com.example.krismobile.documents.positions.DocumentPositionsList;
 
 public class DocumentsManager {
 	
@@ -31,6 +33,8 @@ public class DocumentsManager {
 	
 	private static DocumentsManager manager;
 	private static final String DOC_TYPE = "Document";
+	private static final String DOC_POSITION_TYPE = "DocumentPosition";
+	private static final String DOC_NUMERATOR_TYPE = "DocumentNumerator";
 	
 	public static DocumentsManager getInstance(){
 		if(manager == null)
@@ -55,7 +59,8 @@ public class DocumentsManager {
 			map.put("PaymentDate", krisDocument.getPaymentDate().getTime());
 			map.put("Description", krisDocument.getDescription());
 			map.put("PaymentForm", krisDocument.getPaymentForm());
-			map.put("Value", krisDocument.getValue());
+			map.put("NetValue", krisDocument.getNetValue());
+			map.put("GrossValue", krisDocument.getGrossValue());
 			map.put("ModificationTS", new Date().getTime());			
 			
 			if(krisDocument.getId().equals("")){
@@ -281,5 +286,53 @@ public class DocumentsManager {
 		
 		return new KrisDocument(documentsList.get(0));	
 	}
+	
+	public DocumentPositionsList getDocumentPositions(String documentId){
+		ArrayList<Document> positionsDocumentsList = new ArrayList<Document>();
+		View latestContratorKrisDocumentView = getView("documentPositions");
+		
+		if(latestContratorKrisDocumentView != null){
+			
+			latestContratorKrisDocumentView.setMap(new Mapper(){
 
+				@Override
+				public void map(Map<String, Object> document, Emitter emitter) {
+					
+					if(document.get("DocType").equals(DOC_NUMERATOR_TYPE)){
+				//			&& document.get("ContractorId").equals(contractorId)){
+						
+						//ArrayList<Object> keys = getAllKeysToEmit(document);
+						
+						//ArrayList<Object> keys = new ArrayList<Object>();
+						//keys.add(document.get("ContractorId"));
+						//keys.add(document.get("DocumentDate"));
+						
+						emitter.emit(document.get("DocumentId") , document.get("Ordinal"));
+						//emitter.emit(keys , document);
+					}
+				}
+				
+			}, "1");
+			
+			List<Object> keys = new ArrayList<Object>();
+			keys.add(documentId);
+			
+			positionsDocumentsList = getDocumentsListFromView(latestContratorKrisDocumentView, 0, keys, true);
+		}
+		
+		DocumentPositionsList positionsList = new DocumentPositionsList();
+		
+		for(Document doc: positionsDocumentsList){
+			positionsList.add(new DocumentPosition(doc));
+		}
+		
+		return positionsList;	
+	}
+
+	public void deleteAllKrisDocuments(){
+		ArrayList<Document> docs = getAllKrisDocuments();
+		for(Document doc : docs){
+			deleteKrisDocument(doc.getId());
+		}
+	}
 }

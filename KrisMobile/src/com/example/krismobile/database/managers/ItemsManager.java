@@ -80,6 +80,8 @@ public class ItemsManager {
 			itemMap.put("PriceId", priceDocumentId);
 			itemMap.put("Description", item.getDescription());
 			itemMap.put("Type", item.getType());
+			itemMap.put("NetPrice", item.getPrice().getNetPrice());
+			itemMap.put("GrossPrice", item.getPrice().getGrossPrice());
 			itemMap.put("ModificationTS", new Date().getTime());			
 			
 			if(item.getId().equals("")){

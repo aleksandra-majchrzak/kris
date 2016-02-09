@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.krismobile.R;
 import com.example.krismobile.contractors.documents.ContractorDocumentsActivity;
+import com.example.krismobile.database.DatabaseManager;
 import com.example.krismobile.database.managers.ContractorsManager;
 import com.example.krismobile.database.managers.DocumentsManager;
 import com.example.krismobile.documents.DocumentActivity;
@@ -50,6 +51,9 @@ public class ContractorFragment extends FragmentBase {
 				container, false);
 		
 		this.contractor = ((ContractorActivity) context).getContractor();
+
+		DocumentsManager.getInstance().deleteAllKrisDocuments();
+		
 
 		loadControls(rootView);
 		

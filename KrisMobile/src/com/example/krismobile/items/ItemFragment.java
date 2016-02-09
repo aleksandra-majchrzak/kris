@@ -131,8 +131,8 @@ public class ItemFragment extends FragmentBase {
 		List<ItemStocks> itemStocks = item.getItemStocks();
 		
 		itemTypeTextView.setText(item.getType());
-		itemNetPriceTextView.setText(String.valueOf(item.getPrice().getNetPrice()));
-		itemGrossPriceTextView.setText(String.valueOf(item.getPrice().getGrossPrice()));
+		itemNetPriceTextView.setText(String.valueOf(item.getPrice().getNetPrice()) + context.getString(R.string.net));
+		itemGrossPriceTextView.setText(String.valueOf(item.getPrice().getGrossPrice()) + context.getString(R.string.gross));
 		itemSizeTextView.setText(item.getSize());
 		itemMaterialTextView.setText(item.getMaterial());
 		

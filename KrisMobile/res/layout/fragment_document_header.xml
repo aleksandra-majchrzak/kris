@@ -24,8 +24,8 @@
                 android:id="@+id/document_number_ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" 
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical" >
 
                 <TextView
                     android:id="@+id/textView1"
@@ -40,16 +40,15 @@
                     android:layout_height="wrap_content"
                     android:text="Small Text"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
-
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/document_value_ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" 
-                android:layout_marginBottom="10dp">
-                
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical" >
+
                 <TextView
                     android:id="@+id/textView13"
                     android:layout_width="wrap_content"
@@ -57,20 +56,37 @@
                     android:text="@string/document_value"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
-                <TextView
-                    android:id="@+id/document_value_textView"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/document_values_ll"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Small Text"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/document_netValue_textView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:text="Small Text"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                    <TextView
+                        android:id="@+id/document_grossValue_textView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:text="Small Text"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                </LinearLayout>
             </LinearLayout>
-            
+
             <LinearLayout
                 android:id="@+id/document_contractor_ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" 
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical" >
 
                 <TextView
                     android:id="@+id/textView3"
@@ -85,16 +101,15 @@
                     android:layout_height="wrap_content"
                     android:text="Small Text"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
-
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/document_payment_form_ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" 
-                android:layout_marginBottom="10dp">
-                
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical" >
+
                 <TextView
                     android:id="@+id/textView5"
                     android:layout_width="wrap_content"
@@ -108,15 +123,14 @@
                     android:layout_height="wrap_content"
                     android:text="Small Text"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
-
             </LinearLayout>
-            
+
             <LinearLayout
                 android:id="@+id/document_document_date_ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" 
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical" >
 
                 <TextView
                     android:id="@+id/textView11"
@@ -131,15 +145,14 @@
                     android:layout_height="wrap_content"
                     android:text="Small Text"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
-
             </LinearLayout>
-            
+
             <LinearLayout
                 android:id="@+id/document_payment_date_ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" 
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical" >
 
                 <TextView
                     android:id="@+id/textView7"
@@ -154,15 +167,14 @@
                     android:layout_height="wrap_content"
                     android:text="Small Text"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
-
             </LinearLayout>
-            
+
             <LinearLayout
                 android:id="@+id/document_description_ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" 
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical" >
 
                 <TextView
                     android:id="@+id/textView9"
@@ -175,15 +187,12 @@
                     android:id="@+id/document_description_textView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Small Text"
                     android:inputType="textMultiLine"
                     android:lines="5"
+                    android:text="Small Text"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
-
             </LinearLayout>
-
         </LinearLayout>
-
     </ScrollView>
 
 </LinearLayout>

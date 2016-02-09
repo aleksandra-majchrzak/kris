@@ -11,7 +11,9 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.couchbase.lite.CouchbaseLiteException;
 import com.example.krismobile.R;
+import com.example.krismobile.database.DatabaseManager;
 
 
 public class MainActivity extends Activity {
@@ -28,6 +30,7 @@ public class MainActivity extends Activity {
         getActionBar().hide();
         
         setContentView(R.layout.activity_main);
+       
         
         loadControls();
     }

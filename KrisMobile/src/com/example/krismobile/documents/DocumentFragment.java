@@ -11,11 +11,18 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.couchbase.lite.Document;
 import com.example.krismobile.R;
 import com.example.krismobile.database.managers.DocumentsManager;
+import com.example.krismobile.database.managers.ItemsManager;
+import com.example.krismobile.documents.adapters.DocumentItemsAdapter;
+import com.example.krismobile.documents.adapters.DocumentPositionsAdapter;
+import com.example.krismobile.documents.adapters.DocumentsAdapter;
 import com.example.krismobile.main.base.FragmentBase;
 
 public class DocumentFragment extends FragmentBase {
@@ -26,6 +33,12 @@ public class DocumentFragment extends FragmentBase {
 	
 	private KrisDocument document;
 	
+	private ListView documentItemsListView;
+	private DocumentItemsAdapter itemsAdapter;
+	
+	private ListView documentPositionsListView;
+	private DocumentPositionsAdapter positionsAdapter;
+	
 	private TextView documentNumberTextView;
 //	private TextView documentTypeTextView;
 	private TextView documentContractorTextView;
@@ -33,7 +46,8 @@ public class DocumentFragment extends FragmentBase {
 	private TextView documentPaymentDateTextView;
 	private TextView documentDescriptionTextView;
 	private TextView documentPaymentFormTextView;
-	private TextView documentValueTextView;
+	private TextView documentNetValueTextView;
+	private TextView documentGrossValueTextView;
 	
 	private static final String ARG_SECTION_NUMBER = "section_number";
 
@@ -67,18 +81,24 @@ public class DocumentFragment extends FragmentBase {
 		
 		switch(section){
 		case POSITION_ITEMS:
-			rootView = inflater.inflate(R.layout.fragment_tmp_paged,
+			rootView = inflater.inflate(R.layout.fragment_document_items,
 					container, false);
+			
+			loadDocumentItems(rootView);
+			
 			break;
 		case POSITION_POSITIONS:
-			rootView = inflater.inflate(R.layout.fragment_tmp_paged,
+			rootView = inflater.inflate(R.layout.fragment_document_positions,
 					container, false);
+			
+			loadDocumentPositions(rootView);
+			
 			break;
 		case POSITION_HEADER:
 			rootView = inflater.inflate(R.layout.fragment_document_header,
 					container, false);
 			
-			loadControls(rootView);
+			loadHeaderControls(rootView);
 			
 			break;
 		}
@@ -140,8 +160,52 @@ public class DocumentFragment extends FragmentBase {
 		}
 */
 	}
+	
+	private void loadDocumentItems(View rootView){
 		
-	private void loadControls(View rootView){
+		documentItemsListView = (ListView) rootView.findViewById(R.id.document_items_listView);
+		
+		ItemsManager manager = ItemsManager.getInstance();
+
+		itemsAdapter = new DocumentItemsAdapter(context, manager.getAllItems());
+		
+		documentItemsListView.setAdapter(itemsAdapter);
+		
+		documentItemsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+
+				// wyœwietlanie dialogu z info o pozycji
+				
+			}
+			
+		});
+	}
+	
+	private void loadDocumentPositions(View rootView){
+		
+		documentPositionsListView = (ListView) rootView.findViewById(R.id.document_positions_listView);
+		
+		positionsAdapter = new DocumentPositionsAdapter(context, document.getPositionsList());
+		
+		documentPositionsListView.setAdapter(positionsAdapter);
+		
+		documentPositionsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+
+				// wyœwietlanie dialogu z info o pozycji
+				
+			}
+			
+		});
+	}
+		
+	private void loadHeaderControls(View rootView){
 
 		documentNumberTextView = (TextView) rootView.findViewById(R.id.document_number_textView);
 //		documentTypeTextView = (TextView) rootView.findViewById(R.id.document_d);
@@ -150,7 +214,8 @@ public class DocumentFragment extends FragmentBase {
 		documentPaymentDateTextView = (TextView) rootView.findViewById(R.id.document_payment_date_textView);
 		documentDescriptionTextView = (TextView) rootView.findViewById(R.id.document_description_textView);
 		documentPaymentFormTextView = (TextView) rootView.findViewById(R.id.document_payment_form_textView);
-		documentValueTextView = (TextView) rootView.findViewById(R.id.document_value_textView);
+		documentNetValueTextView = (TextView) rootView.findViewById(R.id.document_netValue_textView);
+		documentGrossValueTextView = (TextView) rootView.findViewById(R.id.document_grossValue_textView);
 		
 		fillControls();	
 	}
@@ -165,7 +230,8 @@ public class DocumentFragment extends FragmentBase {
 			documentPaymentDateTextView.setText(df.format(document.getPaymentDate()));
 			documentDescriptionTextView.setText(document.getDescription());
 			documentPaymentFormTextView.setText(context.getResources().getStringArray(R.array.payment_forms)[document.getPaymentForm()]);
-			documentValueTextView.setText(String.valueOf(document.getValue())+context.getResources().getString(R.string.PLN));
+			documentNetValueTextView.setText(String.valueOf(document.getNetValue())+context.getResources().getString(R.string.PLN));
+			documentGrossValueTextView.setText(String.valueOf(document.getGrossValue())+context.getResources().getString(R.string.PLN));
 		}
 		else{
 			// numer musisz jakis miec wygenerowany wczesniej - wlasciwie ten else nie jest ci potrzebny, bo pola w dokumencie sa domyslnie ustawione
@@ -175,7 +241,8 @@ public class DocumentFragment extends FragmentBase {
 			documentPaymentDateTextView.setText(df.format(new Date()));
 			documentDescriptionTextView.setText("");
 			documentPaymentFormTextView.setText(context.getResources().getStringArray(R.array.payment_forms)[0]);
-			documentValueTextView.setText("0"+context.getResources().getString(R.string.PLN));
+			documentNetValueTextView.setText("0"+context.getResources().getString(R.string.PLN));
+			documentGrossValueTextView.setText("0"+context.getResources().getString(R.string.PLN));
 		}
 	}
 	

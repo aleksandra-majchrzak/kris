@@ -70,6 +70,7 @@
                         android:id="@+id/item_gross_price_textView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
                         android:text=""
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 

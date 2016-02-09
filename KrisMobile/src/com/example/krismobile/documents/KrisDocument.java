@@ -1,6 +1,8 @@
 package com.example.krismobile.documents;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import android.os.Parcel;
@@ -9,6 +11,10 @@ import android.os.Parcelable;
 import com.couchbase.lite.Document;
 import com.example.krismobile.contractors.Contractor;
 import com.example.krismobile.database.managers.ContractorsManager;
+import com.example.krismobile.database.managers.DocumentsManager;
+import com.example.krismobile.documents.positions.DocumentPosition;
+import com.example.krismobile.documents.positions.DocumentPositionsList;
+import com.example.krismobile.warehouses.stocks.ItemStocks;
 
 public class KrisDocument implements Parcelable{
 	
@@ -20,8 +26,10 @@ public class KrisDocument implements Parcelable{
 	private Date paymentDate;
 	private String description;
 	private int paymentForm;
-	private double value;
+	private double netValue;
+	private double grossValue;
 	
+	private DocumentPositionsList positionsList;
 	
 	public KrisDocument() {
 		this.id = "";
@@ -32,12 +40,14 @@ public class KrisDocument implements Parcelable{
 		this.paymentDate = new Date();
 		this.description = "";
 		this.paymentForm = 0;
-		this.value = 0.0;
+		this.netValue = 0.0;
+		this.grossValue = 0.0;
+		this.positionsList = new DocumentPositionsList();
 	}
 	
-	public KrisDocument(String id, String number, int typeId,
+	private KrisDocument(String id, String number, int typeId,
 			Contractor contractor, Date documentDate, Date paymentDate,
-			String description, int paymentForm, double value) {
+			String description, int paymentForm, double netValue, double grossValue, DocumentPositionsList positionsList) {
 
 		this.id = id;
 		this.number = number;
@@ -47,7 +57,9 @@ public class KrisDocument implements Parcelable{
 		this.paymentDate = paymentDate;
 		this.description = description;
 		this.paymentForm = paymentForm;
-		this.value = value;
+		this.netValue = netValue;
+		this.grossValue = grossValue;
+		this.positionsList = positionsList;
 	}
 	
 	public KrisDocument(Parcel in){
@@ -59,7 +71,9 @@ public class KrisDocument implements Parcelable{
 		this.paymentDate = new Date(in.readLong());
 		this.description = in.readString();
 		this.paymentForm = in.readInt();
-		this.value = in.readDouble();
+		this.netValue = in.readDouble();
+		this.grossValue = in.readDouble();
+		in.readTypedList(this.positionsList, DocumentPosition.CREATOR);
 	}
 	
 	public KrisDocument(Document document){
@@ -70,6 +84,8 @@ public class KrisDocument implements Parcelable{
 		
 		Contractor contractor = new Contractor(documentContractor);
 		
+		DocumentPositionsList positionsList = DocumentsManager.getInstance().getDocumentPositions(document.getId());
+		
 		this.id = document.getId();
 		this.number = (String)props.get("Number");
 		this.typeId = (Integer)props.get("TypeId");
@@ -78,7 +94,9 @@ public class KrisDocument implements Parcelable{
 		this.paymentDate = new Date((Long)props.get("PaymentDate"));
 		this.description = (String)props.get("Description");
 		this.paymentForm = (Integer)props.get("PaymentForm");
-		this.value = (Double)props.get("Value");
+		this.netValue = (Double)props.get("NetValue");
+		this.grossValue = (Double)props.get("GrossValue");
+		this.positionsList = positionsList;
 	}
 
 	public String getId() {
@@ -145,12 +163,28 @@ public class KrisDocument implements Parcelable{
 		this.paymentForm = paymentForm;
 	}
 
-	public double getValue() {
-		return value;
+	public double getNetValue() {
+		return netValue;
 	}
 
-	public void setValue(double value) {
-		this.value = value;
+	public void setNetValue(double netValue) {
+		this.netValue = netValue;
+	}
+	
+	public double getGrossValue() {
+		return grossValue;
+	}
+
+	public void setValue(double grossValue) {
+		this.grossValue = grossValue;
+	}
+
+	public DocumentPositionsList getPositionsList() {
+		return positionsList;
+	}
+
+	public void setPositionsList(DocumentPositionsList positionsList) {
+		this.positionsList = positionsList;
 	}
 
 	@Override
@@ -169,7 +203,8 @@ public class KrisDocument implements Parcelable{
 		dest.writeLong(paymentDate.getTime());
 		dest.writeString(description);
 		dest.writeInt(paymentForm);
-		dest.writeDouble(value);
+		dest.writeDouble(netValue);
+		dest.writeDouble(grossValue);
 	}	
 	
 	public static final Parcelable.Creator<KrisDocument> CREATOR = new Parcelable.Creator<KrisDocument>() {
