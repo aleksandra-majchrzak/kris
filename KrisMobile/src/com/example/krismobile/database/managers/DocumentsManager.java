@@ -19,6 +19,7 @@ import com.couchbase.lite.QueryRow;
 import com.couchbase.lite.View;
 import com.example.krismobile.database.DatabaseManager;
 import com.example.krismobile.documents.KrisDocument;
+import com.example.krismobile.documents.entities.DocumentType;
 import com.example.krismobile.documents.positions.DocumentPosition;
 import com.example.krismobile.documents.positions.DocumentPositionsList;
 
@@ -80,6 +81,8 @@ public class DocumentsManager {
 			document.putProperties(map);
 			
 			saveDocumentPositions(krisDocument);
+			
+			updateDocumentNumerator(krisDocument);
 	
 			
 			DatabaseManager.getDatabaseInstance().endTransaction(true);
@@ -389,6 +392,100 @@ public class DocumentsManager {
 		}
 		
 		return positionsList;	
+	}
+	
+	public Document getDocumentNumerator(int docType, int month, int year){
+
+		ArrayList<Document> numerators = new ArrayList<Document>();
+		View krisDocumentNumeratorView = getView("documentNumerator");
+		
+		if(krisDocumentNumeratorView != null){
+			
+			krisDocumentNumeratorView.setMap(new Mapper(){
+
+				@Override
+				public void map(Map<String, Object> document, Emitter emitter) {
+					
+					if(document.get("DocType").equals(DOC_NUMERATOR_TYPE)){
+				//			&& document.get("ContractorId").equals(contractorId)){
+						
+						//ArrayList<Object> keys = getAllKeysToEmit(document);
+						
+						ArrayList<Object> keys = new ArrayList<Object>();
+						keys.add(document.get("DocumentTypeId"));
+						keys.add(document.get("Month"));
+						keys.add(document.get("Year"));
+						
+						//emitter.emit(document.get("DocumentTypeId") , null);
+						//emitter.emit(document.get("Month") , null);
+						//emitter.emit(document.get("Year") , null);
+						emitter.emit(keys , document);
+					}
+				}
+				
+			}, "4");
+			
+			List<Object> key = new ArrayList<Object>();
+			key.add(docType);
+			key.add(month);
+			key.add(year);
+			
+			List<Object> keys = new ArrayList<Object>();
+			keys.add(key);
+			
+			numerators = getDocumentsListFromView(krisDocumentNumeratorView, 0, keys, true);
+		}
+		
+		if(numerators.size() > 0)
+			return numerators.get(0);
+		else
+			return null;
+		
+	}
+	
+	private void updateDocumentNumerator(KrisDocument krisDocument){
+		int month = krisDocument.getDocumentDate().getMonth() +1;
+		int year = krisDocument.getDocumentDate().getYear() + 1900;
+		DocumentType docType = DocumentType.values()[(krisDocument.getTypeId())];
+		
+		// TU JESZCZE POWINNAM UWZGLEDNIAC UZYTKOWNIKA !!!!!
+//		String userName = "";
+		
+		Document documentNumerator = getDocumentNumerator(docType.getValue(), month, year);		
+		
+		Document document;
+
+		try {
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("DocType", DOC_NUMERATOR_TYPE);
+			map.put("DocumentTypeId", krisDocument.getTypeId());
+			map.put("Month", month);
+			map.put("Year", year);
+			
+			if(documentNumerator != null)
+				map.put("Counter", (Integer)documentNumerator.getProperty("Counter") + 1);
+			else
+				map.put("Counter", 2);
+			
+			map.put("ModificationTS", new Date().getTime());		
+			
+			if(documentNumerator == null || documentNumerator.getId().equals("")){
+				
+					document = DatabaseManager.getDatabaseInstance().createDocument();			
+				
+			}else{
+				document = DatabaseManager.getDatabaseInstance().getDocument(documentNumerator.getId());	
+				map.put("_rev", document.getProperty("_rev"));
+			}
+	    
+			document.putProperties(map);
+			
+		} catch (CouchbaseLiteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		}			
+		
 	}
 
 	public void deleteAllKrisDocuments(){

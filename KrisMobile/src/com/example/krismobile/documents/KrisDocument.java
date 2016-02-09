@@ -12,6 +12,7 @@ import com.couchbase.lite.Document;
 import com.example.krismobile.contractors.Contractor;
 import com.example.krismobile.database.managers.ContractorsManager;
 import com.example.krismobile.database.managers.DocumentsManager;
+import com.example.krismobile.documents.entities.DocumentType;
 import com.example.krismobile.documents.positions.DocumentPosition;
 import com.example.krismobile.documents.positions.DocumentPositionsList;
 import com.example.krismobile.warehouses.stocks.ItemStocks;
@@ -32,12 +33,25 @@ public class KrisDocument implements Parcelable{
 	private DocumentPositionsList positionsList;
 	
 	public KrisDocument() {
+		
+		Date today = new Date();
+		
+		// doc type musi byc ustawiany dynamicznie !!!
+		Document numerator = DocumentsManager.getInstance().getDocumentNumerator(0, today.getMonth() +1 , today.getYear() + 1900);
+		int counter = (numerator != null) ? (Integer)numerator.getProperty("Counter") : 1;
+		
+		String number = DocumentType.getDocTypeName(0) 
+				+"/"+ String.valueOf(today.getMonth() +1) 
+				+"/"+ String.valueOf(today.getYear() + 1900)
+				+"/"+"usrName"
+				+"/"+String.valueOf(counter);
+		
 		this.id = "";
-		this.number = "";
+		this.number = number;
 		this.typeId = 0;
 		this.contractor = new Contractor();
-		this.documentDate = new Date();
-		this.paymentDate = new Date();
+		this.documentDate = today;
+		this.paymentDate = today;
 		this.description = "";
 		this.paymentForm = 0;
 		this.netValue = 0.0;
