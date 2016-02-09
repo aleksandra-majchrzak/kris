@@ -5,6 +5,7 @@ import com.couchbase.client.java.document.json.JsonObject;
 import com.couchbase.client.java.view.ViewQuery;
 import com.couchbase.client.java.view.ViewResult;
 import com.couchbase.client.java.view.ViewRow;
+
 import com.web.kris.main.entities.Contractor;
 
 import java.util.ArrayList;

@@ -41,7 +41,7 @@
                             <script type="text/javascript"> $('#conType').val('${contractor.type.value}') </script>
                         </c:when>
                         <c:otherwise>
-                            <select name="type" id="type">
+                            <select name="conType" id="conType">
                                 <option value="0">Dostawca</option>
                                 <option value="1">Kupiec</option>
                             </select>

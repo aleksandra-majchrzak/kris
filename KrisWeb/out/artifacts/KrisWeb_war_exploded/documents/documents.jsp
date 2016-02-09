@@ -26,7 +26,7 @@
     </c:if>
 
     <c:set var="addNewDocument" scope="page" value="${addNewDocument}"/>
-    <c:if test="${addNewDocument != null}">
+    <c:if test="${addNewDocument != null && contractorsDoc.size() > 0}">
         <jsp:include page="add-document-view.jsp" flush="true" />
     </c:if>
 </div>
