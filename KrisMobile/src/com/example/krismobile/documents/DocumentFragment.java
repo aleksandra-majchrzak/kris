@@ -1,8 +1,11 @@
 package com.example.krismobile.documents;
 
 import java.util.Date;
+import java.util.Observable;
+import java.util.Observer;
 
 import android.app.AlertDialog;
+import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,9 +26,12 @@ import com.example.krismobile.database.managers.ItemsManager;
 import com.example.krismobile.documents.adapters.DocumentItemsAdapter;
 import com.example.krismobile.documents.adapters.DocumentPositionsAdapter;
 import com.example.krismobile.documents.adapters.DocumentsAdapter;
+import com.example.krismobile.documents.positions.DocumentPosition;
+import com.example.krismobile.documents.positions.DocumentPositionDialog;
+import com.example.krismobile.items.Item;
 import com.example.krismobile.main.base.FragmentBase;
 
-public class DocumentFragment extends FragmentBase {
+public class DocumentFragment extends FragmentBase implements Observer{
 	
 	private static final int POSITION_ITEMS = 0;
 	private static final int POSITION_POSITIONS  = 1;
@@ -34,10 +40,10 @@ public class DocumentFragment extends FragmentBase {
 	private KrisDocument document;
 	
 	private ListView documentItemsListView;
-	private DocumentItemsAdapter itemsAdapter;
+	private static DocumentItemsAdapter itemsAdapter;
 	
 	private ListView documentPositionsListView;
-	private DocumentPositionsAdapter positionsAdapter;
+	private static DocumentPositionsAdapter positionsAdapter;
 	
 	private TextView documentNumberTextView;
 //	private TextView documentTypeTextView;
@@ -74,9 +80,6 @@ public class DocumentFragment extends FragmentBase {
 		Bundle args = getArguments();
 		int section = args.getInt(ARG_SECTION_NUMBER);
 		
-		//czy to nie powinno byc gdziej indziej?
-		this.document = ((DocumentActivity) context).getDocument();		
-		
 		View rootView = null;
 		
 		switch(section){
@@ -110,6 +113,12 @@ public class DocumentFragment extends FragmentBase {
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
+		
+		//czy to nie powinno byc gdziej indziej?
+		this.document = ((DocumentActivity) context).getDocument();	
+		
+		if( ! this.document.getPositionsList().hasObserverOfType(this))
+			this.document.getPositionsList().addObserver(this);
 	}
 	
 	@Override
@@ -167,7 +176,8 @@ public class DocumentFragment extends FragmentBase {
 		
 		ItemsManager manager = ItemsManager.getInstance();
 
-		itemsAdapter = new DocumentItemsAdapter(context, manager.getAllItems());
+		if(itemsAdapter == null)
+			itemsAdapter = new DocumentItemsAdapter(context, manager.getAllItems(), document.getPositionsList());
 		
 		documentItemsListView.setAdapter(itemsAdapter);
 		
@@ -177,7 +187,28 @@ public class DocumentFragment extends FragmentBase {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 
+				Item item = new Item((Document) itemsAdapter.getItem(position));
+				DocumentPosition newPosition = document.getPositionsList().getByItemId(item.getId());
+				boolean isPositionNew = false;
+				
+				if(newPosition == null){
+				
+					newPosition = new DocumentPosition();
+				
+					newPosition.setDocumentId(document.getId());
+					newPosition.setQuantity(1);
+					newPosition.setItem(item);
+					newPosition.setNetValue(item.getPrice().getNetPrice());
+					newPosition.setGrossValue(item.getPrice().getGrossPrice());
+					newPosition.setOrdinal(document.getPositionsList().size() +1 );
+					
+					isPositionNew = true;
+				}
+				
 				// wyœwietlanie dialogu z info o pozycji
+				 DialogFragment newFragment = DocumentPositionDialog
+			                .newInstance(newPosition, true, isPositionNew);
+			        newFragment.show(getFragmentManager(), "dialog");
 				
 			}
 			
@@ -188,7 +219,8 @@ public class DocumentFragment extends FragmentBase {
 		
 		documentPositionsListView = (ListView) rootView.findViewById(R.id.document_positions_listView);
 		
-		positionsAdapter = new DocumentPositionsAdapter(context, document.getPositionsList());
+		if(positionsAdapter == null)
+			positionsAdapter = new DocumentPositionsAdapter(context, document.getPositionsList());
 		
 		documentPositionsListView.setAdapter(positionsAdapter);
 		
@@ -198,7 +230,10 @@ public class DocumentFragment extends FragmentBase {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 
-				// wyœwietlanie dialogu z info o pozycji
+				// wyœwietlanie dialogu z info o pozycji  - zalezne od tego czy dokument w trybie edycji
+				 DialogFragment newFragment = DocumentPositionDialog
+			                .newInstance(document.getPositionsList().get(position).copy(), true, false);
+			        newFragment.show(getFragmentManager(), "dialog");
 				
 			}
 			
@@ -245,7 +280,7 @@ public class DocumentFragment extends FragmentBase {
 			documentGrossValueTextView.setText("0"+context.getResources().getString(R.string.PLN));
 		}
 	}
-	
+
 	
 	private void deleteDocument(){
 		
@@ -280,5 +315,21 @@ public class DocumentFragment extends FragmentBase {
 				});
 		
 		builder.create().show();
+	}
+	
+	@Override
+	public void onDetach(){
+		itemsAdapter = null;
+		positionsAdapter = null;
+		
+		super.onDetach();
+	}
+
+	@Override
+	public void update(Observable observable, Object data) {
+
+		// tu powinno bys sprawdzenie co wywolalo update
+		itemsAdapter.notifyDataSetChanged();
+		positionsAdapter.notifyDataSetChanged();
 	}
 }

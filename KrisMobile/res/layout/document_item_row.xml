@@ -59,6 +59,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/document_item_values_ll"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" >
 

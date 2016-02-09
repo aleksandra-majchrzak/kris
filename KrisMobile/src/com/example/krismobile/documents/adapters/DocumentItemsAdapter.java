@@ -8,6 +8,8 @@ import com.couchbase.lite.Document;
 import com.example.krismobile.R;
 import com.example.krismobile.database.managers.DocumentsManager;
 import com.example.krismobile.database.managers.ItemsManager;
+import com.example.krismobile.documents.positions.DocumentPosition;
+import com.example.krismobile.documents.positions.DocumentPositionsList;
 import com.example.krismobile.main.utilities.DateUtilities;
 
 import android.app.Activity;
@@ -16,17 +18,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class DocumentItemsAdapter extends  BaseAdapter{
 	
 	private Context context;
 	private ArrayList<Document> documentItemsList;
+	private DocumentPositionsList positions;
 	
-	public DocumentItemsAdapter(Context context, ArrayList<Document> documentsList){
+	public DocumentItemsAdapter(Context context, ArrayList<Document> documentsList, DocumentPositionsList positions){
 		
 		this.context = context;
 		this.documentItemsList = documentsList;
+		this.positions = positions;
 	}
 
 	@Override
@@ -84,12 +89,21 @@ public class DocumentItemsAdapter extends  BaseAdapter{
 		
 		
 		// tu mosze jakos brac z pozycji
+		DocumentPosition currentPosition = positions.getByItemId((String)props.get("_id"));
+		if(currentPosition != null){
+			
+			((LinearLayout) convertView.findViewById(R.id.document_item_values_ll)).setVisibility(View.VISIBLE);
+			
+			TextView documentItemQuantityTextView = (TextView) convertView.findViewById(R.id.document_item_quantity_textView);
+			documentItemQuantityTextView.setText(String.valueOf(currentPosition.getQuantity()));
 		
-		TextView documentItemQuantityTextView = (TextView) convertView.findViewById(R.id.document_item_quantity_textView);
-		documentItemQuantityTextView.setText(String.valueOf(props.get("NetPrice")));
-		
-		TextView documentItemValuesTextView = (TextView) convertView.findViewById(R.id.document_item_value_textView);
-		documentItemValuesTextView.setText(String.valueOf(props.get("GrossPrice")));
+			TextView documentItemValuesTextView = (TextView) convertView.findViewById(R.id.document_item_value_textView);
+			documentItemValuesTextView.setText(String.valueOf(currentPosition.getNetValue()) + context.getString(R.string.net)
+					+ "  "+String.valueOf(currentPosition.getGrossValue()) + context.getString(R.string.gross));
+		}
+		else{
+			((LinearLayout) convertView.findViewById(R.id.document_item_values_ll)).setVisibility(View.GONE);
+		}
 
 
 		
@@ -100,7 +114,7 @@ public class DocumentItemsAdapter extends  BaseAdapter{
 	public void notifyDataSetChanged(){
 		
 		// tu musze uwzglednic dodawanie posycji - miec dostep do lity pozycji
-		documentItemsList =  ItemsManager.getInstance().getAllItems(); // DocumentsManager.getInstance().getAllKrisDocuments();
+//		documentItemsList =  ItemsManager.getInstance().getAllItems(); // DocumentsManager.getInstance().getAllKrisDocuments();
 		
 		super.notifyDataSetChanged();
 	}

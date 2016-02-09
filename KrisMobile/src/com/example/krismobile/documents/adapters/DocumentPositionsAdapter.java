@@ -78,20 +78,20 @@ public class DocumentPositionsAdapter extends  BaseAdapter{
 		
 		TextView documentPositionNetPriceTextView = (TextView) convertView.findViewById(R.id.position_price_net_textView);
 		documentPositionNetPriceTextView
-				.setText(String.valueOf(position.getItem().getPrice().getNetPrice())+"("+ context.getString(R.string.net)+")");
+				.setText(String.valueOf(position.getItem().getPrice().getNetPrice()) + context.getString(R.string.net));
 		
 		TextView documentPositionGrossPriceTextView = (TextView) convertView.findViewById(R.id.position_price_gross_textView);
 		documentPositionGrossPriceTextView
-				.setText(String.valueOf(position.getItem().getPrice().getGrossPrice())+"("+ context.getString(R.string.gross)+")");
+				.setText(String.valueOf(position.getItem().getPrice().getGrossPrice()) + context.getString(R.string.gross));
 		
 		
 		// tu mosze jakos brac z pozycji
 		
 		TextView documentPositionNetValueTextView = (TextView) convertView.findViewById(R.id.position_value_net_textView);
-		documentPositionNetValueTextView.setText(String.valueOf(position.getNetValue()));
+		documentPositionNetValueTextView.setText(String.valueOf(position.getNetValue()) + context.getString(R.string.net));
 		
 		TextView documentPositionGrossValueTextView = (TextView) convertView.findViewById(R.id.position_value_gross_textView);
-		documentPositionGrossValueTextView.setText(String.valueOf(position.getGrossValue()));
+		documentPositionGrossValueTextView.setText(String.valueOf(position.getGrossValue()) + context.getString(R.string.gross));
 
 
 		

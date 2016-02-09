@@ -135,5 +135,8 @@
     <string name="item_name">Nazwa</string>
     <string name="synchronization">Synchronizacja</string>
     <string name="server_address">Adres serwera</string>
-
+    <string name="ok">OK</string>
+    <string name="cancel">Anuluj</string>
+	<string name="pieces">szt.</string>
+	<string name="cannot_save_position_quantity">Nie można zapisać pozycji w ilosci mniejszej od 1</string>
 </resources>

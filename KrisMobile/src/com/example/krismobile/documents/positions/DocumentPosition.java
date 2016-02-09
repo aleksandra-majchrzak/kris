@@ -66,6 +66,11 @@ public class DocumentPosition implements Parcelable{
 		this.netValue = (Double)props.get("NetValue");
 		this.grossValue = (Double)props.get("GrossValue");
 	}
+	
+	public DocumentPosition copy(){
+		return new DocumentPosition(this.id, this.documentId, this.item, 
+					this.ordinal, this.quantity, this.netValue, this.grossValue);
+	}
 
 	public String getId() {
 		return id;
