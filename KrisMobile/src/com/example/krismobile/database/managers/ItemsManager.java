@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +17,7 @@ import com.couchbase.lite.Mapper;
 import com.couchbase.lite.Query;
 import com.couchbase.lite.QueryEnumerator;
 import com.couchbase.lite.QueryRow;
+import com.couchbase.lite.Reducer;
 import com.couchbase.lite.View;
 import com.example.krismobile.database.DatabaseManager;
 import com.example.krismobile.items.Item;
@@ -294,7 +296,7 @@ public class ItemsManager {
 		
 		if(itemTypesView != null){
 			
-			itemTypesView.setMap(new Mapper(){
+			itemTypesView.setMapReduce(new Mapper(){
 
 				@Override
 				public void map(Map<String, Object> document, Emitter emitter) {
@@ -302,6 +304,20 @@ public class ItemsManager {
 					if(document.get("DocType").equals(DOC_TYPE)){
 						
 						emitter.emit(document.get("Type") , document.get("Type"));
+					}
+				}
+				
+			}, new Reducer(){
+
+				@Override
+				public Object reduce(List<Object> keys, List<Object> values, boolean rereduce) {
+					
+					if(rereduce){
+						// temporarily ignoring rereduce
+						return new ArrayList<Object>(new LinkedHashSet<Object>(values));
+					}
+					else{
+						return new ArrayList<Object>(new LinkedHashSet<Object>(values));
 					}
 				}
 				
@@ -323,7 +339,7 @@ public class ItemsManager {
 		
 		if(itemSizesView != null){
 			
-			itemSizesView.setMap(new Mapper(){
+			itemSizesView.setMapReduce(new Mapper(){
 
 				@Override
 				public void map(Map<String, Object> document, Emitter emitter) {
@@ -331,6 +347,20 @@ public class ItemsManager {
 					if(document.get("DocType").equals(DOC_TYPE)){
 						
 						emitter.emit(document.get("Size") , document.get("Size"));
+					}
+				}
+				
+			}, new Reducer(){
+
+				@Override
+				public Object reduce(List<Object> keys, List<Object> values, boolean rereduce) {
+					
+					if(rereduce){
+						// temporarily ignoring rereduce
+						return new ArrayList<Object>(new LinkedHashSet<Object>(values));
+					}
+					else{
+						return new ArrayList<Object>(new LinkedHashSet<Object>(values));
 					}
 				}
 				
@@ -351,7 +381,7 @@ public class ItemsManager {
 		
 		if(itemMaterialsView != null){
 			
-			itemMaterialsView.setMap(new Mapper(){
+			itemMaterialsView.setMapReduce(new Mapper(){
 
 				@Override
 				public void map(Map<String, Object> document, Emitter emitter) {
@@ -359,6 +389,20 @@ public class ItemsManager {
 					if(document.get("DocType").equals(DOC_TYPE)){
 						
 						emitter.emit(document.get("Material") , document.get("Material"));
+					}
+				}
+				
+			}, new Reducer(){
+
+				@Override
+				public Object reduce(List<Object> keys, List<Object> values, boolean rereduce) {
+					
+					if(rereduce){
+						// temporarily ignoring rereduce
+						return new ArrayList<Object>(new LinkedHashSet<Object>(values));
+					}
+					else{
+						return new ArrayList<Object>(new LinkedHashSet<Object>(values));
 					}
 				}
 				
@@ -390,9 +434,14 @@ public class ItemsManager {
 
 	       for (Iterator<QueryRow> it = results; it.hasNext();) {
 	          QueryRow row = it.next();
-	          String doc = (String)row.getValue();
 	          
-	          valuesArray.add(doc);
+	          if(orderedQuery.isMapOnly()){
+	        	  String doc = (String)row.getValue();
+	          
+	        	  valuesArray.add(doc);
+	          }
+	          else
+	        	  valuesArray = (ArrayList<String>) row.getValue();
 
 	          Log.i("KrisMobile", "Found party:" + row);
 	       }

@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.couchbase.lite.Document;
 import com.example.krismobile.R;
 import com.example.krismobile.database.managers.ItemsManager;
+import com.example.krismobile.items.entities.Price;
 
 public class ItemsAdapter extends  BaseAdapter{
 	
@@ -73,16 +74,19 @@ public class ItemsAdapter extends  BaseAdapter{
 			//ustawienie obrazka dla kupca
 				
 //		}
+		
+		Document priceDoc = ItemsManager.getInstance().getItemPrice((String)props.get("PriceId"));
+		Price price = new Price(priceDoc);
 			
 		TextView itemCodeNameTextView = (TextView) convertView.findViewById(R.id.item_code_name_textView);
 		itemCodeNameTextView.setText("[" + (String)props.get("Code") + "] " + (String)props.get("Name"));
 			
-// jakos musisz zapamietywac te cene i pobierac ja		
+	
 		TextView itemNetPriceTextView = (TextView) convertView.findViewById(R.id.item_netPrice_textView);
-		itemNetPriceTextView.setText("ho");
+		itemNetPriceTextView.setText(String.valueOf(price.getNetPrice()) + context.getString(R.string.net));
 		
 		TextView itemGrossPriceTextView = (TextView) convertView.findViewById(R.id.item_grossPrice_textView);
-		itemGrossPriceTextView.setText("hu");
+		itemGrossPriceTextView.setText(String.valueOf(price.getGrossPrice())+ context.getString(R.string.gross));
 
 		
 		return convertView;

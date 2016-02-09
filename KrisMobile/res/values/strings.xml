@@ -139,4 +139,8 @@
     <string name="cancel">Anuluj</string>
 	<string name="pieces">szt.</string>
 	<string name="cannot_save_position_quantity">Nie można zapisać pozycji w ilosci mniejszej od 1</string>
+	<string name="cannot_save_item_without_code">Nie można zapisać towaru bez kodu</string>
+	<string name="cannot_save_item_without_name">Nie można zapisać towaru bez nazwy</string>
+	<string name="cannot_save_item_without_price">Nie można zapisać towaru bez ceny</string>
+	<string name="cannot_save_document_without_position">Nie można zapisać dokumentu bez pozycji</string>
 </resources>

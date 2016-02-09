@@ -4,10 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observer;
 
-public class DocumentPositionsList extends ArrayList<DocumentPosition>{
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class DocumentPositionsList extends ArrayList<DocumentPosition> implements Parcelable{
 	
 	private List<Observer> observers = new ArrayList<Observer>();
 	private ArrayList<String> removedPositionsId = new ArrayList<String>();
+
+	public DocumentPositionsList() {
+		super();
+	}
+	
+	public DocumentPositionsList(Parcel in) {
+		in.readTypedList(this, DocumentPosition.CREATOR);
+		in.readStringList(removedPositionsId);
+		in.readList(observers, Observer.class.getClassLoader());
+	}
 
 	@Override
 	public boolean add(DocumentPosition position){
@@ -66,6 +79,24 @@ public class DocumentPositionsList extends ArrayList<DocumentPosition>{
 		return false;
 	}
 	
+	public double getDocumentValueNet(){
+		double sum = 0;
+		
+		for(DocumentPosition position: this)
+			sum += position.getNetValue();
+		
+		return sum;
+	}
+	
+	public double getDocumentValueGross(){
+		double sum = 0;
+		
+		for(DocumentPosition position: this)
+			sum += position.getGrossValue();
+		
+		return sum;
+	}
+	
 	public void addObserver(Observer observer){
 		this.observers.add(observer);
 	}
@@ -84,4 +115,28 @@ public class DocumentPositionsList extends ArrayList<DocumentPosition>{
 			observer.update(null, null);	// jakie tu powinny byc wartosci?
 		}
 	}
+
+	@Override
+	public int describeContents() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeTypedList(this);
+		dest.writeStringList(removedPositionsId);
+		dest.writeList(observers);
+		
+	}
+	
+	public static final Parcelable.Creator<DocumentPositionsList> CREATOR = new Parcelable.Creator<DocumentPositionsList>() {
+        public DocumentPositionsList createFromParcel(Parcel in) {
+            return new DocumentPositionsList(in); 
+        }
+
+        public DocumentPositionsList[] newArray(int size) {
+            return new DocumentPositionsList[size];
+        }
+    };
 }

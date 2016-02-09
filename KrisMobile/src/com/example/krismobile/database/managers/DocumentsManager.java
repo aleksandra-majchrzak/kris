@@ -48,6 +48,8 @@ public class DocumentsManager {
 		Document document;
 		String documentId;
 		try {
+			
+			DatabaseManager.getDatabaseInstance().beginTransaction();
 	    
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("DocType", DOC_TYPE);
@@ -69,13 +71,19 @@ public class DocumentsManager {
 			}else{
 				document = DatabaseManager.getDatabaseInstance().getDocument(krisDocument.getId());	
 				map.put("_rev", document.getProperty("_rev"));
+				
 			}
 			
 			documentId = document.getId();
-
+			krisDocument.setId(document.getId());
 	    
 			document.putProperties(map);
+			
+			saveDocumentPositions(krisDocument);
 	
+			
+			DatabaseManager.getDatabaseInstance().endTransaction(true);
+			
 			return documentId;
 			
 		} catch (CouchbaseLiteException e) {
@@ -85,6 +93,47 @@ public class DocumentsManager {
 		}
 		
 		return null;
+	}
+	
+	public void saveDocumentPositions(KrisDocument krisDocument){
+		
+		for(DocumentPosition position : krisDocument.getPositionsList()){
+			
+			Document document;
+			String documentId;
+			try {
+				
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("DocType", DOC_POSITION_TYPE);
+				map.put("DocumentId", krisDocument.getId());
+				map.put("ItemId", position.getItem().getId());
+				map.put("Ordinal", position.getOrdinal());
+				map.put("Quantity", position.getQuantity());
+				map.put("NetValue", position.getNetValue());
+				map.put("GrossValue", position.getGrossValue());	
+				map.put("ModificationTS", new Date().getTime());		
+				
+				if(position.getId().equals("")){
+					
+						document = DatabaseManager.getDatabaseInstance().createDocument();
+					
+					
+				}else{
+					document = DatabaseManager.getDatabaseInstance().getDocument(position.getId());	
+					map.put("_rev", document.getProperty("_rev"));
+					
+					position.setId(document.getId());
+				}
+				
+				documentId = document.getId();
+
+		    
+				document.putProperties(map);
+			} catch (CouchbaseLiteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+			}
+		}
 	}
 	
 	public Document getKrisDocument(String documentId){
@@ -298,7 +347,7 @@ public class DocumentsManager {
 				@Override
 				public void map(Map<String, Object> document, Emitter emitter) {
 					
-					if(document.get("DocType").equals(DOC_NUMERATOR_TYPE)){
+					if(document.get("DocType").equals(DOC_POSITION_TYPE)){
 				//			&& document.get("ContractorId").equals(contractorId)){
 						
 						//ArrayList<Object> keys = getAllKeysToEmit(document);
@@ -312,7 +361,7 @@ public class DocumentsManager {
 					}
 				}
 				
-			}, "1");
+			}, "2");
 			
 			List<Object> keys = new ArrayList<Object>();
 			keys.add(documentId);
@@ -333,6 +382,12 @@ public class DocumentsManager {
 		ArrayList<Document> docs = getAllKrisDocuments();
 		for(Document doc : docs){
 			deleteKrisDocument(doc.getId());
+			
+			ArrayList<DocumentPosition> docsPos = this.getDocumentPositions(doc.getId());
+			for(DocumentPosition docPos : docsPos){
+				deleteKrisDocument(docPos.getId());
+				
+			}
 		}
 	}
 }

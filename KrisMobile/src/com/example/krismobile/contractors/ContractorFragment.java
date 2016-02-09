@@ -52,7 +52,7 @@ public class ContractorFragment extends FragmentBase {
 		
 		this.contractor = ((ContractorActivity) context).getContractor();
 
-		DocumentsManager.getInstance().deleteAllKrisDocuments();
+//		DocumentsManager.getInstance().deleteAllKrisDocuments();
 		
 
 		loadControls(rootView);

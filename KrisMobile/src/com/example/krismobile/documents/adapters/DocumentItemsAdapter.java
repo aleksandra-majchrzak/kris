@@ -77,7 +77,7 @@ public class DocumentItemsAdapter extends  BaseAdapter{
 		
 		//jak zrobic jakiegoc joina zeby wyciagnac nazwe z id konhtrahenta ??  a moze w ogole powinnam to inaczej zrobic??
 		TextView documentItemCodeTextView = (TextView) convertView.findViewById(R.id.document_item_code_textView);
-		documentItemCodeTextView.setText("["+(String)props.get("Code")+"]"+(String)props.get("Name"));
+		documentItemCodeTextView.setText("["+(String)props.get("Code")+"] "+(String)props.get("Name"));
 			
 		TextView documentItemStocksTextView = (TextView) convertView.findViewById(R.id.document_item_stocks_textView);
 		// tu musze miec info o zasobach

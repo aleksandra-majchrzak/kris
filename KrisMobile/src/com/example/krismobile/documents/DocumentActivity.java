@@ -30,8 +30,6 @@ public class DocumentActivity extends Activity implements ActionBar.TabListener{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
-		super.onCreate(savedInstanceState);
-		
 		Bundle args = getIntent().getExtras();
 		String documentId = args.getString("documentId");
 		contractor = args.getParcelable("contractor");
@@ -39,23 +37,34 @@ public class DocumentActivity extends Activity implements ActionBar.TabListener{
 		getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 	
-		if(!documentId.equals("")){
-			this.isNewDocument = false;
+		
+		if(savedInstanceState!= null && ! savedInstanceState.isEmpty()){
+			document = (KrisDocument) savedInstanceState.getParcelable("document");
 			
-			Document documentDoc = DocumentsManager.getInstance().getKrisDocument(documentId);
-			Map<?,?> props = documentDoc.getProperties();
-			
-			document = new KrisDocument(documentDoc);
-			
-			getActionBar().setTitle((String)props.get("Number"));
-		}
+			if(!documentId.equals(""))
+				getActionBar().setTitle(document.getNumber());
+			else
+				getActionBar().setTitle(getResources().getString(R.string.action_add_document));
+		} 
 		else{
-			this.isNewDocument = true;
-			
-			document = new KrisDocument();
-			document.setContractor(contractor);
-			
-			getActionBar().setTitle(getResources().getString(R.string.action_add_document));
+			if(!documentId.equals("")){
+				this.isNewDocument = false;
+				
+				Document documentDoc = DocumentsManager.getInstance().getKrisDocument(documentId);
+				Map<?,?> props = documentDoc.getProperties();
+				
+				document = new KrisDocument(documentDoc);
+				
+				getActionBar().setTitle((String)props.get("Number"));
+			}
+			else{
+				this.isNewDocument = true;
+				
+				document = new KrisDocument();
+				document.setContractor(contractor);
+				
+				getActionBar().setTitle(getResources().getString(R.string.action_add_document));
+			}
 		}
 			
 		setContentView(R.layout.activity_document);
@@ -80,7 +89,16 @@ public class DocumentActivity extends Activity implements ActionBar.TabListener{
                             .setText(mSectionsPagerAdapter.getPageTitle(i))
                             .setTabListener(this));
         }
+		
+		
+		super.onCreate(savedInstanceState);
 	}	
+	
+	
+	@Override
+	protected void onSaveInstanceState(Bundle stateBundle){
+		stateBundle.putParcelable("document", this.document);
+	}
 /*	
 	public Contractor reloadDocument(){
 		Document documentDoc = ContractorsManager.getInstance().getContractor(contractor.getId());

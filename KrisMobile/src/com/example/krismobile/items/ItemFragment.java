@@ -102,15 +102,15 @@ public class ItemFragment extends FragmentBase {
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data){
-	/*
-		if(requestCode == ContractorsActivity.REQUEST_ADD_NEW_CONTRACTOR){
-			if(resultCode == ContractorsActivity.RESULT_OK){
+	
+		if(requestCode == ItemsActivity.REQUEST_REFRESH){
+			if(resultCode == ItemsActivity.RESULT_OK){
 
-				contractor = ((ContractorActivity)context).reloadContractor();
+				item = ((ItemActivity)context).reloadItem();
 				fillControls();	
 			}
 		}
-*/
+
 	}
 		
 	private void loadControls(View rootView){

@@ -175,7 +175,7 @@ public class KrisDocument implements Parcelable{
 		return grossValue;
 	}
 
-	public void setValue(double grossValue) {
+	public void setGrossValue(double grossValue) {
 		this.grossValue = grossValue;
 	}
 

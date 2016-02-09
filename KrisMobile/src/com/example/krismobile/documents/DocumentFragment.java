@@ -40,6 +40,8 @@ public class DocumentFragment extends FragmentBase implements Observer{
 	
 	private KrisDocument document;
 	
+	private int section;
+	
 	private ListView documentItemsListView;
 	private static DocumentItemsAdapter itemsAdapter;
 	
@@ -79,7 +81,7 @@ public class DocumentFragment extends FragmentBase implements Observer{
 			Bundle savedInstanceState) {
 		
 		Bundle args = getArguments();
-		int section = args.getInt(ARG_SECTION_NUMBER);
+		section = args.getInt(ARG_SECTION_NUMBER);
 		
 		View rootView = null;
 		
@@ -260,27 +262,15 @@ public class DocumentFragment extends FragmentBase implements Observer{
 	private void fillControls(){
 		java.text.DateFormat df = DateFormat.getDateFormat(context.getApplicationContext());
 		
-		if(!document.getId().equals("")){
-			documentNumberTextView.setText(document.getNumber());
-			documentContractorTextView.setText(document.getContractor().getCode());
-			documentDocumentDateTextView.setText(df.format(document.getDocumentDate()));
-			documentPaymentDateTextView.setText(df.format(document.getPaymentDate()));
-			documentDescriptionTextView.setText(document.getDescription());
-			documentPaymentFormTextView.setText(context.getResources().getStringArray(R.array.payment_forms)[document.getPaymentForm()]);
-			documentNetValueTextView.setText(String.valueOf(document.getNetValue())+context.getResources().getString(R.string.PLN));
-			documentGrossValueTextView.setText(String.valueOf(document.getGrossValue())+context.getResources().getString(R.string.PLN));
-		}
-		else{
-			// numer musisz jakis miec wygenerowany wczesniej - wlasciwie ten else nie jest ci potrzebny, bo pola w dokumencie sa domyslnie ustawione
-			documentNumberTextView.setText(document.getNumber());
-			documentContractorTextView.setText(document.getContractor().getCode());
-			documentDocumentDateTextView.setText(df.format(new Date()));
-			documentPaymentDateTextView.setText(df.format(new Date()));
-			documentDescriptionTextView.setText("");
-			documentPaymentFormTextView.setText(context.getResources().getStringArray(R.array.payment_forms)[0]);
-			documentNetValueTextView.setText("0"+context.getResources().getString(R.string.PLN));
-			documentGrossValueTextView.setText("0"+context.getResources().getString(R.string.PLN));
-		}
+		documentNumberTextView.setText(document.getNumber());
+		documentContractorTextView.setText(document.getContractor().getCode());
+		documentDocumentDateTextView.setText(df.format(document.getDocumentDate()));
+		documentPaymentDateTextView.setText(df.format(document.getPaymentDate()));
+		documentDescriptionTextView.setText(document.getDescription());
+		documentPaymentFormTextView.setText(context.getResources().getStringArray(R.array.payment_forms)[document.getPaymentForm()]);
+		documentNetValueTextView.setText(String.valueOf(document.getNetValue())+context.getResources().getString(R.string.PLN));
+		documentGrossValueTextView.setText(String.valueOf(document.getGrossValue())+context.getResources().getString(R.string.PLN));
+
 	}
 
 	
@@ -333,5 +323,10 @@ public class DocumentFragment extends FragmentBase implements Observer{
 		// tu powinno bys sprawdzenie co wywolalo update
 		itemsAdapter.notifyDataSetChanged();
 		positionsAdapter.notifyDataSetChanged();
+		
+		document.setNetValue(document.getPositionsList().getDocumentValueNet());
+		document.setGrossValue(document.getPositionsList().getDocumentValueGross());
+//			documentGrossValueTextView.setText(String.valueOf(document.getPositionsList().getDocumentValueGross())) ;
+
 	}
 }

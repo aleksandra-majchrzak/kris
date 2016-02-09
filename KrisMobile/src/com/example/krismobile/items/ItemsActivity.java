@@ -1,5 +1,7 @@
 package com.example.krismobile.items;
 
+import java.util.Map;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,7 +9,9 @@ import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.couchbase.lite.Document;
 import com.example.krismobile.R;
+import com.example.krismobile.database.managers.ContractorsManager;
 
 public class ItemsActivity extends Activity {
 	
@@ -45,6 +49,7 @@ public class ItemsActivity extends Activity {
 		
 		return super.onOptionsItemSelected(item);
 	}
+	
 	
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data){

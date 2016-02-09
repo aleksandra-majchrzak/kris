@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.krismobile.R;
 import com.example.krismobile.contractors.ContractorsActivity;
@@ -20,7 +21,11 @@ import com.example.krismobile.warehouses.stocks.ItemStocks;
 
 public class ModifyItemFragment extends FragmentBase{
 	
-private Item item;
+	private static int NO_CODE = 1;
+	private static int NO_NAME = 2;
+	private static int NO_PRICE = 3;
+	
+	private Item item;
 	
 	private EditText itemCodeEditText;
 	private EditText itemNameEditText;
@@ -66,8 +71,21 @@ private Item item;
 		
 		if(id == R.id.action_save_item){
 			
-			saveItem();
-			return true;
+			int validationResult = validate();
+			
+			if(validationResult == 0){
+				saveItem();
+				return true;
+			}
+			else{
+				if(validationResult == 1)
+					Toast.makeText(context, R.string.cannot_save_item_without_code, Toast.LENGTH_LONG).show();
+				else if(validationResult == 2)
+					Toast.makeText(context, R.string.cannot_save_item_without_name, Toast.LENGTH_LONG).show();
+				else
+					Toast.makeText(context, R.string.cannot_save_item_without_price, Toast.LENGTH_LONG).show();
+				return false;
+			}
 		}
 		
 		return super.onOptionsItemSelected(item);
@@ -107,8 +125,8 @@ private Item item;
 		List<ItemStocks> itemStocks = item.getItemStocks();
 		Price price = item.getPrice();
 		
-		itemCodeEditText.setText(item.getName());
-		itemNameEditText.setText(item.getCode());
+		itemCodeEditText.setText(item.getCode());
+		itemNameEditText.setText(item.getName());
 		
 		itemTypeSpinner.setText(item.getType());		
 		String[] itemTypes = ItemsManager.getInstance().getItemTypes();
@@ -138,6 +156,17 @@ private Item item;
 */		
 		itemDescriptionEditText.setText(item.getDescription());
 
+	}
+	
+	private int validate(){
+		boolean noPrice = itemNetPriceEditText.getText().toString().equals("") 
+				|| itemGrossPriceEditText.getText().toString().equals("");
+		
+		boolean noCode = itemCodeEditText.getText().toString().equals("");
+		
+		boolean noName = itemNameEditText.getText().toString().equals("");
+		
+		return  (noCode) ? 1 : ( (noName) ? 2 : (noPrice) ? 3: 0);
 	}
 	
 	private void saveItem(){
