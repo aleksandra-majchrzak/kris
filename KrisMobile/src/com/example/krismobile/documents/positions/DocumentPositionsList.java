@@ -52,7 +52,7 @@ public class DocumentPositionsList extends ArrayList<DocumentPosition> implement
 		
 		notifyObservers();
 		
-		DocumentPosition removed = this.remove(position);
+		DocumentPosition removed = super.remove(position);
 		
 		if(! removed.id.equals(""))
 			removedPositionsId.add(removed.id);
@@ -114,7 +114,12 @@ public class DocumentPositionsList extends ArrayList<DocumentPosition> implement
 		for(Observer observer : observers){
 			observer.update(null, null);	// jakie tu powinny byc wartosci?
 		}
+	}	
+
+	public ArrayList<String> getRemovedPositionsId() {
+		return removedPositionsId;
 	}
+
 
 	@Override
 	public int describeContents() {

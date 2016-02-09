@@ -7,6 +7,7 @@ import java.util.Observer;
 import android.app.AlertDialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateFormat;
@@ -15,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -130,6 +132,9 @@ public class DocumentFragment extends FragmentBase implements Observer{
 		int id = item.getItemId();
 		
 		if (id == R.id.action_edit_document) {
+			
+			((DocumentActivity)getActivity()).setIsBeingEdited(true);
+			getActivity().invalidateOptionsMenu();
 		/*	
 			
 			Intent intent = new Intent(context, ModifyContractorActivity.class);
@@ -217,6 +222,7 @@ public class DocumentFragment extends FragmentBase implements Observer{
 			}
 			
 		});
+		
 	}
 	
 	private void loadDocumentPositions(View rootView){
@@ -233,12 +239,49 @@ public class DocumentFragment extends FragmentBase implements Observer{
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
+				
+				boolean canEdit = ((DocumentActivity)context).getIsBeingEdited();
+					
+				
 
 				// wyœwietlanie dialogu z info o pozycji  - zalezne od tego czy dokument w trybie edycji
 				 DialogFragment newFragment = DocumentPositionDialog
-			                .newInstance(document.getPositionsList().get(position).copy(), true, false);
+			                .newInstance(document.getPositionsList().get(position).copy(), canEdit, false);
 			        newFragment.show(getFragmentManager(), "dialog");
 				
+			}
+			
+		});
+		
+		documentPositionsListView.setOnItemLongClickListener(new OnItemLongClickListener(){
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view,
+					final int position, long id) {
+			
+				AlertDialog.Builder builder = new AlertDialog.Builder(context);
+				
+				builder.setTitle(R.string.do_you_want_to_delete_position)
+				.setPositiveButton(R.string.yes, new OnClickListener(){
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// DocumentPosition positionToDelete = (DocumentPosition) positionsAdapter.getItem(which);
+						
+						document.getPositionsList().remove(position);
+						positionsAdapter.notifyDataSetChanged();
+					}
+					
+				})
+				.setNegativeButton(R.string.no, new OnClickListener(){
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {}
+					
+				})
+				.create().show();
+				
+				return true;
 			}
 			
 		});

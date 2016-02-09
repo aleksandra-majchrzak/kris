@@ -69,6 +69,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.7"
                         android:text="Small Text"
+                        android:textColor="@android:color/holo_blue_dark"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
                     <TextView
@@ -78,6 +79,7 @@
                         android:layout_weight="0.3"
                         android:gravity="right"
                         android:text="Small Text"
+                        android:textColor="@android:color/holo_blue_dark"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 </LinearLayout>

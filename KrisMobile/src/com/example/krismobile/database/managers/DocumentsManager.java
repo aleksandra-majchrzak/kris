@@ -91,6 +91,13 @@ public class DocumentsManager {
 			
 		} catch (CouchbaseLiteException e) {
 
+			try {
+				DatabaseManager.getDatabaseInstance().endTransaction(false);
+				
+			} catch (CouchbaseLiteException e1) {
+
+				e1.printStackTrace();
+			}
 			e.printStackTrace();
 			Log.e("Database Error", "Error putting", e);
 		}
@@ -98,44 +105,43 @@ public class DocumentsManager {
 		return null;
 	}
 	
-	public void saveDocumentPositions(KrisDocument krisDocument){
+	public void saveDocumentPositions(KrisDocument krisDocument) throws CouchbaseLiteException{
 		
 		for(DocumentPosition position : krisDocument.getPositionsList()){
 			
 			Document document;
 			String documentId;
-			try {
 				
-				Map<String, Object> map = new HashMap<String, Object>();
-				map.put("DocType", DOC_POSITION_TYPE);
-				map.put("DocumentId", krisDocument.getId());
-				map.put("ItemId", position.getItem().getId());
-				map.put("Ordinal", position.getOrdinal());
-				map.put("Quantity", position.getQuantity());
-				map.put("NetValue", position.getNetValue());
-				map.put("GrossValue", position.getGrossValue());	
-				map.put("ModificationTS", new Date().getTime());		
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("DocType", DOC_POSITION_TYPE);
+			map.put("DocumentId", krisDocument.getId());
+			map.put("ItemId", position.getItem().getId());
+			map.put("Ordinal", position.getOrdinal());
+			map.put("Quantity", position.getQuantity());
+			map.put("NetValue", position.getNetValue());
+			map.put("GrossValue", position.getGrossValue());	
+			map.put("ModificationTS", new Date().getTime());		
 				
-				if(position.getId().equals("")){
+			if(position.getId().equals("")){
 					
-						document = DatabaseManager.getDatabaseInstance().createDocument();
+					document = DatabaseManager.getDatabaseInstance().createDocument();
 					
 					
-				}else{
-					document = DatabaseManager.getDatabaseInstance().getDocument(position.getId());	
-					map.put("_rev", document.getProperty("_rev"));
+			}else{
+				document = DatabaseManager.getDatabaseInstance().getDocument(position.getId());	
+				map.put("_rev", document.getProperty("_rev"));
 					
-					position.setId(document.getId());
-				}
-				
-				documentId = document.getId();
-
-		    
-				document.putProperties(map);
-			} catch (CouchbaseLiteException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				position.setId(document.getId());
 			}
+				
+			documentId = document.getId();
+		    
+			document.putProperties(map);
+			
+		}
+		
+		for(String removedId : krisDocument.getPositionsList().getRemovedPositionsId()){
+			DatabaseManager.getDatabaseInstance().getDocument(removedId).delete();
 		}
 	}
 	
@@ -296,7 +302,7 @@ public class DocumentsManager {
 			ArrayList<DocumentPosition> docsPos = this.getDocumentPositions(documentToDelete.getId());
 			
 			for(DocumentPosition docPos : docsPos){
-				deleteKrisDocument(docPos.getId());
+				DatabaseManager.getDatabaseInstance().getDocument(docPos.getId()).delete();
 				
 			}
 			

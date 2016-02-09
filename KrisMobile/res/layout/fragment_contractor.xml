@@ -169,7 +169,9 @@
                         android:layout_gravity="right"
                         android:layout_weight="0.1"
                         android:clickable="true"
-                        android:src="@drawable/ic_launcher" />
+                        android:layout_marginRight="5dp"
+        				android:layout_marginLeft="5dp"
+        				android:src="@drawable/down60" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

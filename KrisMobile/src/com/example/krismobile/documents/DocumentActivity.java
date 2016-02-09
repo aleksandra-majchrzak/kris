@@ -26,6 +26,9 @@ public class DocumentActivity extends Activity implements ActionBar.TabListener{
 	private KrisDocument document;
 	private Contractor contractor;
 	private boolean isNewDocument = true;
+	private boolean editingDocument = false;
+	
+	private Tab itemsTab;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,7 @@ public class DocumentActivity extends Activity implements ActionBar.TabListener{
 		Bundle args = getIntent().getExtras();
 		String documentId = args.getString("documentId");
 		contractor = args.getParcelable("contractor");
+		int docTypeId = args.getInt("docTypeId");
 		
 		getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -59,8 +63,9 @@ public class DocumentActivity extends Activity implements ActionBar.TabListener{
 			}
 			else{
 				this.isNewDocument = true;
+				editingDocument = true;
 				
-				document = new KrisDocument();
+				document = new KrisDocument(docTypeId);
 				document.setContractor(contractor);
 				
 				getActionBar().setTitle(getResources().getString(R.string.action_add_document));
@@ -69,7 +74,7 @@ public class DocumentActivity extends Activity implements ActionBar.TabListener{
 			
 		setContentView(R.layout.activity_document);
 
-		mSectionsPagerAdapter = new DocumentSectionsPagerAdapter(getFragmentManager(), this);
+		mSectionsPagerAdapter = new DocumentSectionsPagerAdapter(getFragmentManager(), this, editingDocument);
 
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 		
@@ -83,7 +88,7 @@ public class DocumentActivity extends Activity implements ActionBar.TabListener{
         });
 		
 		for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
-
+			
 			getActionBar().addTab(
 					getActionBar().newTab()
                             .setText(mSectionsPagerAdapter.getPageTitle(i))
@@ -115,15 +120,37 @@ public class DocumentActivity extends Activity implements ActionBar.TabListener{
 		return contractor;
 	}
 */	
+	public void setIsBeingEdited(boolean beingEdited){
+		editingDocument = beingEdited;
+		
+/*		mSectionsPagerAdapter.setDocumentEditing(editingDocument);
+		
+		
+		if(beingEdited){
+			getActionBar().addTab(
+					getActionBar().newTab()
+                            .setText(mSectionsPagerAdapter.getPageTitle(0))
+                            .setTabListener(this), 0, true);			
+			
+		}else{
+			getActionBar().removeTabAt(0);
+		}
+		mSectionsPagerAdapter.notifyDataSetChanged();
+*/			
+	}
 	
+	public boolean getIsBeingEdited(){
+		return editingDocument;
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
-		if(isNewDocument)
+		if(isNewDocument || editingDocument)
 			getMenuInflater().inflate(R.menu.document_modify, menu);
 		else
 			getMenuInflater().inflate(R.menu.document, menu);
+			
 		return true;
 	}
 

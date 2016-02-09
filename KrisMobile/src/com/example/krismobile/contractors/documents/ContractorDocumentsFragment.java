@@ -1,6 +1,8 @@
 package com.example.krismobile.contractors.documents;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -94,6 +96,49 @@ public class ContractorDocumentsFragment extends FragmentBase{
 		
 		if (id == R.id.action_add_document) {
 			
+			AlertDialog.Builder builder = new AlertDialog.Builder(context);
+			final Bundle docTypBundle = new Bundle();
+			
+			
+			builder.setTitle(R.string.document_type)					
+			.setSingleChoiceItems(R.array.document_types, 0, new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						
+						docTypBundle.putInt("docTypeId", which);
+					}
+				})
+
+				.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int id) {
+						
+						Intent intent = new Intent(context, DocumentActivity.class);
+						//Intent intent = new Intent(context, TmpPagedActivity.class);
+						
+						Bundle args = new Bundle();
+						args.putString("documentId", "");
+						args.putParcelable("contractor", contractor);
+						args.putInt("docTypeId", docTypBundle.getInt("docTypeId"));
+						intent.putExtras(args);
+						
+						startActivityForResult(intent,DocumentsActivity.REQUEST_REFRESH);
+
+					}
+				})
+				.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int id) {
+
+					}
+				});
+
+				builder.create().show();
+			
+/*			
 			Intent intent = new Intent(context, DocumentActivity.class);
 			//Intent intent = new Intent(context, TmpPagedActivity.class);
 			
@@ -103,6 +148,7 @@ public class ContractorDocumentsFragment extends FragmentBase{
 			intent.putExtras(args);
 			
 			startActivityForResult(intent,DocumentsActivity.REQUEST_REFRESH);
+*/
 			return true;
 			
 		}

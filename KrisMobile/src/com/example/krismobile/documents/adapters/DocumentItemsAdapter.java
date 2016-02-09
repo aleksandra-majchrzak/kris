@@ -8,6 +8,7 @@ import com.couchbase.lite.Document;
 import com.example.krismobile.R;
 import com.example.krismobile.database.managers.DocumentsManager;
 import com.example.krismobile.database.managers.ItemsManager;
+import com.example.krismobile.documents.DocumentActivity;
 import com.example.krismobile.documents.positions.DocumentPosition;
 import com.example.krismobile.documents.positions.DocumentPositionsList;
 import com.example.krismobile.main.utilities.DateUtilities;
@@ -60,6 +61,15 @@ public class DocumentItemsAdapter extends  BaseAdapter{
         }
         return -1;
     }
+	
+	@Override
+	public boolean isEnabled(int position){
+		if( ! ((DocumentActivity)context).getIsBeingEdited())
+			return false;
+		
+		return true;
+		
+	}
 	
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {

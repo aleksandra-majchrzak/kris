@@ -32,15 +32,15 @@ public class KrisDocument implements Parcelable{
 	
 	private DocumentPositionsList positionsList;
 	
-	public KrisDocument() {
+	public KrisDocument(int docTypeId) {
 		
 		Date today = new Date();
 		
 		// doc type musi byc ustawiany dynamicznie !!!
-		Document numerator = DocumentsManager.getInstance().getDocumentNumerator(0, today.getMonth() +1 , today.getYear() + 1900);
+		Document numerator = DocumentsManager.getInstance().getDocumentNumerator(docTypeId, today.getMonth() +1 , today.getYear() + 1900);
 		int counter = (numerator != null) ? (Integer)numerator.getProperty("Counter") : 1;
 		
-		String number = DocumentType.getDocTypeName(0) 
+		String number = DocumentType.getDocTypeName(docTypeId) 
 				+"/"+ String.valueOf(today.getMonth() +1) 
 				+"/"+ String.valueOf(today.getYear() + 1900)
 				+"/"+"usrName"
@@ -48,7 +48,7 @@ public class KrisDocument implements Parcelable{
 		
 		this.id = "";
 		this.number = number;
-		this.typeId = 0;
+		this.typeId = docTypeId;
 		this.contractor = new Contractor();
 		this.documentDate = today;
 		this.paymentDate = today;
