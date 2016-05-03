@@ -10,8 +10,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.couchbase.lite.CouchbaseLiteException;
+import com.couchbase.lite.replicator.Replication;
 import com.example.krismobile.R;
 import com.example.krismobile.contractors.ContractorsActivity;
+import com.example.krismobile.database.DatabaseManager;
 import com.example.krismobile.documents.DocumentsActivity;
 import com.example.krismobile.items.ItemsActivity;
 import com.example.krismobile.main.adapters.MenuAdapter;
@@ -23,10 +26,10 @@ public class MenuFragment extends FragmentBase {
 	
 	private final int POSITION_CONTRACTORS = 0;
 	private final int POSITION_DOCUMENTS = 1;
-	private final int POSITION_PAYMENTS = 2;
-	private final int POSITION_ITEMS = 3;
-	private final int POSITION_WAREHOUSES = 4;
-	private final int POSITION_SYNCHRONIZATION = 5;
+//	private final int POSITION_PAYMENTS = 2;
+	private final int POSITION_ITEMS = 2;
+//	private final int POSITION_WAREHOUSES = 4;
+	private final int POSITION_SYNCHRONIZATION = 3;
 	
 	private ListView menuListView;
 	private MenuAdapter menuAdapter;
@@ -56,9 +59,9 @@ public class MenuFragment extends FragmentBase {
 		
 		itemList.add(new MenuItem(context.getResources().getString(R.string.contractors), R.drawable.contractors));
 		itemList.add(new MenuItem(context.getResources().getString(R.string.documents), R.drawable.documents));
-		itemList.add(new MenuItem(context.getResources().getString(R.string.payments), R.drawable.payments));
+//		itemList.add(new MenuItem(context.getResources().getString(R.string.payments), R.drawable.payments));
 		itemList.add(new MenuItem(context.getResources().getString(R.string.items), R.drawable.items));
-		itemList.add(new MenuItem(context.getResources().getString(R.string.warehouses), R.drawable.warehouses));
+//		itemList.add(new MenuItem(context.getResources().getString(R.string.warehouses), R.drawable.warehouses));
 		itemList.add(new MenuItem(context.getResources().getString(R.string.synchronization), R.drawable.synchronization));
 		
 		menuAdapter = new MenuAdapter(context, 0, itemList);
@@ -91,7 +94,15 @@ public class MenuFragment extends FragmentBase {
 					break;
 					
 				case POSITION_SYNCHRONIZATION:
-					SynchronizationManager.setupConnection();
+					try {
+						
+						SynchronizationManager.getManagerInstance(context).setupConnection();
+						
+					} catch (CouchbaseLiteException e) {
+						
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					break;
 				default:
 					break;

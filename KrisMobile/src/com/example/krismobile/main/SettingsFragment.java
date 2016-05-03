@@ -13,9 +13,13 @@ import com.example.krismobile.R;
 
 public class SettingsFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
 
-	private static String SERVER_ADDRESS_PREF = "server_address_preference";
+	public static String SERVER_ADDRESS_PREF = "server_address_preference";
+	public static String PORT_NUMBER_PREF = "port_number_preference";
+	public static String BUCKET_NAME_PREF = "bucket_name_preference";
 	
 	private EditTextPreference serverAddressPref;
+	private EditTextPreference portNumberPref;
+	private EditTextPreference bucketNamePref;
 	
 	public SettingsFragment(){
 		
@@ -36,7 +40,16 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
 		View rootView = super.onCreateView(inflater, container, savedInstanceState);
 		
 		serverAddressPref = (EditTextPreference) findPreference(SERVER_ADDRESS_PREF);
-		serverAddressPref.setSummary(serverAddressPref.getText().toString());
+		String serverAddressPrefText = serverAddressPref.getText() == null ? "" : serverAddressPref.getText();
+		serverAddressPref.setSummary(serverAddressPrefText);
+		
+		portNumberPref = (EditTextPreference) findPreference(PORT_NUMBER_PREF);
+		String portNumberPrefText = portNumberPref.getText() == null ? "" : portNumberPref.getText();
+		portNumberPref.setSummary(portNumberPrefText);
+		
+		bucketNamePref = (EditTextPreference) findPreference(BUCKET_NAME_PREF);
+		String bucketNamePrefText = bucketNamePref.getText() == null ? "" : bucketNamePref.getText();
+		bucketNamePref.setSummary(bucketNamePrefText);
 		
 		
 		return rootView;
@@ -47,9 +60,14 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
 			String key) {
 		
 		if(key.equals(SERVER_ADDRESS_PREF)){
-		//	EditTextPreference serverAddressPref = (EditTextPreference) findPreference(SERVER_ADDRESS_PREF);
 			serverAddressPref.setSummary(serverAddressPref.getText().toString());
 		}
+		if(key.equals(PORT_NUMBER_PREF)){
+			portNumberPref.setSummary(portNumberPref.getText().toString());
+			}
+		if(key.equals(BUCKET_NAME_PREF)){
+			bucketNamePref.setSummary(bucketNamePref.getText().toString());
+			}
 		
 	}
 	

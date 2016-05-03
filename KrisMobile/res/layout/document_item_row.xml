@@ -25,8 +25,13 @@
             <ImageView
                 android:id="@+id/document_item_image_imageView"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_launcher" />
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
+        		android:layout_marginLeft="5dp"
+        		android:layout_marginTop="10dp"
+        		android:layout_marginBottom="10dp"
+        		android:layout_gravity="center"
+                android:src="@drawable/items_small" />
 
             <LinearLayout
                 android:layout_width="match_parent"

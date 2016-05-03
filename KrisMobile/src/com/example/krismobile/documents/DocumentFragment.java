@@ -119,7 +119,7 @@ public class DocumentFragment extends FragmentBase implements Observer{
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
 		
-		//czy to nie powinno byc gdziej indziej?
+		
 		this.document = ((DocumentActivity) context).getDocument();	
 		
 		if( ! this.document.getPositionsList().hasObserverOfType(this))
@@ -244,7 +244,7 @@ public class DocumentFragment extends FragmentBase implements Observer{
 					
 				
 
-				// wyœwietlanie dialogu z info o pozycji  - zalezne od tego czy dokument w trybie edycji
+				
 				 DialogFragment newFragment = DocumentPositionDialog
 			                .newInstance(document.getPositionsList().get(position).copy(), canEdit, false);
 			        newFragment.show(getFragmentManager(), "dialog");
@@ -363,13 +363,12 @@ public class DocumentFragment extends FragmentBase implements Observer{
 	@Override
 	public void update(Observable observable, Object data) {
 
-		// tu powinno bys sprawdzenie co wywolalo update
+		
 		itemsAdapter.notifyDataSetChanged();
 		positionsAdapter.notifyDataSetChanged();
 		
 		document.setNetValue(document.getPositionsList().getDocumentValueNet());
 		document.setGrossValue(document.getPositionsList().getDocumentValueGross());
-//			documentGrossValueTextView.setText(String.valueOf(document.getPositionsList().getDocumentValueGross())) ;
 
 	}
 }

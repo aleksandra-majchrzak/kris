@@ -144,5 +144,9 @@
 	<string name="cannot_save_item_without_price">Nie można zapisać towaru bez ceny</string>
 	<string name="cannot_save_document_without_position">Nie można zapisać dokumentu bez pozycji</string>
 	<string name="do_you_want_to_delete_position">Czy chcesz usunać pozycję?</string>
+	<string name="port_number">Number portu</string>
+	<string name="bucket_name">Nazwa bazy</string>
+	<string name="config_parameters">Dane konfiguracyjne</string>
+	<string name="synchro_in_progress">Trwa synchronizacja...</string>
 
 </resources>

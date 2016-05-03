@@ -21,7 +21,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/ic_launcher" />
+            android:layout_marginRight="5dp"
+        	android:layout_gravity="center"
+            android:src="@drawable/items_small" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -69,6 +71,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Small Text"
+                    android:textColor="@android:color/holo_blue_dark"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <TextView
@@ -77,6 +80,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:text="Small Text"
+                    android:textColor="@android:color/holo_blue_dark"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
             </LinearLayout>

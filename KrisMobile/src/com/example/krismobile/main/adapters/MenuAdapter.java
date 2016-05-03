@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -45,14 +46,15 @@ public class MenuAdapter extends ArrayAdapter<MenuItem>{
 			textView.setText(currentItem.getName());
 //			textView.setCompoundDrawables(left, top, right, bottom)
 			
-			LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) convertView.getLayoutParams();
+			AbsListView.LayoutParams params = (AbsListView.LayoutParams) convertView.getLayoutParams();
 			if(params == null){
-				params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, 130);
+				params = new AbsListView.LayoutParams(LayoutParams.MATCH_PARENT, 130);
 			}
 			else
 				params.height = 130;
 			
 			convertView.setLayoutParams(params);
+			
 		}
 		
 		return convertView;

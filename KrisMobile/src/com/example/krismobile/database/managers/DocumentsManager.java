@@ -413,18 +413,12 @@ public class DocumentsManager {
 				public void map(Map<String, Object> document, Emitter emitter) {
 					
 					if(document.get("DocType").equals(DOC_NUMERATOR_TYPE)){
-				//			&& document.get("ContractorId").equals(contractorId)){
-						
-						//ArrayList<Object> keys = getAllKeysToEmit(document);
 						
 						ArrayList<Object> keys = new ArrayList<Object>();
 						keys.add(document.get("DocumentTypeId"));
 						keys.add(document.get("Month"));
 						keys.add(document.get("Year"));
-						
-						//emitter.emit(document.get("DocumentTypeId") , null);
-						//emitter.emit(document.get("Month") , null);
-						//emitter.emit(document.get("Year") , null);
+
 						emitter.emit(keys , document);
 					}
 				}
