@@ -43,6 +43,8 @@
                     android:textAppearance="?android:attr/textAppearanceSmall" />
             </LinearLayout>
 
+            <include layout="@layout/divider_view"/>
+            
             <LinearLayout
                 android:id="@+id/contractor_NIP_linearLayout"
                 android:layout_width="match_parent"
@@ -66,6 +68,8 @@
                     android:textAppearance="?android:attr/textAppearanceSmall" />
             </LinearLayout>
 
+            <include layout="@layout/divider_view"/>
+            
             <LinearLayout
                 android:id="@+id/contractor_Address_linearLayout"
                 android:layout_width="match_parent"
@@ -89,6 +93,8 @@
                     android:textAppearance="?android:attr/textAppearanceSmall" />
             </LinearLayout>
 
+            <include layout="@layout/divider_view"/>
+            
             <LinearLayout
                 android:id="@+id/contractor_description_linearLayout"
                 android:layout_width="match_parent"
@@ -112,6 +118,8 @@
                     android:textAppearance="?android:attr/textAppearanceSmall" />
             </LinearLayout>
 
+            <include layout="@layout/divider_view"/>
+            
             <LinearLayout
                 android:id="@+id/contractor_documents_linearLayout"
                 android:layout_width="match_parent"

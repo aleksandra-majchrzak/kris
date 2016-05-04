@@ -42,6 +42,8 @@
                     android:textAppearance="?android:attr/textAppearanceSmall" />
             </LinearLayout>
 
+            <include layout="@layout/divider_view"/>
+            
             <LinearLayout
                 android:id="@+id/document_value_ll"
                 android:layout_width="match_parent"
@@ -81,6 +83,8 @@
                 </LinearLayout>
             </LinearLayout>
 
+            <include layout="@layout/divider_view"/>
+            
             <LinearLayout
                 android:id="@+id/document_contractor_ll"
                 android:layout_width="match_parent"
@@ -103,6 +107,8 @@
                     android:textAppearance="?android:attr/textAppearanceSmall" />
             </LinearLayout>
 
+            <include layout="@layout/divider_view"/>
+            
             <LinearLayout
                 android:id="@+id/document_payment_form_ll"
                 android:layout_width="match_parent"
@@ -125,6 +131,8 @@
                     android:textAppearance="?android:attr/textAppearanceSmall" />
             </LinearLayout>
 
+            <include layout="@layout/divider_view"/>
+            
             <LinearLayout
                 android:id="@+id/document_document_date_ll"
                 android:layout_width="match_parent"
@@ -147,6 +155,8 @@
                     android:textAppearance="?android:attr/textAppearanceSmall" />
             </LinearLayout>
 
+            <include layout="@layout/divider_view"/>
+            
             <LinearLayout
                 android:id="@+id/document_payment_date_ll"
                 android:layout_width="match_parent"
@@ -169,6 +179,8 @@
                     android:textAppearance="?android:attr/textAppearanceSmall" />
             </LinearLayout>
 
+            <include layout="@layout/divider_view"/>
+            
             <LinearLayout
                 android:id="@+id/document_description_ll"
                 android:layout_width="match_parent"
