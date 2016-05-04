@@ -125,6 +125,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
+                android:clickable="true"
+                android:background="@drawable/row_selector"
                 android:orientation="vertical" >
 
                 <TextView
@@ -138,8 +140,7 @@
                     android:id="@+id/contractor_document_row_ll"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:clickable="true"
+                    android:layout_marginLeft="10dp"              
                     android:orientation="horizontal" >
 
                     <LinearLayout

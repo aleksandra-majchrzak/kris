@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -55,7 +56,7 @@ public class DocumentFragment extends FragmentBase implements Observer{
 	private TextView documentContractorTextView;
 	private TextView documentDocumentDateTextView;
 	private TextView documentPaymentDateTextView;
-	private TextView documentDescriptionTextView;
+	private EditText documentDescriptionEditText;
 	private TextView documentPaymentFormTextView;
 	private TextView documentNetValueTextView;
 	private TextView documentGrossValueTextView;
@@ -135,6 +136,8 @@ public class DocumentFragment extends FragmentBase implements Observer{
 			
 			((DocumentActivity)getActivity()).setIsBeingEdited(true);
 			getActivity().invalidateOptionsMenu();
+			
+			documentDescriptionEditText.setEnabled(((DocumentActivity)getActivity()).getIsBeingEdited());
 		/*	
 			
 			Intent intent = new Intent(context, ModifyContractorActivity.class);
@@ -154,6 +157,8 @@ public class DocumentFragment extends FragmentBase implements Observer{
 			return true;
 		}
 		else if(id == R.id.action_save_document){
+			
+			document.setDescription(documentDescriptionEditText.getText().toString());
 			
 			DocumentsManager.getInstance().saveKrisDocument(document);
 			getActivity().setResult(DocumentsActivity.RESULT_OK);
@@ -294,10 +299,15 @@ public class DocumentFragment extends FragmentBase implements Observer{
 		documentContractorTextView = (TextView) rootView.findViewById(R.id.document_contractor_textView);
 		documentDocumentDateTextView = (TextView) rootView.findViewById(R.id.document_document_date_textView);
 		documentPaymentDateTextView = (TextView) rootView.findViewById(R.id.document_payment_date_textView);
-		documentDescriptionTextView = (TextView) rootView.findViewById(R.id.document_description_textView);
+		documentDescriptionEditText = (EditText) rootView.findViewById(R.id.document_description_editText);
 		documentPaymentFormTextView = (TextView) rootView.findViewById(R.id.document_payment_form_textView);
 		documentNetValueTextView = (TextView) rootView.findViewById(R.id.document_netValue_textView);
 		documentGrossValueTextView = (TextView) rootView.findViewById(R.id.document_grossValue_textView);
+
+		documentDescriptionEditText.setEnabled(((DocumentActivity)getActivity()).getIsBeingEdited());
+		
+		if(! documentDescriptionEditText.isEnabled())
+			documentDescriptionEditText.setTextColor(context.getResources().getColor(android.R.color.secondary_text_dark));
 		
 		fillControls();	
 	}
@@ -309,7 +319,7 @@ public class DocumentFragment extends FragmentBase implements Observer{
 		documentContractorTextView.setText(document.getContractor().getCode());
 		documentDocumentDateTextView.setText(df.format(document.getDocumentDate()));
 		documentPaymentDateTextView.setText(df.format(document.getPaymentDate()));
-		documentDescriptionTextView.setText(document.getDescription());
+		documentDescriptionEditText.setText(document.getDescription());
 		documentPaymentFormTextView.setText(context.getResources().getStringArray(R.array.payment_forms)[document.getPaymentForm()]);
 		documentNetValueTextView.setText(String.valueOf(document.getNetValue())+context.getResources().getString(R.string.PLN));
 		documentGrossValueTextView.setText(String.valueOf(document.getGrossValue())+context.getResources().getString(R.string.PLN));

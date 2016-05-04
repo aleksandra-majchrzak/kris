@@ -115,7 +115,7 @@ public class ContractorFragment extends FragmentBase {
 		contractorLatestDocumentTextView = (TextView) rootView.findViewById(R.id.contractor_document_number_textView);
 		contractorLatestDocumentDateTextView = (TextView) rootView.findViewById(R.id.contractor_document_date_textView);
 		
-		LinearLayout documentLinearLayout = (LinearLayout) rootView.findViewById(R.id.contractor_document_row_ll);
+		LinearLayout documentLinearLayout = (LinearLayout) rootView.findViewById(R.id.contractor_documents_linearLayout);
 		documentLinearLayout.setOnClickListener(new View.OnClickListener() {
 			
 			@Override

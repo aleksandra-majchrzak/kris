@@ -1,5 +1,6 @@
 package com.example.krismobile.documents;
 
+import java.util.Currency;
 import java.util.Map;
 
 import android.app.ActionBar;
@@ -27,6 +28,7 @@ public class DocumentActivity extends Activity implements ActionBar.TabListener{
 	private Contractor contractor;
 	private boolean isNewDocument = true;
 	private boolean editingDocument = false;
+	private int activePage = 0;
 	
 	private Tab itemsTab;
 
@@ -44,11 +46,22 @@ public class DocumentActivity extends Activity implements ActionBar.TabListener{
 		
 		if(savedInstanceState!= null && ! savedInstanceState.isEmpty()){
 			document = (KrisDocument) savedInstanceState.getParcelable("document");
+			activePage = savedInstanceState.getInt("activePage");
 			
-			if(!documentId.equals(""))
+			if(!documentId.equals("")){
+				
+				this.isNewDocument = false;
 				getActionBar().setTitle(document.getNumber());
-			else
+				
+			} 
+			else {
+				
+				this.isNewDocument = true;			
 				getActionBar().setTitle(getResources().getString(R.string.action_add_document));
+				
+			}
+			
+			editingDocument =savedInstanceState.getBoolean("isBeingEdited");
 		} 
 		else{
 			if(!documentId.equals("")){
@@ -95,6 +108,7 @@ public class DocumentActivity extends Activity implements ActionBar.TabListener{
                             .setTabListener(this));
         }
 		
+		mViewPager.setCurrentItem(activePage);
 		
 		super.onCreate(savedInstanceState);
 	}	
@@ -102,7 +116,12 @@ public class DocumentActivity extends Activity implements ActionBar.TabListener{
 	
 	@Override
 	protected void onSaveInstanceState(Bundle stateBundle){
-		stateBundle.putParcelable("document", this.document);
+		
+		activePage = mViewPager.getCurrentItem();		
+		
+		stateBundle.putParcelable("document", this.document);		
+		stateBundle.putInt("activePage", activePage);
+		stateBundle.putBoolean("isBeingEdited", editingDocument);
 	}
 /*	
 	public Contractor reloadDocument(){
@@ -183,4 +202,5 @@ public class DocumentActivity extends Activity implements ActionBar.TabListener{
 
 	@Override
 	public void onTabReselected(Tab tab, FragmentTransaction ft) {}
+
 }

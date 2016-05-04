@@ -195,8 +195,8 @@
                     android:text="@string/description"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
-                <TextView
-                    android:id="@+id/document_description_textView"
+                <EditText
+                    android:id="@+id/document_description_editText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textMultiLine"
