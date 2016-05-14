@@ -41,7 +41,7 @@ public class Contractor {
 
         this.id = document.id();
         this.code = content.getString("Code");
-        this.type = ContractorType.values()[Integer.valueOf(content.getString("TypeId"))];
+        this.type = ContractorType.value(content.getInt("TypeId"));
         this.address = content.getString("Address");
         this.description = content.getString("Description");
         this.NIP = content.getString("NIP");

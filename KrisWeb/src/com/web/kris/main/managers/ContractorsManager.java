@@ -35,7 +35,7 @@ public class ContractorsManager {
         JsonObject content = JsonObject.empty()
                 .put("DocType", DOC_TYPE)
                 .put("Code", contractor.getCode())
-                .put("TypeId", String.valueOf(contractor.getType().ordinal()))
+                .put("TypeId", contractor.getType().ordinal())
                 .put("NIP", contractor.getNIP())
                 .put("Address", contractor.getAddress())
                 .put("Description", contractor.getDescription())

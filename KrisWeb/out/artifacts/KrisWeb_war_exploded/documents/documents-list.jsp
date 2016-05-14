@@ -5,7 +5,7 @@
         <a href="DocumentServlet?documentIndex=${loop.index}" class="list-group-item kris-list-group-item">
             <div>
                 <h4>${document.number}</h4>
-                <p>${document.documentDate}</p> <!-- to musze ftormatowac ladnie jako date -->
+                <p>${document.documentDate}</p>
             </div>
         </a>
     </c:forEach>
