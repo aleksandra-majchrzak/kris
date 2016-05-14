@@ -5,21 +5,27 @@
     </a>
     <!-- jesli nie zalogowany, to wyswietlaj navbar do logowania, jesli zalogowany to komunikat o zaligowaniu -->
     <c:set var="user" scope="session" value="${pageContext.request.session.getAttribute('user')}"/>
-    <ul class="nav nav-pills navbar-right nav-menu">
+    <div id="main-nav-menu">
+        <ul class="nav nav-pills navbar-right nav-menu">
+            <c:choose>
+                <c:when test="${user == null || !user.isActive}">
+                    <li role="presentation" id="register-tab"><a href="${pageContext.request.contextPath}/register.jsp">Zarejestruj</a></li>
+                    <li role="presentation" id="login-tab"><a href="${pageContext.request.contextPath}/login.jsp">Zaloguj</a></li>
+                </c:when>
+                <c:otherwise>
+                    <c:if test="${user.isAdmin}">
+                        <li role="presentation" id="admin-tab"><a href="UserServlet">Panel admina</a></li>
+                    </c:if>
+                    <li role="presentation" id="logout-tab"><a href="LoginServlet?logout=true">Wyloguj</a></li>
+                </c:otherwise>
+            </c:choose>
+        </ul>
         <c:choose>
-            <c:when test="${user == null || !user.isActive}">
-                <li role="presentation" id="register-tab"><a href="${pageContext.request.contextPath}/register.jsp">Zarejestruj</a></li>
-                <li role="presentation" id="login-tab"><a href="${pageContext.request.contextPath}/login.jsp">Zaloguj</a></li>
-            </c:when>
-            <c:otherwise>
-                <h4>Jestes zalogowany jako ${user.login}</h4>
-                <li role="presentation" id="logout-tab"><a href="LoginServlet?logout=true">Wyloguj</a></li>
-                <c:if test="${user.isAdmin}">
-                    <li role="presentation" id="admin-tab"><a href="UserServlet">Panel admina</a></li>
-                </c:if>
-            </c:otherwise>
+        <c:when test="${user != null && user.isActive}">
+            <h5 id="logged_user_info">Jestes zalogowany jako ${user.login}</h5>
+        </c:when>
         </c:choose>
-    </ul>
+    </div>
     <br/>
     <c:if test="${user != null && user.isActive}">
         <ul class="nav nav-pills navbar-right nav-submenu">

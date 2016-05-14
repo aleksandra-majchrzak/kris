@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Couchbase-Java-Client-2.2">
+    <CLASSES>
+      <root url="file://C:/Program Files/Java/Couchbase-Java-Client-2.2.3" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://C:/Program Files/Java/Couchbase-Java-Client-2.2.3" />
+    </SOURCES>
+    <jarDirectory url="file://C:/Program Files/Java/Couchbase-Java-Client-2.2.3" recursive="false" />
+    <jarDirectory url="file://C:/Program Files/Java/Couchbase-Java-Client-2.2.3" recursive="false" type="SOURCES" />
+  </library>
+</component>
