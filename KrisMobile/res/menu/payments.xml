@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.krismobile.PaymentsActivity" >
+
+     <item
+        android:id="@+id/action_add_payment"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:title="@string/add_payment"
+        android:icon="@drawable/sym_action_add"/>
+
+</menu>

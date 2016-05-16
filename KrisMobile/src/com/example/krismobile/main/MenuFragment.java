@@ -20,16 +20,17 @@ import com.example.krismobile.items.ItemsActivity;
 import com.example.krismobile.main.adapters.MenuAdapter;
 import com.example.krismobile.main.base.FragmentBase;
 import com.example.krismobile.main.entities.MenuItem;
+import com.example.krismobile.payments.PaymentsActivity;
 import com.example.krismobile.synchronization.SynchronizationManager;
 
 public class MenuFragment extends FragmentBase {
 	
 	private final int POSITION_CONTRACTORS = 0;
 	private final int POSITION_DOCUMENTS = 1;
-//	private final int POSITION_PAYMENTS = 2;
-	private final int POSITION_ITEMS = 2;
-//	private final int POSITION_WAREHOUSES = 4;
-	private final int POSITION_SYNCHRONIZATION = 3;
+	private final int POSITION_PAYMENTS = 2;
+	private final int POSITION_ITEMS = 3;
+	private final int POSITION_WAREHOUSES = 4;
+	private final int POSITION_SYNCHRONIZATION = 5;
 	
 	private ListView menuListView;
 	private MenuAdapter menuAdapter;
@@ -59,9 +60,9 @@ public class MenuFragment extends FragmentBase {
 		
 		itemList.add(new MenuItem(context.getResources().getString(R.string.contractors), R.drawable.contractors));
 		itemList.add(new MenuItem(context.getResources().getString(R.string.documents), R.drawable.documents));
-//		itemList.add(new MenuItem(context.getResources().getString(R.string.payments), R.drawable.payments));
+		itemList.add(new MenuItem(context.getResources().getString(R.string.payments), R.drawable.payments));
 		itemList.add(new MenuItem(context.getResources().getString(R.string.items), R.drawable.items));
-//		itemList.add(new MenuItem(context.getResources().getString(R.string.warehouses), R.drawable.warehouses));
+		itemList.add(new MenuItem(context.getResources().getString(R.string.warehouses), R.drawable.warehouses));
 		itemList.add(new MenuItem(context.getResources().getString(R.string.synchronization), R.drawable.synchronization));
 		
 		menuAdapter = new MenuAdapter(context, 0, itemList);
@@ -88,9 +89,17 @@ public class MenuFragment extends FragmentBase {
 					startActivity(intent);
 					break;
 					
+				case POSITION_PAYMENTS:
+					intent = new Intent(context, PaymentsActivity.class);
+					startActivity(intent);
+					break;
+					
 				case POSITION_ITEMS:
 					intent = new Intent(context, ItemsActivity.class);
 					startActivity(intent);
+					break;
+					
+				case POSITION_WAREHOUSES:
 					break;
 					
 				case POSITION_SYNCHRONIZATION:

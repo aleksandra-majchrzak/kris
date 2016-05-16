@@ -94,10 +94,10 @@
 
     <string-array name="document_types">
         <item>Zamówienie sprzedaży</item>
-   <!-- <item>Zamówienie zakupu</item> --> 
+        <!-- <item>Zamówienie zakupu</item> -->
         <item>Faktura sprzedaży</item>
-   <!-- <item>Faktura zakupu</item> --> 
-   <!-- <item>Przyjęcie do magazynu</item> --> 
+        <!-- <item>Faktura zakupu</item> -->
+        <!-- <item>Przyjęcie do magazynu</item> -->
         <item>Wydanie z magazynu</item>
     </string-array>
 
@@ -137,16 +137,22 @@
     <string name="server_address">Adres serwera</string>
     <string name="ok">OK</string>
     <string name="cancel">Anuluj</string>
-	<string name="pieces">szt.</string>
-	<string name="cannot_save_position_quantity">Nie można zapisać pozycji w ilosci mniejszej od 1</string>
-	<string name="cannot_save_item_without_code">Nie można zapisać towaru bez kodu</string>
-	<string name="cannot_save_item_without_name">Nie można zapisać towaru bez nazwy</string>
-	<string name="cannot_save_item_without_price">Nie można zapisać towaru bez ceny</string>
-	<string name="cannot_save_document_without_position">Nie można zapisać dokumentu bez pozycji</string>
-	<string name="do_you_want_to_delete_position">Czy chcesz usunać pozycję?</string>
-	<string name="port_number">Number portu</string>
-	<string name="bucket_name">Nazwa bazy</string>
-	<string name="config_parameters">Dane konfiguracyjne</string>
-	<string name="synchro_in_progress">Trwa synchronizacja...</string>
+    <string name="pieces">szt.</string>
+    <string name="cannot_save_position_quantity">Nie można zapisać pozycji w ilosci mniejszej od 1</string>
+    <string name="cannot_save_item_without_code">Nie można zapisać towaru bez kodu</string>
+    <string name="cannot_save_item_without_name">Nie można zapisać towaru bez nazwy</string>
+    <string name="cannot_save_item_without_price">Nie można zapisać towaru bez ceny</string>
+    <string name="cannot_save_document_without_position">Nie można zapisać dokumentu bez pozycji</string>
+    <string name="do_you_want_to_delete_position">Czy chcesz usunać pozycję?</string>
+    <string name="port_number">Number portu</string>
+    <string name="bucket_name">Nazwa bazy</string>
+    <string name="config_parameters">Dane konfiguracyjne</string>
+    <string name="synchro_in_progress">Trwa synchronizacja...</string>
+    <string name="title_activity_payments">PaymentsActivity</string>
+    <string name="all">Wszystkie</string>
+    <string name="due_payments">Zaległe</string>
+    <string name="add_payment">Dodaj płatność</string>
+    <string name="payment_name">Nazwa płatności</string>
+    <string name="payment_value">Wartość płatności</string>
 
 </resources>

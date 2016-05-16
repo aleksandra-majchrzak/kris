@@ -4,9 +4,9 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-    <uses-permission  android:name="android.permission.INTERNET"/>
-    <uses-permission  android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="22" />
@@ -99,8 +99,16 @@
                 android:value="com.example.krismobile.items.ItemsActivity" />
         </activity>
         <activity
-            android:name="com.example.krismobile.items.ModifyItemActivity"
+            android:name=".items.ModifyItemActivity"
             android:label="@string/title_activity_modify_item" >
+        </activity>
+        <activity
+            android:name="com.example.krismobile.payments.PaymentsActivity"
+            android:label="@string/payments"
+            android:parentActivityName=".main.MenuActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.krismobile.main.MenuActivity" />
         </activity>
     </application>
 
