@@ -78,8 +78,10 @@
                         </c:if>
                     </div>
                     <div class="form-group">
-                        <h4>Wartość</h4>
-                        <input type="number" step="0.01" name="value" placeholder="Wartosc" class="form-control" value="${document.value}"/>
+                        <h4>Wartość netto</h4>
+                        <input type="number" step="0.01" name="netValue" placeholder="Wartosc" class="form-control" value="${document.netValue}"/>
+                        <h4>Wartość brutto</h4>
+                        <input type="number" step="0.01" name="grossValue" placeholder="Wartosc" class="form-control" value="${document.grossValue}"/>
                     </div>
                     <div class="form-group">
                         <h4>Opis</h4>

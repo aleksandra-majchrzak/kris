@@ -36,7 +36,8 @@ public class DocumentsManager {
                 .put("PaymentDate", document.getPaymentDate().getTime())
                 .put("Description", document.getDescription())
                 .put("PaymentForm", document.getPaymentForm().getValue())
-                .put("Value", document.getValue())
+                .put("NetValue", document.getNetValue())
+                .put("NetGrossValue", document.getGrossValue())
                 .put("ModificationTS", String.valueOf((new Date()).getTime()));
 
         JsonDocument inserted = null;

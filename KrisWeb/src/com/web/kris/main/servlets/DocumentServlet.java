@@ -53,7 +53,8 @@ public class DocumentServlet extends HttpServlet {
         documentToSave.setPaymentDate(new Date());
         documentToSave.setDescription(request.getParameter("description"));
         documentToSave.setPaymentForm(Integer.valueOf(request.getParameter("paymentForm")));
-        documentToSave.setValue(Double.valueOf(request.getParameter("value")));
+        documentToSave.setNetValue(Double.valueOf(request.getParameter("netValue")));
+        documentToSave.setGrossValue(Double.valueOf(request.getParameter("grossValue")));
 
         DocumentsManager.getInstance().saveDocument(documentToSave);
 

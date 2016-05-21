@@ -21,7 +21,8 @@ public class Document {
     private Date paymentDate;
     private String description;
     private PaymentForm paymentForm;
-    private double value;
+    private double netValue;
+    private double grossValue;
 
 
     public Document() {
@@ -33,12 +34,13 @@ public class Document {
         this.paymentDate = new Date();
         this.description = "";
         this.paymentForm = PaymentForm.Cash;
-        this.value = 0.0;
+        this.netValue = 0.0;
+        this.netValue = 0.0;
     }
 
     public Document(String id, String number, int typeId,
                         Contractor contractor, Date documentDate, Date paymentDate,
-                        String description, int paymentForm, double value) {
+                        String description, int paymentForm, double netValue, double grossValue) {
 
         this.id = id;
         this.number = number;
@@ -48,7 +50,8 @@ public class Document {
         this.paymentDate = paymentDate;
         this.description = description;
         this.paymentForm = PaymentForm.values()[paymentForm];
-        this.value = value;
+        this.netValue = netValue;
+        this.grossValue = grossValue;
     }
 
     public Document(JsonDocument document) {
@@ -63,7 +66,8 @@ public class Document {
         this.paymentDate = new Date (content.getLong("PaymentDate"));
         this.description = content.getString("Description");
         this.paymentForm = PaymentForm.values()[content.getInt("PaymentForm")];
-        this.value = content.getDouble("Value");
+        this.netValue = content.getDouble("NetValue");
+        this.grossValue = content.getDouble("GrossValue");
     }
 
     public String getId() {
@@ -130,11 +134,19 @@ public class Document {
         this.paymentForm = PaymentForm.values()[paymentForm];
     }
 
-    public double getValue() {
-        return value;
+    public double getNetValue() {
+        return netValue;
     }
 
-    public void setValue(double value) {
-        this.value = value;
+    public void setNetValue(double netValue) {
+        this.netValue = netValue;
+    }
+
+    public double getGrossValue() {
+        return grossValue;
+    }
+
+    public void setGrossValue(double grossValue) {
+        this.grossValue = grossValue;
     }
 }

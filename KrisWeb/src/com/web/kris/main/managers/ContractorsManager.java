@@ -46,15 +46,17 @@ public class ContractorsManager {
         String docId = DOC_TYPE+String.valueOf(DatabaseManager.getInstance().getBucketInstance().counter(DOC_TYPE, 1, 0));
 
         if(!contractor.getId().equals("")){
-            JsonDocument doc = JsonDocument.create(contractor.getId(), content);
-            inserted = DatabaseManager.getInstance().getBucketInstance().replace(doc);
+     //       JsonDocument doc = JsonDocument.create(contractor.getId(), content);
+     //       inserted = DatabaseManager.getInstance().getBucketInstance().replace(doc);
+            DatabaseManager.getInstance().putData(content);
         }
         else{
-            JsonDocument doc = JsonDocument.create(docId, content);
-            inserted = DatabaseManager.getInstance().getBucketInstance().insert(doc);
+     //       JsonDocument doc = JsonDocument.create(docId, content);
+     //       inserted = DatabaseManager.getInstance().getBucketInstance().insert(doc);
+            DatabaseManager.getInstance().postData(content);
         }
 
-        return inserted.id();
+        return  ""; //inserted.id();
     }
 
     public Contractor getContractor(String contractorId){
@@ -69,7 +71,7 @@ public class ContractorsManager {
         ViewResult result = DatabaseManager.getInstance().getBucketInstance().query(ViewQuery.from("dev_contractors", "by_name"));
 
         List<ViewRow> rows = result.allRows();
-        System.out.println(rows);
+//        System.out.println(rows);
 
         List<Contractor> contractors = new ArrayList<>();
 
