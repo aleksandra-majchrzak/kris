@@ -137,7 +137,8 @@ public class DocumentFragment extends FragmentBase implements Observer{
 			((DocumentActivity)getActivity()).setIsBeingEdited(true);
 			getActivity().invalidateOptionsMenu();
 			
-			documentDescriptionEditText.setEnabled(((DocumentActivity)getActivity()).getIsBeingEdited());
+			if(documentDescriptionEditText != null)
+				documentDescriptionEditText.setEnabled(((DocumentActivity)getActivity()).getIsBeingEdited());
 		/*	
 			
 			Intent intent = new Intent(context, ModifyContractorActivity.class);
@@ -158,7 +159,8 @@ public class DocumentFragment extends FragmentBase implements Observer{
 		}
 		else if(id == R.id.action_save_document){
 			
-			document.setDescription(documentDescriptionEditText.getText().toString());
+			if(documentDescriptionEditText != null)
+				document.setDescription(documentDescriptionEditText.getText().toString());
 			
 			DocumentsManager.getInstance().saveKrisDocument(document);
 			getActivity().setResult(DocumentsActivity.RESULT_OK);
