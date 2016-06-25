@@ -62,16 +62,15 @@ public class PaymentsListAdapter extends BaseAdapter{
 		paymentNameTextView.setText((String)props.get("PaymentName"));
 			
 		TextView paymentValueTextView = (TextView) convertView.findViewById(R.id.payment_value_textView);
-		paymentValueTextView.setText((String)props.get("PaymentValue"));
-//		documentContractorCodeTextView.setText((String)props.get("ContractorId"));
+		paymentValueTextView.setText(String.valueOf(props.get("Value")) +" "+ context.getResources().getString(R.string.PLN));
 		
 		Date paymentDate = new Date((Long)props.get("PaymentDate"));
 		
 		TextView paymentDateTextView = (TextView) convertView.findViewById(R.id.payment_date_textView);
 		paymentDateTextView.setText(DateUtilities.contvertDateToString(context, paymentDate));
 		
-		TextView contractorCodeTextView = (TextView) convertView.findViewById(R.id.contractor_code_textView);
-		contractorCodeTextView.setText((String)props.get("ContractorCode"));
+		TextView paymentDescriptionTextView = (TextView) convertView.findViewById(R.id.payment_description_textView);
+		paymentDescriptionTextView.setText((String)props.get("Description"));
 		
 		CheckBox paymentCheckBox = (CheckBox) convertView.findViewById(R.id.payment_checkBox);
 
@@ -79,12 +78,10 @@ public class PaymentsListAdapter extends BaseAdapter{
 		return convertView;
 	}
 	
-	@Override
-	public void notifyDataSetChanged(){
+	public void updateAdapter( List<Document> paymentsList){
 		
-		paymentsList = null; // inne zapytanieDocumentsManager.getInstance().getContractorDocuments(contractor.getId());
-		
-		super.notifyDataSetChanged();
+		this.paymentsList.clear();
+		this.paymentsList.addAll(paymentsList);
 	}
 
 }

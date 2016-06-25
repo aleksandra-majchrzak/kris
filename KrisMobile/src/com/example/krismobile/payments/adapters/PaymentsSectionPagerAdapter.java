@@ -35,9 +35,9 @@ public class PaymentsSectionPagerAdapter extends FragmentPagerAdapter{
 		
 		switch (position) {
 		case 0:
-			return context.getString(R.string.all);
-		case 1:
 			return context.getString(R.string.due_payments);
+		case 1:
+			return context.getString(R.string.finalized_payments);
 		}
 		return null;
 	}

@@ -9,6 +9,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -69,10 +70,9 @@ public class PaymentsActivity extends Activity implements TabListener {
 	public boolean onOptionsItemSelected(MenuItem item) {
 
 		int id = item.getItemId();
-		if (id == R.id.action_add_payment) {
-			
-			
-			return true;
+		if(id == android.R.id.home){
+	        NavUtils.navigateUpFromSameTask(this);
+	        return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}

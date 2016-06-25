@@ -108,8 +108,8 @@ public class KrisDocument implements Parcelable{
 		this.paymentDate = new Date((Long)props.get("PaymentDate"));
 		this.description = (String)props.get("Description");
 		this.paymentForm = (Integer)props.get("PaymentForm");
-		this.netValue = (Double)props.get("NetValue");
-		this.grossValue = (Double)props.get("GrossValue");
+		this.netValue = Double.valueOf((Integer)props.get("NetValue"));
+		this.grossValue = Double.valueOf((Integer)props.get("GrossValue"));
 		this.positionsList = positionsList;
 	}
 

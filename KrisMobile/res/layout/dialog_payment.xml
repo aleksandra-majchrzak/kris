@@ -2,18 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:orientation="vertical" >
+    android:paddingTop="@dimen/activity_vertical_margin" >
 
     <EditText
         android:id="@+id/payment_name_editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10" 
-        android:hint="@string/payment_name">
+        android:ems="10"
+        android:hint="@string/payment_name" >
 
         <requestFocus />
     </EditText>
@@ -22,7 +22,42 @@
         android:id="@+id/payment_value_editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10" 
-        android:hint="@string/payment_value"/>
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:hint="@string/payment_value" />
+
+    <EditText
+        android:id="@+id/payment_description_editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/description"
+        android:lines="2"
+        android:inputType="textMultiLine" />
+
+    <LinearLayout
+        android:id="@+id/bottom_payment_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <CheckBox
+            android:id="@+id/payment_finalized_checkBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="@string/finalize" />
+
+        <TextView
+            android:id="@+id/payment_date_textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:gravity="end"
+            android:text="@string/payment_date"
+            android:background="@drawable/row_selector"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    </LinearLayout>
 
 </LinearLayout>

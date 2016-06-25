@@ -1,43 +1,57 @@
 package com.example.krismobile.payments.entities;
 
+import java.util.Date;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
 
 public class Payment implements Parcelable{
 	
+	private String id;
 	private String paymentName;
 	private double value;
-	private String paymentDate;
-	private String contractorCode;
+	private Date paymentDate;
+	private String description;
 	private boolean isPaid;
 
 	public Payment(){
+		this.id = "";
 		this.paymentName = "";
 		this.value = 0;
-		this.paymentDate = "";
-		this.contractorCode = "";
+		this.paymentDate = new Date();
+		this.description = "";
 		this.isPaid = false;
 	}
 	
-	public Payment(String paymentName, double value, String paymentDate, String contractorCode, boolean isPaid) {
+	public Payment(String id, String paymentName, double value, Date paymentDate, String description, boolean isPaid) {
+		this.id = id;
 		this.paymentName = paymentName;
 		this.value = value;
 		this.paymentDate = paymentDate;
-		this.contractorCode = contractorCode;
+		this.description = description;
 		this.isPaid = isPaid;
 	}
 
 	public Payment(Parcel in) {
+		this.id = in.readString();
 		this.paymentName = in.readString();
 		this.value = in.readDouble();
-		this.paymentDate = in.readString();
-		this.contractorCode = in.readString();
+		this.paymentDate = new Date(in.readLong());
+		this.description = in.readString();
 		this.isPaid = in.readInt() == 1;
 	}
 
 	public double getValue() {
 		return value;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public void setValue(double value) {
@@ -52,20 +66,20 @@ public class Payment implements Parcelable{
 		this.paymentName = paymentName;
 	}
 
-	public String getPaymentDate() {
+	public Date getPaymentDate() {
 		return paymentDate;
 	}
 
-	public void setPaymentDate(String paymentDate) {
+	public void setPaymentDate(Date paymentDate) {
 		this.paymentDate = paymentDate;
 	}
 
-	public String getContractorCode() {
-		return contractorCode;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setContractorCode(String contractorCode) {
-		this.contractorCode = contractorCode;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public boolean isPaid() {
@@ -83,10 +97,11 @@ public class Payment implements Parcelable{
 
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(id);
 		dest.writeString(paymentName);
 		dest.writeDouble(value);
-		dest.writeString(paymentDate);
-		dest.writeString(contractorCode);
+		dest.writeLong(paymentDate.getTime());
+		dest.writeString(description);
 		dest.writeInt(isPaid ? 1 : 0);
 	}
 	

@@ -151,8 +151,11 @@
     <string name="title_activity_payments">PaymentsActivity</string>
     <string name="all">Wszystkie</string>
     <string name="due_payments">Zaległe</string>
+    <string name="finalized_payments">Rozliczone</string>
     <string name="add_payment">Dodaj płatność</string>
     <string name="payment_name">Nazwa płatności</string>
     <string name="payment_value">Wartość płatności</string>
+    <string name="finalize">Rozlicz</string>
+    <string name="cannot_save_payment_value">Nie można zapisać płatności o zerowej wartości</string>
 
 </resources>
