@@ -1,25 +1,33 @@
 package com.example.krismobile.main;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
+import android.preference.Preference;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.krismobile.R;
+import com.example.krismobile.database.DatabaseManager;
 
 public class SettingsFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
 
 	public static String SERVER_ADDRESS_PREF = "server_address_preference";
 	public static String PORT_NUMBER_PREF = "port_number_preference";
 	public static String BUCKET_NAME_PREF = "bucket_name_preference";
+	private static String DELETE_DATABASE = "delete_database";
 	
 	private EditTextPreference serverAddressPref;
 	private EditTextPreference portNumberPref;
 	private EditTextPreference bucketNamePref;
+	private Preference clearDatabase;
 	
 	public SettingsFragment(){
 		
@@ -51,6 +59,35 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
 		String bucketNamePrefText = bucketNamePref.getText() == null ? "" : bucketNamePref.getText();
 		bucketNamePref.setSummary(bucketNamePrefText);
 		
+		clearDatabase = (Preference) findPreference(DELETE_DATABASE);
+		clearDatabase.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+			
+			@Override
+			public boolean onPreferenceClick(Preference preference) {
+				
+				AlertDialog.Builder builder = new AlertDialog.Builder(SettingsFragment.this.getActivity());
+				builder.setMessage(R.string.do_you_want_to_delete_database)
+					.setPositiveButton(R.string.yes, new OnClickListener() {
+						
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							DatabaseManager.getInstance().deleteDatabase();
+							
+						}
+					})
+					.setNegativeButton(R.string.no, new OnClickListener() {
+						
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+						
+						}
+					})
+					.create().show();
+				
+				
+				return true;
+			}
+		});
 		
 		return rootView;
 	}

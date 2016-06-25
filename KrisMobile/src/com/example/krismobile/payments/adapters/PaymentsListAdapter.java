@@ -64,7 +64,7 @@ public class PaymentsListAdapter extends BaseAdapter{
 		TextView paymentValueTextView = (TextView) convertView.findViewById(R.id.payment_value_textView);
 		paymentValueTextView.setText(String.valueOf(props.get("Value")) +" "+ context.getResources().getString(R.string.PLN));
 		
-		Date paymentDate = new Date((Long)props.get("PaymentDate"));
+		Date paymentDate = new Date(Long.valueOf((String) props.get("PaymentDate")));
 		
 		TextView paymentDateTextView = (TextView) convertView.findViewById(R.id.payment_date_textView);
 		paymentDateTextView.setText(DateUtilities.contvertDateToString(context, paymentDate));

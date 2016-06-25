@@ -18,6 +18,7 @@ import com.couchbase.lite.QueryRow;
 import com.couchbase.lite.View;
 import com.example.krismobile.contractors.Contractor;
 import com.example.krismobile.database.DatabaseManager;
+import com.example.krismobile.documents.positions.DocumentPosition;
 
 public class ContractorsManager {
 	
@@ -177,5 +178,4 @@ public class ContractorsManager {
 			return false;
 		}
 	}
-
 }

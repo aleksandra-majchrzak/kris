@@ -58,8 +58,8 @@ public class DocumentsManager {
 			map.put("TypeId", krisDocument.getTypeId());
 			map.put("ContractorId", krisDocument.getContractor().getId());
 			map.put("ContractorCode", krisDocument.getContractor().getCode());
-			map.put("DocumentDate", krisDocument.getDocumentDate().getTime());
-			map.put("PaymentDate", krisDocument.getPaymentDate().getTime());
+			map.put("DocumentDate", String.valueOf(krisDocument.getDocumentDate().getTime()));
+			map.put("PaymentDate", String.valueOf(krisDocument.getPaymentDate().getTime()));
 			map.put("Description", krisDocument.getDescription());
 			map.put("PaymentForm", krisDocument.getPaymentForm());
 			map.put("NetValue", krisDocument.getNetValue());
@@ -486,18 +486,5 @@ public class DocumentsManager {
 				e.printStackTrace();
 		}			
 		
-	}
-
-	public void deleteAllKrisDocuments(){
-		ArrayList<Document> docs = getAllKrisDocuments();
-		for(Document doc : docs){
-			deleteKrisDocument(doc.getId());
-			
-			ArrayList<DocumentPosition> docsPos = this.getDocumentPositions(doc.getId());
-			for(DocumentPosition docPos : docsPos){
-				deleteKrisDocument(docPos.getId());
-				
-			}
-		}
 	}
 }

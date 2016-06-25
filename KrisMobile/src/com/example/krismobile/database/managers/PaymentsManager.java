@@ -43,7 +43,7 @@ public class PaymentsManager {
 			map.put("Description", payment.getDescription());
 			map.put("PaymentName", payment.getPaymentName());
 			map.put("Value", payment.getValue());
-			map.put("PaymentDate", payment.getPaymentDate().getTime());
+			map.put("PaymentDate", String.valueOf(payment.getPaymentDate().getTime()));
 			map.put("IsPaid", payment.isPaid());		
 			
 			if(payment.getId().equals("")){

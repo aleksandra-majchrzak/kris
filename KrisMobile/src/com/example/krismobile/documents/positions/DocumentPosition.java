@@ -63,9 +63,9 @@ public class DocumentPosition extends Observable implements Parcelable{
 		this.documentId = (String)props.get("DocumentId");
 		this.item = item;
 		this.ordinal = (Integer)props.get("Ordinal");
-		this.quantity = Double.valueOf((Integer)props.get("Quantity"));
-		this.netValue =  Double.valueOf((Integer)props.get("NetValue"));
-		this.grossValue =  Double.valueOf((Integer)props.get("GrossValue"));
+		this.quantity = ((Number)props.get("Quantity")).doubleValue();
+		this.netValue =  ((Number)props.get("NetValue")).doubleValue();
+		this.grossValue =  ((Number)props.get("GrossValue")).doubleValue();
 	}
 	
 	public DocumentPosition copy(){

@@ -93,7 +93,7 @@ public class ContractorDocumentsAdapter extends BaseAdapter{
 		documentContractorCodeTextView.setVisibility(View.GONE);
 //		documentContractorCodeTextView.setText((String)props.get("ContractorId"));
 		
-		Date documentDate = new Date((Long)props.get("DocumentDate"));
+		Date documentDate = new Date(Long.valueOf((String) props.get("DocumentDate")));
 		
 		TextView documentDateTextView = (TextView) convertView.findViewById(R.id.document_date_textView);
 		documentDateTextView.setText(DateUtilities.contvertDateToString(context, documentDate));

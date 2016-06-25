@@ -17,7 +17,7 @@ public class ItemStocks implements Parcelable{
 		Map<?,?> props = doc.getProperties();
 		this.itemId = (Integer)props.get("ItemId") ;
 		this.warehouseId = (Integer)props.get("WarehouseId") ;
-		this.stocks = (Double)props.get("Stocks") ;
+		this.stocks = ((Number)props.get("Stocks")).doubleValue() ;
 	}
 	
 	public ItemStocks(int itemId, int warehouseId, double stocks) {

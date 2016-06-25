@@ -7,28 +7,46 @@ import java.security.NoSuchAlgorithmException;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.widget.Toast;
 
 import com.couchbase.lite.CouchbaseLiteException;
 import com.couchbase.lite.Database;
 import com.couchbase.lite.Manager;
 import com.couchbase.lite.android.AndroidContext;
+import com.example.krismobile.R;
+import com.example.krismobile.database.managers.ContractorsManager;
+import com.example.krismobile.database.managers.DocumentsManager;
+import com.example.krismobile.database.managers.ItemsManager;
+import com.example.krismobile.database.managers.PaymentsManager;
 import com.example.krismobile.database.managers.UserManager;
 
 public class DatabaseManager {
 	private static final String DB_NAME = "kris_mobile_db";
 
 	private static Manager manager;
+	private static DatabaseManager databaseManager;
 	private static Database database;
 	private static Context context;
 	private static String SHARED = "KrisPreferences";
 	
 	public static Manager getManagerInstance(Context context) throws IOException{
+		
+		if(databaseManager == null){
+			databaseManager = new DatabaseManager();
+		}
 		if(manager == null){
 			manager = new Manager(new AndroidContext(context), Manager.DEFAULT_OPTIONS);
 			DatabaseManager.context = context;
 		}
 		
 		return manager;
+	}
+	
+	public static DatabaseManager getInstance(){
+		if(databaseManager == null)
+			databaseManager = new DatabaseManager();
+		
+		return databaseManager;
 	}
 	
 	public static Database getDatabaseInstance() throws CouchbaseLiteException{
@@ -101,4 +119,19 @@ public class DatabaseManager {
         }
         return buf.toString();
     }
+	
+	public void deleteDatabase(){
+		
+		try {
+			
+			getDatabaseInstance().delete();
+			
+		} catch (CouchbaseLiteException e) {
+			
+			Toast.makeText(context, R.string.database_could_not_be_deleted, Toast.LENGTH_LONG).show();
+			e.printStackTrace();
+		}
+		
+		Toast.makeText(context, R.string.database_deleted, Toast.LENGTH_LONG).show();
+	}
 }

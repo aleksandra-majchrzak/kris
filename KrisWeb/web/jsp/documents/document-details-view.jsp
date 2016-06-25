@@ -45,8 +45,12 @@
                     <p>${document.paymentForm.name}</p>
                 </li>
                 <li class="list-group-item kris-list-group-item">
-                    <h4>Wartość</h4>
-                    <p>${document.value}</p>
+                    <h4>Wartość netto</h4>
+                    <p>${document.netValue}</p>
+                </li>
+                <li class="list-group-item kris-list-group-item">
+                    <h4>Wartość brutto</h4>
+                    <p>${document.grossValue}</p>
                 </li>
                 <li class="list-group-item kris-list-group-item">
                     <h4>Opis</h4>

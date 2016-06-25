@@ -11,6 +11,7 @@ import com.web.kris.main.entities.Contractor;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by Mohru on 2016-01-26.
@@ -35,7 +36,7 @@ public class ContractorsManager {
         JsonObject content = JsonObject.empty()
                 .put("DocType", DOC_TYPE)
                 .put("Code", contractor.getCode())
-                .put("TypeId", contractor.getType().ordinal())
+                .put("TypeId", contractor.getType().ordinal()+1)
                 .put("NIP", contractor.getNIP())
                 .put("Address", contractor.getAddress())
                 .put("Description", contractor.getDescription())
@@ -43,20 +44,23 @@ public class ContractorsManager {
 
         JsonDocument inserted = null;
 
-        String docId = DOC_TYPE+String.valueOf(DatabaseManager.getInstance().getBucketInstance().counter(DOC_TYPE, 1, 0));
+        String docId = UUID.randomUUID().toString().toLowerCase();
+
+        while(DatabaseManager.getInstance().getBucketInstance().exists(docId))
+            docId = UUID.randomUUID().toString().toLowerCase();
 
         if(!contractor.getId().equals("")){
-     //       JsonDocument doc = JsonDocument.create(contractor.getId(), content);
-     //       inserted = DatabaseManager.getInstance().getBucketInstance().replace(doc);
-            DatabaseManager.getInstance().putData(content);
+            JsonDocument doc = JsonDocument.create(contractor.getId(), content);
+            inserted = DatabaseManager.getInstance().getBucketInstance().replace(doc);
+    //        DatabaseManager.getInstance().putData(content);
         }
         else{
-     //       JsonDocument doc = JsonDocument.create(docId, content);
-     //       inserted = DatabaseManager.getInstance().getBucketInstance().insert(doc);
-            DatabaseManager.getInstance().postData(content);
+            JsonDocument doc = JsonDocument.create(docId, content);
+            inserted = DatabaseManager.getInstance().getBucketInstance().insert(doc);
+    //        DatabaseManager.getInstance().postData(content);
         }
 
-        return  ""; //inserted.id();
+        return  inserted.id();
     }
 
     public Contractor getContractor(String contractorId){
