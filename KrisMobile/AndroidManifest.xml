@@ -41,6 +41,7 @@
         <activity
             android:name=".contractors.ContractorActivity"
             android:label="@string/title_activity_contractor"
+            android:launchMode="singleTop"
             android:parentActivityName=".contractors.ContractorsActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

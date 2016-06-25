@@ -3,6 +3,7 @@ package com.example.krismobile.contractors;
 import java.util.Map;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
@@ -24,21 +25,29 @@ public class ContractorActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		
 		Bundle args = getIntent().getExtras();
-		String contractorId = args.getString("contractorId");
 		
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-		
-
-		Document contractorDoc = ContractorsManager.getInstance().getContractor(contractorId);
-		Map<?,?> props = contractorDoc.getProperties();
-		contractor = new Contractor(contractorDoc.getId(), 
-								(String)props.get("Code"), 
-								(Integer)props.get("TypeId"), 
-								(String)props.get("Address"), 
-								(String)props.get("Description"),
-								(String)props.get("NIP"));
+		if(args != null){
+			String contractorId = args.getString("contractorId");
 			
-		getActionBar().setTitle((String)props.get("Code"));
+			getActionBar().setDisplayHomeAsUpEnabled(true);
+			
+	
+			Document contractorDoc = ContractorsManager.getInstance().getContractor(contractorId);
+			Map<?,?> props = contractorDoc.getProperties();
+			contractor = new Contractor(contractorDoc.getId(), 
+									(String)props.get("Code"), 
+									(Integer)props.get("TypeId"), 
+									(String)props.get("Address"), 
+									(String)props.get("Description"),
+									(String)props.get("NIP"));
+			
+			
+		}
+		else{
+			contractor = savedInstanceState.getParcelable("contractor");
+		}
+			
+		getActionBar().setTitle(contractor.getCode());
 		
 		setContentView(R.layout.activity_contractor);
 		
@@ -46,6 +55,14 @@ public class ContractorActivity extends Activity {
 			getFragmentManager().beginTransaction()
 				.add(R.id.container, new ContractorFragment()).commit();
 
+	}
+	
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		
+		outState.putParcelable("contractor", contractor);
+		
+		super.onSaveInstanceState(outState);
 	}
 	
 	public Contractor reloadContractor(){

@@ -152,10 +152,6 @@ public class ContractorDocumentsFragment extends FragmentBase{
 			return true;
 			
 		}
-		else if(id == android.R.id.home){
-	        NavUtils.navigateUpFromSameTask((Activity)context);
-	        return true;
-		}
 		
 		return super.onOptionsItemSelected(item);
 	}
