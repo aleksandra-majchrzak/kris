@@ -62,8 +62,8 @@ public class Document {
         this.number = content.getString("Number");
         this.type = DocumentType.values()[content.getInt("TypeId")];
         this.contractor = ContractorsManager.getInstance().getContractor(content.getString("ContractorId"));
-        this.documentDate = new Date(content.getLong("DocumentDate"));
-        this.paymentDate = new Date (content.getLong("PaymentDate"));
+        this.documentDate = new Date(Long.valueOf(content.getString("DocumentDate")));
+        this.paymentDate = new Date (Long.valueOf(content.getString("PaymentDate")));
         this.description = content.getString("Description");
         this.paymentForm = PaymentForm.values()[content.getInt("PaymentForm")];
         this.netValue = content.getDouble("NetValue");
