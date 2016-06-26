@@ -27,6 +27,9 @@ public class ContractorDocumentsActivity extends Activity {
 			getFragmentManager().beginTransaction()
 					.add(R.id.container, new ContractorDocumentsFragment()).commit();
 		}
+		
+		getActionBar().setTitle(contractor.getCode() + getResources().getString(R.string.contractor_documents));
+		
 	}
 
 	@Override

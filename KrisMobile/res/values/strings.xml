@@ -162,5 +162,6 @@
     <string name="database_could_not_be_deleted">Nie udało się usunąć bazy</string>
     <string name="database_deleted">Baza usunięta</string>
     <string name="do_you_want_to_delete_database">Czy na pewno chcesz usunąć bazę danych? Spowoduje to usunięcie wszystkich informacji.</string>
+    <string name="contractor_documents">" - dokumenty"</string>
 
 </resources>

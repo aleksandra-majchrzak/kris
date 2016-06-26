@@ -221,12 +221,12 @@ public class DocumentsManager {
 						keys.add(document.get("ContractorId"));
 						keys.add(document.get("DocumentDate"));
 						
-						emitter.emit(document.get("ContractorId"), document);
 						emitter.emit(document.get("DocumentDate"), document);
+						emitter.emit(document.get("ContractorId"), document);						
 					}
 				}
 				
-			}, "5");
+			}, "6");
 			
 			List<Object> keys = new ArrayList<Object>();
 			keys.add(contractorId);
