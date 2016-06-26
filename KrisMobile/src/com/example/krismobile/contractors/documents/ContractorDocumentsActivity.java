@@ -9,6 +9,7 @@ import android.view.MenuItem;
 
 import com.example.krismobile.R;
 import com.example.krismobile.contractors.Contractor;
+import com.example.krismobile.contractors.ContractorActivity;
 
 public class ContractorDocumentsActivity extends Activity {
 
@@ -51,4 +52,9 @@ public class ContractorDocumentsActivity extends Activity {
 		return contractor;
 	}
 	
+	@Override
+	protected void onDestroy() {
+		this.setResult(ContractorActivity.REQUEST_REFRESH_VIEW);
+		super.onDestroy();
+	}
 }
