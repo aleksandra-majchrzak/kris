@@ -8,6 +8,8 @@ import com.couchbase.client.java.document.JsonDocument;
 import com.couchbase.client.java.document.json.JsonObject;
 import com.couchbase.client.java.env.CouchbaseEnvironment;
 import com.couchbase.client.java.env.DefaultCouchbaseEnvironment;
+import com.couchbase.client.java.query.Index;
+import com.couchbase.client.java.query.Statement;
 import com.couchbase.client.java.view.*;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -24,6 +26,8 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.List;
+
+import static com.couchbase.client.java.query.Index.*;
 
 /**
  * Created by Mohru on 2016-01-26.
@@ -53,10 +57,15 @@ public class DatabaseManager {
         return bucket;
     }
 
+    public static String getBucketName(){
+        return bucketName;
+    }
+
     public boolean establishConnection(String host, String port, String bucketName){
 
         System.out.println("in database manager2");
 
+        System.setProperty("com.couchbase.queryEnabled", "true");
         // Connect to localhost
         cluster = CouchbaseCluster.create(env, host+":"+port);
 
@@ -67,8 +76,11 @@ public class DatabaseManager {
         databaseURL = "http://"+host+":"+"4984"+"/"+bucketName; // na razie adres servera na sztywno- sprawdz czydziala
 
         // tylko przy pierwszym polaczeniu
-        if(bucket.bucketManager().getDesignDocument("dev_users") == null)
+        if(bucket.bucketManager().getDesignDocument("dev_users") == null) {
+            createIndex();
             createViews();
+            createFilters();
+        }
 
         return true;
     }
@@ -122,6 +134,28 @@ public class DatabaseManager {
         bucketManager.insertDesignDocument(designDoc);
 
     }
+
+    private void createFilters(){
+        BucketManager bucketManager = bucket.bucketManager();
+
+        // Initialize design document
+        DesignDocument designDoc = DesignDocument.create(
+                "dev_users",
+                Arrays.asList(
+                        DefaultView.create("user_filter",
+                                "function (doc, req) { if(doc.DocType && doc.DocType == \"User\" && doc.IsActive && doc.Login == req.query.text) { return true } else {return false} }")
+                )
+        );
+
+        // Insert design document into the bucket
+        bucketManager.insertDesignDocument(designDoc);
+
+    }
+
+    private void createIndex(){
+        bucket.bucketManager().createPrimaryIndex(true, false);
+    }
+
 
     public static HttpPost createPostForJSONObject( JsonObject params, String url) {
 

@@ -3,6 +3,8 @@ package com.example.krismobile.synchronization;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -28,6 +30,9 @@ public class SynchronizationManager implements ChangeListener {
 	private static Context context;
 	public static String TAG = "KrisMobile";
 	private ProgressDialog progressDialog;
+	
+	Replication pull;
+    Replication push;
 	
 	public static SynchronizationManager getManagerInstance(Context context){
 		if(manager == null){
@@ -62,8 +67,8 @@ public class SynchronizationManager implements ChangeListener {
 	
 	private void startReplications() throws CouchbaseLiteException {
 		
-	    Replication pull = DatabaseManager.getDatabaseInstance().createPullReplication(this.createSyncURL(false));
-	    Replication push = DatabaseManager.getDatabaseInstance().createPushReplication(this.createSyncURL(false));
+	    pull = DatabaseManager.getDatabaseInstance().createPullReplication(this.createSyncURL(false));
+	    push = DatabaseManager.getDatabaseInstance().createPushReplication(this.createSyncURL(false));
 	    
 	    pull.setContinuous(false);
 	    push.setContinuous(false);
@@ -80,18 +85,23 @@ public class SynchronizationManager implements ChangeListener {
     @Override
     public void changed(Replication.ChangeEvent event) {
 
-        Replication replication = event.getSource();
-        Log.d(TAG, "Replication : " + replication + " changed.");
-        if (!replication.isRunning()) {
-            String msg = String.format("Replicator %s not running", replication);
+    	boolean active = (pull.getStatus() == Replication.ReplicationStatus.REPLICATION_ACTIVE) ||
+    	        (push.getStatus() == Replication.ReplicationStatus.REPLICATION_ACTIVE);
+        
+        if (! active) {
+            String msg = "Replications not running";
             Log.d(TAG, msg);
             
             progressDialog.dismiss();
-            replication.stop();
         }
         else {
-            int processed = replication.getCompletedChangesCount();
-            int total = replication.getChangesCount();
+        	
+        	int total = push.getCompletedChangesCount() + pull.getCompletedChangesCount();
+        	int processed = push.getChangesCount() + pull.getChangesCount();
+        	
+            progressDialog.setMax(total);
+            progressDialog.setProgress(processed);
+
             String msg = String.format("Replicator processed %d / %d", processed, total);
             Log.d(TAG, msg);
         }
@@ -121,6 +131,23 @@ public class SynchronizationManager implements ChangeListener {
         progress.setMessage(context.getString(R.string.synchro_in_progress));
         progress.show();
         return progress;
+    }
+    
+    public void startFirstLoginReplication() throws CouchbaseLiteException{
+    	
+    	pull = DatabaseManager.getDatabaseInstance().createPullReplication(this.createSyncURL(false));
+ 	    
+    	List<String> channels = new ArrayList<String>();
+    	channels.add("sales");
+    	pull.setChannels(channels);
+    	
+ 	    pull.setContinuous(false);
+ 	    
+ 	    pull.start();
+ 	    
+ 	    progressDialog = showLoadingSpinner();
+ 	    
+ 	    pull.addChangeListener(this);
     }
 
 }

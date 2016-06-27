@@ -2,15 +2,21 @@ package com.web.kris.main.managers;
 
 import com.couchbase.client.java.document.JsonDocument;
 import com.couchbase.client.java.document.json.JsonObject;
+import com.couchbase.client.java.query.*;
 import com.couchbase.client.java.view.ViewQuery;
 import com.couchbase.client.java.view.ViewResult;
 import com.couchbase.client.java.view.ViewRow;
 import com.web.kris.main.entities.Document;
+import com.web.kris.main.entities.DocumentPosition;
+import com.web.kris.main.entities.DocumentPositionsList;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+
+import static com.couchbase.client.java.query.Select.select;
+import static com.couchbase.client.java.query.dsl.Expression.*;
 
 /**
  * Created by Mohru on 2016-01-26.
@@ -19,6 +25,8 @@ public class DocumentsManager {
 
     private static DocumentsManager manager;
     private static final String DOC_TYPE = "Document";
+    private static final String DOC_POSITION_TYPE = "DocumentPosition";
+    private static final String DOC_NUMERATOR_TYPE = "DocumentNumerator";
 
     public static DocumentsManager getInstance(){
         if(manager == null)
@@ -82,6 +90,30 @@ public class DocumentsManager {
         }
 
         return documents;
+    }
+
+    public DocumentPositionsList getDocumentPositions(String documentId){
+
+        DocumentPositionsList positionsList = new DocumentPositionsList();
+        String bucketName = DatabaseManager.getBucketName();
+
+        Statement statement = select(bucketName + ".*, meta("+bucketName+").id")
+                .from(i(DatabaseManager.getBucketName()))
+                .where(x("DocType").eq(x("$DocType"))
+                .and(x("DocumentId")).eq(x("$DocumentId")));
+
+        JsonObject placeholderValues = JsonObject.create().put("$DocType", DOC_POSITION_TYPE);
+        placeholderValues.put("$DocumentId", documentId);
+        ParameterizedN1qlQuery q = N1qlQuery.parameterized(statement, placeholderValues);
+
+        N1qlQueryResult result = DatabaseManager.getInstance().getBucketInstance().query(q);
+
+        for (N1qlQueryRow row : result) {
+            System.out.println(row);
+            positionsList.add(new DocumentPosition(row.value()));
+        }
+
+        return positionsList;
     }
 
     public boolean deleteDocument(String documentId){

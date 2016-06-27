@@ -80,6 +80,8 @@ public class DocumentServlet extends HttpServlet {
             int index = Integer.valueOf(documentIndex);
             Document document = documents.get(index);
 
+            document.setPositionsList(DocumentsManager.getInstance().getDocumentPositions(document.getId()));
+
             request.setAttribute("document", document);
             request.setAttribute("documentIndex", index);
         }

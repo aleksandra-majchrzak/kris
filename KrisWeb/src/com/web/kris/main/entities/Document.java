@@ -24,6 +24,8 @@ public class Document {
     private double netValue;
     private double grossValue;
 
+    private DocumentPositionsList positionsList;
+
 
     public Document() {
         this.id = "";
@@ -36,6 +38,7 @@ public class Document {
         this.paymentForm = PaymentForm.Cash;
         this.netValue = 0.0;
         this.netValue = 0.0;
+        this.positionsList = new DocumentPositionsList();
     }
 
     public Document(String id, String number, int typeId,
@@ -52,6 +55,8 @@ public class Document {
         this.paymentForm = PaymentForm.values()[paymentForm];
         this.netValue = netValue;
         this.grossValue = grossValue;
+
+        this.positionsList = new DocumentPositionsList();
     }
 
     public Document(JsonDocument document) {
@@ -68,6 +73,8 @@ public class Document {
         this.paymentForm = PaymentForm.values()[content.getInt("PaymentForm")];
         this.netValue = content.getDouble("NetValue");
         this.grossValue = content.getDouble("GrossValue");
+
+        this.positionsList = new DocumentPositionsList();
     }
 
     public String getId() {
@@ -148,5 +155,13 @@ public class Document {
 
     public void setGrossValue(double grossValue) {
         this.grossValue = grossValue;
+    }
+
+    public DocumentPositionsList getPositionsList() {
+        return positionsList;
+    }
+
+    public void setPositionsList(DocumentPositionsList positionsList) {
+        this.positionsList = positionsList;
     }
 }

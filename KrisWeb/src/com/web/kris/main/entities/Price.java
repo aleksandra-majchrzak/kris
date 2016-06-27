@@ -1,5 +1,7 @@
 package com.web.kris.main.entities;
 
+import com.couchbase.client.java.document.json.JsonObject;
+
 /**
  * Created by Mohru on 2016-01-26.
  */
@@ -20,6 +22,12 @@ public class Price {
         this.id = id;
         this.netPrice = netPrice;
         this.grossPrice = grossPrice;
+    }
+
+    public Price(JsonObject price) {
+        this.id = price.getString("id");
+        this.netPrice = price.getDouble("NetPrice");
+        this.grossPrice = price.getDouble("GrossPrice");
     }
 
     public String getId() {

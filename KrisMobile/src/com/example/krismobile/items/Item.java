@@ -39,7 +39,7 @@ public class Item implements Parcelable{
 		this.price = null;
 		this.description = "";
 		this.type = "";
-		 new ArrayList<ItemStocks>();
+		this.itemStocks = new ArrayList<ItemStocks>();
 	}
 	
 	public Item(String id, String code, String name,
