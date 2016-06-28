@@ -78,7 +78,7 @@ public class DocumentsManager {
         ViewResult result = DatabaseManager.getInstance().getBucketInstance().query(ViewQuery.from("dev_documents", "by_date"));
 
         List<ViewRow> rows = result.allRows();
-        System.out.println(rows);
+    //    System.out.println(rows);
 
         List<Document> documents = new ArrayList<>();
 
@@ -109,7 +109,7 @@ public class DocumentsManager {
         N1qlQueryResult result = DatabaseManager.getInstance().getBucketInstance().query(q);
 
         for (N1qlQueryRow row : result) {
-            System.out.println(row);
+     //       System.out.println(row);
             positionsList.add(new DocumentPosition(row.value()));
         }
 

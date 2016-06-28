@@ -1,7 +1,11 @@
 package com.web.kris.main.managers;
 
+import com.couchbase.client.java.document.JsonDocument;
 import com.couchbase.client.java.document.json.JsonObject;
 import com.couchbase.client.java.query.*;
+import com.couchbase.client.java.view.ViewQuery;
+import com.couchbase.client.java.view.ViewResult;
+import com.couchbase.client.java.view.ViewRow;
 import com.web.kris.main.entities.DocumentPositionsList;
 import com.web.kris.main.entities.Item;
 import com.web.kris.main.entities.ItemStocks;
@@ -28,6 +32,25 @@ public class ItemsManager {
             manager = new ItemsManager();
 
         return manager;
+    }
+
+    public List<Item> getAllItems(){
+
+        ViewResult result = DatabaseManager.getInstance().getBucketInstance().query(ViewQuery.from("dev_items", "by_code"));
+
+        List<ViewRow> rows = result.allRows();
+//        System.out.println(rows);
+
+        List<Item> items = new ArrayList<>();
+
+        for (ViewRow row : rows) {
+            JsonDocument doc = row.document();
+
+            if(doc != null && doc.content() != null)
+                items.add(new Item(doc));
+        }
+
+        return items;
     }
 
     public String saveItem(Item item){    //  save & update
@@ -95,7 +118,7 @@ public class ItemsManager {
         N1qlQueryResult result = DatabaseManager.getInstance().getBucketInstance().query(q);
 
         for (N1qlQueryRow row : result) {
-            System.out.println(row);
+         //   System.out.println(row);
             stocks.add(new ItemStocks(row.value()));
         }
 
@@ -103,6 +126,9 @@ public class ItemsManager {
     }
 
     public boolean deleteItem(String itemId){
+
+        DatabaseManager.getInstance().getBucketInstance().remove(itemId);
         return true;
+
     }
 }

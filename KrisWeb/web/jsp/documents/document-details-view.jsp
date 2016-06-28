@@ -24,14 +24,9 @@
     <div class="panel-body kris-panel-body">
         <div  id ="kris-panel-document-tabs" class=" col-lg-12">
             <ul class="nav nav-tabs">
-                <li role="presentation" ><a href="#document-tab-items">Towary</a></li>
                 <li role="presentation" class="active"><a href="#document-tab-positions">Pozycje</a></li>
                 <li role="presentation" ><a href="#document-tab-header">Nagłówek</a></li>
             </ul>
-
-            <div id="document-tab-items" class="gone">
-                <jsp:include page="../items/items-list.jsp"  flush="true" />
-            </div>
 
             <div id="document-tab-positions" class="visible">
                 <jsp:include page="/documents/document-positions-view.jsp"  flush="true" />
@@ -75,31 +70,4 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.0.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#kris-panel-document-tabs > ul > li > a').click(function(event){
-                event.preventDefault();//stop browser to take action for clicked anchor
-
-                //get displaying tab content jQuery selector
-                var active_tab_selector = $('#kris-panel-document-tabs > ul > li.active > a').attr('href');
-
-                //find actived navigation and remove 'active' css
-                var actived_nav = $('#kris-panel-document-tabs > ul > li.active');
-                actived_nav.removeClass('active');
-
-                //add 'active' css into clicked navigation
-                $(this).parents('li').addClass('active');
-
-                //hide displaying tab content
-                $(active_tab_selector).removeClass('visible');
-                $(active_tab_selector).addClass('gone');
-
-                //show target tab content
-                var target_tab_selector = $(this).attr('href');
-                $(target_tab_selector).removeClass('gone');
-                $(target_tab_selector).addClass('visible');
-            });
-        });
-    </script>
 </div>

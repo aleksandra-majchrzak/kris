@@ -1,5 +1,6 @@
 package com.web.kris.main.entities;
 
+import com.couchbase.client.java.document.JsonDocument;
 import com.couchbase.client.java.document.json.JsonObject;
 import com.web.kris.main.managers.ItemsManager;
 
@@ -47,6 +48,21 @@ public class Item {
         this.description = description;
         this.type = type;
         this.itemStocks = itemStocks;
+    }
+
+    public Item(JsonDocument item) {
+
+        JsonObject content = item.content();
+
+        this.id = item.id();
+        this.code = content.getString("Code");
+        this.name = content.getString("Name");
+        this.size = content.getString("Size");
+        this.material = content.getString("Material");
+        this.price = ItemsManager.getInstance().getItemPrice(content.getString("PriceId"));
+        this.description = content.getString("Description");
+        this.type = content.getString("Type");
+        this.itemStocks = ItemsManager.getInstance().getItemStocks(this.id);
     }
 
     public Item(JsonObject item) {

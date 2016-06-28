@@ -4,6 +4,7 @@ import com.web.kris.main.entities.Document;
 import com.web.kris.main.enums.DocumentType;
 import com.web.kris.main.managers.ContractorsManager;
 import com.web.kris.main.managers.DocumentsManager;
+import com.web.kris.main.managers.ItemsManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -91,6 +92,7 @@ public class DocumentServlet extends HttpServlet {
         if(addNewDocument != null) {
             request.setAttribute("addNewDocument", true);
             request.setAttribute("contractorsDoc", ContractorsManager.getInstance().getAllContractors());
+            request.setAttribute("itemsDoc", ItemsManager.getInstance().getAllItems());
         }
 
         String editDocumentIndex = request.getParameter("documentToEditIndex");
@@ -101,8 +103,11 @@ public class DocumentServlet extends HttpServlet {
             int index = Integer.valueOf(editDocumentIndex);
             Document documentToEdit = documents.get(index);
 
+            documentToEdit.setPositionsList(DocumentsManager.getInstance().getDocumentPositions(documentToEdit.getId()));
+
             request.setAttribute("documentToEdit", documentToEdit);
             request.setAttribute("contractorsDoc", ContractorsManager.getInstance().getAllContractors());
+            request.setAttribute("itemsDoc", ItemsManager.getInstance().getAllItems());
         }
 
         request.getRequestDispatcher("documents/documents.jsp").forward(request, response);

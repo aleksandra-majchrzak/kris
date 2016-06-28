@@ -133,6 +133,17 @@ public class DatabaseManager {
         // Insert design document into the bucket
         bucketManager.insertDesignDocument(designDoc);
 
+        designDoc = DesignDocument.create(
+                "dev_items",
+                Arrays.asList(
+                        DefaultView.create("by_code",
+                                "function (doc, meta) { if(doc.DocType && doc.DocType == \"Item\") { emit(doc.Code, doc.Id); } }")
+                )
+        );
+
+        // Insert design document into the bucket
+        bucketManager.insertDesignDocument(designDoc);
+
     }
 
     private void createFilters(){
