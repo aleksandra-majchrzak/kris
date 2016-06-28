@@ -9,6 +9,7 @@ import java.util.List;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -22,6 +23,9 @@ import com.couchbase.lite.replicator.Replication.ChangeEvent;
 import com.couchbase.lite.replicator.Replication.ChangeListener;
 import com.example.krismobile.R;
 import com.example.krismobile.database.DatabaseManager;
+import com.example.krismobile.database.managers.UserManager;
+import com.example.krismobile.main.MainActivity;
+import com.example.krismobile.main.MenuActivity;
 import com.example.krismobile.main.SettingsFragment;
 
 public class SynchronizationManager implements ChangeListener {
@@ -30,6 +34,9 @@ public class SynchronizationManager implements ChangeListener {
 	private static Context context;
 	public static String TAG = "KrisMobile";
 	private ProgressDialog progressDialog;
+	private boolean isLoginSync = false;
+	private String login;
+	private String hashedPassword;
 	
 	Replication pull;
     Replication push;
@@ -93,6 +100,24 @@ public class SynchronizationManager implements ChangeListener {
             Log.d(TAG, msg);
             
             progressDialog.dismiss();
+            
+            if(isLoginSync){
+            	
+            	if(UserManager.getInstance().authenticateUser(login, hashedPassword)){
+            		
+            		Intent intent = new Intent(context, MenuActivity.class);
+					
+					context.startActivity(intent);
+					
+					((Activity) context).finish();
+					
+            	}
+            	else{
+            		Toast.makeText(context, "B³êdny login lub has³o", Toast.LENGTH_LONG).show();
+            	}
+            	
+            	isLoginSync = false;
+            }
         }
         else {
         	
@@ -133,12 +158,16 @@ public class SynchronizationManager implements ChangeListener {
         return progress;
     }
     
-    public void startFirstLoginReplication() throws CouchbaseLiteException{
+    public void startFirstLoginReplication(String login, String password) throws CouchbaseLiteException{
+    	
+    	isLoginSync = true;
+    	this.login = login;
+    	hashedPassword = UserManager.getInstance().hashPswd(password);
     	
     	pull = DatabaseManager.getDatabaseInstance().createPullReplication(this.createSyncURL(false));
  	    
     	List<String> channels = new ArrayList<String>();
-    	channels.add("sales");
+    	channels.add(login);
     	pull.setChannels(channels);
     	
  	    pull.setContinuous(false);
@@ -147,7 +176,7 @@ public class SynchronizationManager implements ChangeListener {
  	    
  	    progressDialog = showLoadingSpinner();
  	    
- 	    pull.addChangeListener(this);
+ 	    pull.addChangeListener(this);   
     }
 
 }

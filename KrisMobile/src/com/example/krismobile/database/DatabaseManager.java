@@ -51,7 +51,7 @@ public class DatabaseManager {
 	
 	public static Database getDatabaseInstance() throws CouchbaseLiteException{
 
-		if ((database == null) & (manager != null)) {
+		if ((database == null) && (manager != null)) {
 	        database = manager.getDatabase(DB_NAME);
 	    }
 	    return database;

@@ -1,5 +1,7 @@
 package com.example.krismobile.main;
 
+import java.io.IOException;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -14,17 +16,22 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.couchbase.lite.CouchbaseLiteException;
 import com.example.krismobile.R;
 import com.example.krismobile.database.DatabaseManager;
+import com.example.krismobile.database.managers.UserManager;
+import com.example.krismobile.synchronization.SynchronizationManager;
 
 
 public class MainActivity extends Activity {
 	
-	EditText loginEditText;
-	EditText pswdEditText;
-	Button loginButton;
+	private EditText loginEditText;
+	private EditText pswdEditText;
+	private Button loginButton;
+	private SharedPreferences shared;
+	
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +45,15 @@ public class MainActivity extends Activity {
         
         loadControls();
         
-        final SharedPreferences shared = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        try {
+        	
+			DatabaseManager.getManagerInstance(MainActivity.this);
+			
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+        shared = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         
         /*
         if(! shared.contains("server_address_preference")){
@@ -91,13 +106,37 @@ public class MainActivity extends Activity {
 				String login = loginEditText.getText().toString();
 				String password = pswdEditText.getText().toString();
 				
-				Intent intent = new Intent(MainActivity.this, MenuActivity.class);
+				String hashedPassword = UserManager.getInstance().hashPswd(password);
 				
-				/* TODO 
-				 * autentykacja logowania - gdzie zapisujemy te dane i czy s¹ jakos szyfrowane*/
-				startActivity(intent);
+		//		if(shared.contains("Username") && UserManager.getInstance().getUser(login) != null){
 				
-				MainActivity.this.finish();
+		//			if(UserManager.getInstance().authenticateUser(login, hashedPassword)){
+						
+						Intent intent = new Intent(MainActivity.this, MenuActivity.class);
+												
+						startActivity(intent);
+						
+						MainActivity.this.finish();
+		/*			}
+					else{
+						Toast.makeText(MainActivity.this, "B³êdny login lub has³o", Toast.LENGTH_LONG).show();
+					}
+				}
+				else{
+					
+					shared.edit().putString("Username", login).apply();
+					
+					try {
+						SynchronizationManager.getManagerInstance(MainActivity.this).startFirstLoginReplication(login, password);
+					
+					} catch (CouchbaseLiteException e) {
+						
+						Toast.makeText(MainActivity.this, "B³¹d po³¹czenia z baz¹.", Toast.LENGTH_LONG).show();
+						e.printStackTrace();
+						
+					} 
+				}
+		*/
 			}
     		
     	});
