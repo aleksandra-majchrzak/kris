@@ -10,6 +10,7 @@
           <root url="file://$MODULE_DIR$/web/jsp" relative="/" />
           <root url="file://$MODULE_DIR$/web/css" relative="/" />
           <root url="file://$MODULE_DIR$/web/images" relative="/" />
+          <root url="file://$MODULE_DIR$/web/js" relative="/" />
         </webroots>
       </configuration>
     </facet>

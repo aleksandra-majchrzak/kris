@@ -98,6 +98,14 @@ h4{
     max-height: 445px;
 }
 
+#kris-panel-document-tabs > .visible{
+    display: block;
+}
+
+#kris-panel-document-tabs > .gone{
+    display: none;
+}
+
 #push, .footer, .container:after {
     height: 50px;
 }

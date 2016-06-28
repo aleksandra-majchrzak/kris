@@ -11,6 +11,7 @@
 <head>
     <title>Kris Web</title>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
+    <script src="<c:url value="/document-panel.js" />"></script>
     <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link rel="stylesheet" href="/styles.css">
 </head>

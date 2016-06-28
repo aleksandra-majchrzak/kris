@@ -22,38 +22,52 @@
         </h1>
     </div>
     <div class="panel-body kris-panel-body">
-        <div class=" col-lg-12">
-            <ul class="list-group document-details-list-group">
-                <li class="list-group-item kris-list-group-item">
-                    <h4>Typ dokumentu</h4>
-                    <p>${document.type.name}</p>
-                </li>
-                <li class="list-group-item kris-list-group-item">
-                    <h4>Kontrahent</h4>
-                    <p>${document.contractor.code}</p>
-                </li>
-                <li class="list-group-item kris-list-group-item">
-                    <h4>Data wystawienia</h4>
-                    <p>${document.documentDate}</p>
-                </li>
-                <li class="list-group-item kris-list-group-item">
-                    <h4>Data płatności</h4>
-                    <p>${document.paymentDate}</p>
-                </li>
-                <li class="list-group-item kris-list-group-item">
-                    <h4>Forma płatności</h4>
-                    <p>${document.paymentForm.name}</p>
-                </li>
-                <li class="list-group-item kris-list-group-item">
-                    <h4>Wartość</h4>
-                    <p>${document.value}</p>
-                </li>
-                <li class="list-group-item kris-list-group-item">
-                    <h4>Opis</h4>
-                    <p>${document.description}</p>
-                </li>
+        <div  id ="kris-panel-document-tabs" class=" col-lg-12">
+            <ul class="nav nav-tabs">
+                <li role="presentation" class="active"><a href="#document-tab-positions">Pozycje</a></li>
+                <li role="presentation" ><a href="#document-tab-header">Nagłówek</a></li>
             </ul>
+
+            <div id="document-tab-positions" class="visible">
+                <jsp:include page="/documents/document-positions-view.jsp"  flush="true" />
+            </div>
+
+            <div id="document-tab-header" class="gone">
+                <ul class="list-group document-details-list-group">
+                    <li class="list-group-item kris-list-group-item">
+                        <h4>Typ dokumentu</h4>
+                        <p>${document.type.name}</p>
+                    </li>
+                    <li class="list-group-item kris-list-group-item">
+                        <h4>Kontrahent</h4>
+                        <p>${document.contractor.code}</p>
+                    </li>
+                    <li class="list-group-item kris-list-group-item">
+                        <h4>Data wystawienia</h4>
+                        <p>${document.documentDate}</p>
+                    </li>
+                    <li class="list-group-item kris-list-group-item">
+                        <h4>Data płatności</h4>
+                        <p>${document.paymentDate}</p>
+                    </li>
+                    <li class="list-group-item kris-list-group-item">
+                        <h4>Forma płatności</h4>
+                        <p>${document.paymentForm.name}</p>
+                    </li>
+                    <li class="list-group-item kris-list-group-item">
+                        <h4>Wartość netto</h4>
+                        <p>${document.netValue}</p>
+                    </li>
+                    <li class="list-group-item kris-list-group-item">
+                        <h4>Wartość brutto</h4>
+                        <p>${document.grossValue}</p>
+                    </li>
+                    <li class="list-group-item kris-list-group-item">
+                        <h4>Opis</h4>
+                        <p>${document.description}</p>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
-
 </div>

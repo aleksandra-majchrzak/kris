@@ -10,6 +10,7 @@
         <element id="directory" name="lib">
           <element id="library" level="project" name="Couchbase-Java-Client-2.2" />
           <element id="library" level="project" name="jstl-1.2" />
+          <element id="library" level="project" name="commons-codec-1.9" />
         </element>
       </element>
     </root>
