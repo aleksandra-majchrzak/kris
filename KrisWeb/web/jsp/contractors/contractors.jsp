@@ -20,8 +20,8 @@
 <div class="container">
     <jsp:include page="../reusable-panel.jsp"  flush="true" />    <!-- w jakis posob przekazywac parametry z jednej strony do drugiej?? servletami?? -->
 
-    <c:set var="contractor" scope="page" value="${contractor}"/>
-    <c:if test="${contractor != null}">
+    <c:set var="item" scope="page" value="${contractor}"/>
+    <c:if test="${item != null}">
         <jsp:include page="contractor-details-view.jsp" flush="true" />
     </c:if>
 

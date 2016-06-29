@@ -64,13 +64,13 @@
                         <div class="form-group">
                             <h4>Kontrahent</h4>
                             <select name="contractorDocId" id="contractorDocId">
-                                <c:forEach items="${contractorsDoc}" var="contractor" varStatus="loop">
+                                <c:forEach items="${contractorsDoc}" var="item" varStatus="loop">
                                     <c:choose>
-                                        <c:when test="${contractor.id == document.contractor.id}">
-                                            <option value="${contractor.id}" selected>${contractor.code}</option>
+                                        <c:when test="${item.id == document.contractor.id}">
+                                            <option value="${item.id}" selected>${item.code}</option>
                                         </c:when>
                                         <c:otherwise>
-                                            <option value="${contractor.id}">${contractor.code}</option>
+                                            <option value="${item.id}">${item.code}</option>
                                         </c:otherwise>
                                     </c:choose>
                                 </c:forEach>

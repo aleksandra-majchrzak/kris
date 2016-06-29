@@ -2,9 +2,10 @@
 
 <ul class="list-group">
     <c:forEach items="${items}" var="item" varStatus="loop">
-        <a href="ItemsServlet?itemIndex=${loop.index}" class="list-group-item kris-list-group-item">
+        <a href="ItemServlet?itemIndex=${loop.index}" class="list-group-item kris-list-group-item">
             <div>
-                <h4>${item.name}</h4> <!-- to musze ftormatowac ladnie jako date -->
+                <h4>${item.code}</h4>
+                <h6>${item.name}</h6>
             </div>
         </a>
     </c:forEach>

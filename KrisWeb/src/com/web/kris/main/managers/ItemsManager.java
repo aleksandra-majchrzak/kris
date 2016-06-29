@@ -12,7 +12,9 @@ import com.web.kris.main.entities.ItemStocks;
 import com.web.kris.main.entities.Price;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import static com.couchbase.client.java.query.Select.select;
 import static com.couchbase.client.java.query.dsl.Expression.*;
@@ -54,7 +56,66 @@ public class ItemsManager {
     }
 
     public String saveItem(Item item){    //  save & update
-        return "";
+
+        JsonObject content = JsonObject.empty()
+                .put("DocType", DOC_TYPE)
+                .put("Code", item.getCode())
+                .put("Name", item.getName())
+                .put("Type", item.getType())
+                .put("PriceId", item.getPrice().getId())
+                .put("Size", item.getSize())
+                .put("Material", item.getMaterial())
+                .put("Description", item.getDescription())
+                .put("ModificationTS", String.valueOf((new Date()).getTime()));
+
+        JsonDocument inserted = null;
+
+        String docId = UUID.randomUUID().toString().toLowerCase();
+
+        while(DatabaseManager.getInstance().getBucketInstance().exists(docId))
+            docId = UUID.randomUUID().toString().toLowerCase();
+
+        if(!item.getId().equals("")){
+            JsonDocument doc = JsonDocument.create(item.getId(), content);
+            inserted = DatabaseManager.getInstance().getBucketInstance().replace(doc);
+            //        DatabaseManager.getInstance().putData(content);
+        }
+        else{
+            JsonDocument doc = JsonDocument.create(docId, content);
+            inserted = DatabaseManager.getInstance().getBucketInstance().insert(doc);
+            //        DatabaseManager.getInstance().postData(content);
+        }
+
+        return  inserted.id();
+    }
+
+    public String savePrice(Price price){
+
+        JsonObject content = JsonObject.empty()
+                .put("DocType", PRICE_TYPE)
+                .put("NetPrice", price.getNetPrice())
+                .put("GrossPrice", price.getGrossPrice())
+                .put("ModificationTS", String.valueOf((new Date()).getTime()));
+
+        JsonDocument inserted = null;
+
+        String docId = UUID.randomUUID().toString().toLowerCase();
+
+        while(DatabaseManager.getInstance().getBucketInstance().exists(docId))
+            docId = UUID.randomUUID().toString().toLowerCase();
+
+        if(!price.getId().equals("")){
+            JsonDocument doc = JsonDocument.create(price.getId(), content);
+            inserted = DatabaseManager.getInstance().getBucketInstance().replace(doc);
+            //        DatabaseManager.getInstance().putData(content);
+        }
+        else{
+            JsonDocument doc = JsonDocument.create(docId, content);
+            inserted = DatabaseManager.getInstance().getBucketInstance().insert(doc);
+            //        DatabaseManager.getInstance().postData(content);
+        }
+
+        return  inserted.id();
     }
 
     public Item getItem(String itemId){
@@ -124,6 +185,67 @@ public class ItemsManager {
 
         return stocks;
     }
+
+    public List<String> getAllItemTypes(){
+
+        List<String> itemTypes = new ArrayList<String>();
+
+        Statement statement = select("distinct Type")
+                .from(i(DatabaseManager.getBucketName()))
+                .where(x("DocType").eq(x("$DocType")));
+
+        JsonObject placeholderValues = JsonObject.create().put("$DocType", DOC_TYPE);
+        ParameterizedN1qlQuery q = N1qlQuery.parameterized(statement, placeholderValues);
+
+        N1qlQueryResult result = DatabaseManager.getInstance().getBucketInstance().query(q);
+
+        for (N1qlQueryRow row : result) {
+            itemTypes.add(row.value().getString("Type"));
+        }
+
+        return itemTypes;
+    }
+
+    public List<String> getAllItemMaterials(){
+
+        List<String> itemMaterials = new ArrayList<String>();
+
+        Statement statement = select("distinct Material")
+                .from(i(DatabaseManager.getBucketName()))
+                .where(x("DocType").eq(x("$DocType")));
+
+        JsonObject placeholderValues = JsonObject.create().put("$DocType", DOC_TYPE);
+        ParameterizedN1qlQuery q = N1qlQuery.parameterized(statement, placeholderValues);
+
+        N1qlQueryResult result = DatabaseManager.getInstance().getBucketInstance().query(q);
+
+        for (N1qlQueryRow row : result) {
+            itemMaterials.add(row.value().getString("Material"));
+        }
+
+        return itemMaterials;
+    }
+
+    public List<String> getAllItemSizes(){
+
+        List<String> itemSizes = new ArrayList<String>();
+
+        Statement statement = select("distinct Size")
+                .from(i(DatabaseManager.getBucketName()))
+                .where(x("DocType").eq(x("$DocType")));
+
+        JsonObject placeholderValues = JsonObject.create().put("$DocType", DOC_TYPE);
+        ParameterizedN1qlQuery q = N1qlQuery.parameterized(statement, placeholderValues);
+
+        N1qlQueryResult result = DatabaseManager.getInstance().getBucketInstance().query(q);
+
+        for (N1qlQueryRow row : result) {
+            itemSizes.add(row.value().getString("Size"));
+        }
+
+        return itemSizes;
+    }
+
 
     public boolean deleteItem(String itemId){
 

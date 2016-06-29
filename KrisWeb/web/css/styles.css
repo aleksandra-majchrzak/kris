@@ -93,6 +93,10 @@ h4{
     overflow-y: scroll;
 }
 
+.item-details-list-group{
+    overflow-y: scroll;
+}
+
 .kris-panel-body{
     min-height: 445px;
     max-height: 445px;

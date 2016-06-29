@@ -18,6 +18,9 @@
                 <c:when test = "${documents != null}">
                     <jsp:include page="buttons/add-document-button.jsp" />
                 </c:when>
+                <c:when test = "${items != null}">
+                    <jsp:include page="buttons/add-item-button.jsp" />
+                </c:when>
             </c:choose>
         </h1>
 
