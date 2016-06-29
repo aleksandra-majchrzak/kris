@@ -34,7 +34,7 @@ public class Price implements Parcelable{
 	
 	public Price(Document doc) {
 		Map<?,?> props = doc.getProperties();
-		this.id = (String)props.get("Id");
+		this.id = doc.getId();
 		this.netPrice = ((Number)props.get("NetPrice")).doubleValue();
 		this.grossPrice = ((Number)props.get("GrossPrice")).doubleValue();
 	}

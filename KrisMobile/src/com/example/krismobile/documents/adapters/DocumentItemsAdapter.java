@@ -83,9 +83,6 @@ public class DocumentItemsAdapter extends  BaseAdapter{
 		}	
 
 
-		// tu powinno byc tez ustawianie zdjecia przedmioty- musisz wykombinowac jaka inna grafike jesli nie ma zdjecia
-		
-		//jak zrobic jakiegoc joina zeby wyciagnac nazwe z id konhtrahenta ??  a moze w ogole powinnam to inaczej zrobic??
 		TextView documentItemCodeTextView = (TextView) convertView.findViewById(R.id.document_item_code_textView);
 		documentItemCodeTextView.setText("["+(String)props.get("Code")+"] "+(String)props.get("Name"));
 			
@@ -94,20 +91,22 @@ public class DocumentItemsAdapter extends  BaseAdapter{
 		documentItemStocksTextView.setText((String)props.get("ContractorCode"));
 		
 		TextView documentItemPricesTextView = (TextView) convertView.findViewById(R.id.document_item_price_textView);
+		
 		documentItemPricesTextView.setText(String.valueOf(props.get("NetPrice")) + context.getString(R.string.net)
 											+ "  "+String.valueOf(props.get("GrossPrice")) + context.getString(R.string.gross));
 		
 		
-		// tu mosze jakos brac z pozycji
 		DocumentPosition currentPosition = positions.getByItemId((String)props.get("_id"));
 		if(currentPosition != null){
 			
 			((LinearLayout) convertView.findViewById(R.id.document_item_values_ll)).setVisibility(View.VISIBLE);
 			
 			TextView documentItemQuantityTextView = (TextView) convertView.findViewById(R.id.document_item_quantity_textView);
+			
 			documentItemQuantityTextView.setText(String.valueOf(currentPosition.getQuantity()));
 		
 			TextView documentItemValuesTextView = (TextView) convertView.findViewById(R.id.document_item_value_textView);
+			
 			documentItemValuesTextView.setText(String.valueOf(currentPosition.getNetValue()) + context.getString(R.string.net)
 					+ "  "+String.valueOf(currentPosition.getGrossValue()) + context.getString(R.string.gross));
 		}

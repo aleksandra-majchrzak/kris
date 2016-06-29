@@ -66,6 +66,8 @@ public class ItemsManager {
                 .put("Size", item.getSize())
                 .put("Material", item.getMaterial())
                 .put("Description", item.getDescription())
+                .put("GrossPrice", item.getPrice().getGrossPrice())
+                .put("NetPrice", item.getPrice().getNetPrice())
                 .put("ModificationTS", String.valueOf((new Date()).getTime()));
 
         JsonDocument inserted = null;
