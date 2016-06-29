@@ -15,9 +15,10 @@
                 <c:when test = "${contractors != null}">
                     <jsp:include page="buttons/add-contractor-button.jsp" />
                 </c:when>
-                <c:when test = "${documents != null}">
+            <%--<c:when test = "${documents != null}">
                     <jsp:include page="buttons/add-document-button.jsp" />
                 </c:when>
+            --%>
                 <c:when test = "${items != null}">
                     <jsp:include page="buttons/add-item-button.jsp" />
                 </c:when>

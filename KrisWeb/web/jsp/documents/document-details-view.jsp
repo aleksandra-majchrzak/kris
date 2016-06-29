@@ -5,17 +5,19 @@
     <div class="panel-heading kris-panel-heading">
         <h1>
             ${document.number}
+
                 <div class="edit-buttons">
-                    <a href="DocumentServlet?documentToEditIndex=${documentIndex}">
+                    <!--  <a href="DocumentServlet?documentToEditIndex=${documentIndex}">
                         <button type="button" class="btn btn-default edit-button" aria-label="Left Align">
                             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                         </button>
                     </a>
-                    <form role="form" action="DocumentServlet" method="post" class="delete-button">
+             -->      <form role="form" action="DocumentServlet" method="post" class="delete-button">
                         <input type="hidden" name="documentToDeleteIndex" id="documentToDeleteIndex" value="${documentIndex}" />
                         <button type="submit" class="btn btn-default delete-button" aria-label="Left Align">
                             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                         </button>
+
                     </form>
 
                 </div>

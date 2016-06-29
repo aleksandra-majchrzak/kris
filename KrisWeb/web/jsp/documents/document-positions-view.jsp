@@ -7,10 +7,14 @@
 
 <ul class="list-group">
     <c:forEach items="${document.positionsList}" var="position" varStatus="loop">
-        <a href="#" class="list-group-item kris-list-group-item">
+        <a  class="list-group-item kris-list-group-item position-row">
             <div>
-                <h4>${position.item.name}</h4> <!-- to musze ftormatowac ladnie jako date -->
+                <h4>${position.item.name}</h4>
+                <div id="document-position-info">
+                    <h6>${position.quantity} szt. <span> </span> <span> </span> ${position.netValue} (N) <span> </span> ${position.grossValue} (B)</h6>
+                </div>
             </div>
         </a>
+
     </c:forEach>
 </ul>

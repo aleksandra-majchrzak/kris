@@ -93,6 +93,15 @@ h4{
     overflow-y: scroll;
 }
 
+#document-position-info{
+    display: inline;
+
+
+}
+
+#document-position-info > h6 >span {
+    margin-right: 10px;
+}
 .item-details-list-group{
     overflow-y: scroll;
 }
