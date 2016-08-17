@@ -2,7 +2,7 @@
     "log":["CRUD+", "REST+", "Changes+", "Attach+"],
     "databases": {
         "kris_mobile_db": {
-            "server":"http://192.168.0.11:8091",
+            "server":"http://192.168.56.2:8091",
             "sync":`
                 function (doc, oldDoc) {                 
 
@@ -21,12 +21,12 @@
                 }
             },
             "shadow":{
-                "server":"http://192.168.0.11:8091",
+                "server":"http://192.168.56.2:8091",
                 "bucket":"kris_mobile_db"
             }
         },
         "grocery-sync": {
-            "server":"http://192.168.0.11:8091",
+            "server":"http://192.168.56.2:8091",
             "sync":`
                 function (doc) {
                 channel (doc.channels);

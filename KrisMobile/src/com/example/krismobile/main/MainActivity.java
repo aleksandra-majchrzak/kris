@@ -108,16 +108,16 @@ public class MainActivity extends Activity {
 				
 				String hashedPassword = UserManager.getInstance().hashPswd(password);
 				
-		//		if(shared.contains("Username") && UserManager.getInstance().getUser(login) != null){
+	//			if(shared.contains("Username") && UserManager.getInstance().getUser(login) != null){
 				
-		//			if(UserManager.getInstance().authenticateUser(login, hashedPassword)){
+	//				if(UserManager.getInstance().authenticateUser(login, hashedPassword)){
 						
 						Intent intent = new Intent(MainActivity.this, MenuActivity.class);
 												
 						startActivity(intent);
 						
 						MainActivity.this.finish();
-		/*			}
+	/*				}
 					else{
 						Toast.makeText(MainActivity.this, "B³êdny login lub has³o", Toast.LENGTH_LONG).show();
 					}
@@ -128,6 +128,7 @@ public class MainActivity extends Activity {
 					
 					try {
 						SynchronizationManager.getManagerInstance(MainActivity.this).startFirstLoginReplication(login, password);
+		//				SynchronizationManager.getManagerInstance(MainActivity.this).setupConnection();
 					
 					} catch (CouchbaseLiteException e) {
 						

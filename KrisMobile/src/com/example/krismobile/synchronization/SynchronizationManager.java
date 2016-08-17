@@ -80,8 +80,12 @@ public class SynchronizationManager implements ChangeListener {
 	    pull.setContinuous(false);
 	    push.setContinuous(false);
 	    
+	    
+	    
 	    pull.start();
 	    push.start();
+	    
+	    
 	    
 	    progressDialog = showLoadingSpinner();
 	    
@@ -93,7 +97,7 @@ public class SynchronizationManager implements ChangeListener {
     public void changed(Replication.ChangeEvent event) {
 
     	boolean active = (pull.getStatus() == Replication.ReplicationStatus.REPLICATION_ACTIVE) ||
-    	        (push.getStatus() == Replication.ReplicationStatus.REPLICATION_ACTIVE);
+    	        ((! isLoginSync && push.getStatus() == Replication.ReplicationStatus.REPLICATION_ACTIVE));
         
         if (! active) {
             String msg = "Replications not running";
@@ -166,17 +170,19 @@ public class SynchronizationManager implements ChangeListener {
     	
     	pull = DatabaseManager.getDatabaseInstance().createPullReplication(this.createSyncURL(false));
  	    
-    	List<String> channels = new ArrayList<String>();
-    	channels.add(login);
-    	pull.setChannels(channels);
+   // 	List<String> channels = new ArrayList<String>();
+   // 	channels.add(login);
+    //	pull.setChannels(channels);
     	
  	    pull.setContinuous(false);
+ 	    
+ 	    pull.addChangeListener(this); 
  	    
  	    pull.start();
  	    
  	    progressDialog = showLoadingSpinner();
  	    
- 	    pull.addChangeListener(this);   
+ 	      
     }
 
 }

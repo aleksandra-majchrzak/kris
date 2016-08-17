@@ -62,7 +62,7 @@ public class MenuFragment extends FragmentBase {
 		itemList.add(new MenuItem(context.getResources().getString(R.string.documents), R.drawable.documents));
 		itemList.add(new MenuItem(context.getResources().getString(R.string.payments), R.drawable.payments));
 		itemList.add(new MenuItem(context.getResources().getString(R.string.items), R.drawable.items));
-	//	itemList.add(new MenuItem(context.getResources().getString(R.string.warehouses), R.drawable.warehouses));
+		itemList.add(new MenuItem(context.getResources().getString(R.string.warehouses), R.drawable.warehouses));
 		itemList.add(new MenuItem(context.getResources().getString(R.string.synchronization), R.drawable.synchronization));
 		
 		menuAdapter = new MenuAdapter(context, 0, itemList);
